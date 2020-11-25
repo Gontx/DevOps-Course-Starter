@@ -12,10 +12,20 @@
       <h2>Items</h2>
       <ul class="list-group mb-4">
         {% for item in items %}
-          <h1> Item  {{item.id}}: "{{item.title}}" is {{item.status}} </h1>
+          <li> Item  {{item.id}}: "{{item.title}}" is {{item.status}} </li>
         {% endfor %}
         <!-- List the todo items here -->
       </ul>
     </div>
   </div>
+
+    <!-- Form which will send a POST request to the current URL -->
+  <form action='/form' method="POST">
+    <label>Item Title :
+      <input type = 'text' name = 'title' id ='title'>
+    </label>
+    <button class = 'favourite styled type=' button>
+      Save
+    </button>
+  </form>
 {% endblock %}
