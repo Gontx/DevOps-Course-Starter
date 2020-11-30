@@ -32,10 +32,7 @@ def itemStatus():
 def sortItems():
     initial_items = si.get_items()
     final_items = sorted(initial_items, key = lambda item:item['status'])
-    for item in final_items:
-        si.save_item(item)
-    items = si.get_items()
-    return render_template('index.html', items = items)
+    return render_template('index.html', items = final_items)
 
 if __name__ == '__main__':
     app.run()
