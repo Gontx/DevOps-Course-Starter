@@ -23,7 +23,7 @@ def itemStatus():
     item_id = request.form ['itemID']
     item_status = request.form ['itemStatus']
     item = si.get_item(item_id)
-    updatedItem = {'id': item_id, 'title': item.title, 'status': item_status}
+    updatedItem = {'id': item_id, 'title': item['title'], 'status': item_status}
     si.save_item(updatedItem)
     items = si.get_items()
     return render_template('index.html', items = items)
