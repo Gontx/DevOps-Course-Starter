@@ -34,7 +34,7 @@ def sortItems():
     final_items = sorted(initial_items, key = lambda item:item['status'])
     for item in final_items:
         si.save_item(item)
-    items = si.get_items
+    items = si.get_items()
     return render_template('index.html', items = items)
 
 if __name__ == '__main__':
