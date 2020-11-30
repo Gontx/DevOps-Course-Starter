@@ -17,6 +17,7 @@ def form():
     si.add_item(title)
     items = si.get_items()
     return render_template('index.html', items = items)
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run()

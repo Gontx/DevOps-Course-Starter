@@ -18,14 +18,21 @@
       </ul>
     </div>
   </div>
-
+  <br></br>
     <!-- Form which will send a POST request to the current URL -->
   <form action='/form' method="POST">
-    <label>Item Title :
-      <input type = 'text' name = 'title' id ='title'>
-    </label>
-    <button class = 'favourite styled type=' button>
-      Save
+    <div class="form-group">
+      <label for="exampleFormControlInput1">New to-do item:</label>
+      <input type="text" class="form-control" name="title" id="title" placeholder="to-do item">
+      <small id = "idHelpBlock" class="form-text text-muted">
+        Enter your new to-do item description
+      </small>
+    </div>
+    <button type="button" class="btn btn-secondary">
+    Save
     </button>
   </form>
+ 
+
+  
 {% endblock %}
