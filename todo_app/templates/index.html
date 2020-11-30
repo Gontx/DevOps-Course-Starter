@@ -21,7 +21,7 @@
   <br></br>
     <!-- Form which will send a POST request to the current URL -->
   <form action='/form' method="POST">
-    <h2>Add to-do item</h2>
+    <h3>Add to-do item</h3>
     <div class="form-group">
       <input type="text" class="form-control" name="title" id="title" placeholder="to-do item">
       <small id = "idHelpBlock" class="form-text text-muted">
@@ -36,7 +36,7 @@
   <br></br>
 
   <form action ='/itemStatus' method = 'POST'>
-    <h2>Update Item Status</h2>
+    <h3>Update Item Status</h3>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="selectID">Item ID</label>
@@ -53,6 +53,15 @@
     </div>
     <button type="button" class="btn btn-secondary">
       Update
+    </button>
+  </form>
+
+  <br></br>
+
+  <form action = '/sortItems' method = ['POST']>
+    <h3>Sort item list by status</h3>
+    <button type="button" class="btn btn-secondary">
+      Sort item list
     </button>
   </form>
 
