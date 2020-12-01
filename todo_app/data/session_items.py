@@ -71,13 +71,14 @@ def save_item(item):
 
 def delete_item(id_num):
     """
-    Removes the item for the ID given 
-    Args: ID of the item to delete
-    returns: item list without the deleted item
+    Removes the item for the ID given. After that re-asigns ID
+    Args: 
+        ID of the item to delete
+    
     """
     items = get_items()
     items.pop(id_num-1)
-    
+
     for idx, item in enumerate(items):
         items[idx]['id']=idx+1
 
