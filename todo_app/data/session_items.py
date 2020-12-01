@@ -68,3 +68,14 @@ def save_item(item):
     session['items'] = updated_items
 
     return item
+
+def delete_item(id):
+    """
+    Removes the item for the ID given 
+    Args: ID of the item to delete
+    returns: item list without the deleted item
+    """
+    existing_items = get_items()
+    final_items = existing_items.pop(id-1)
+    
+    return final_items
