@@ -21,13 +21,12 @@ def form():
 
 @app.route('/itemStatus', methods = ['GET','POST'])
 def itemStatus():
-    item_id = request.form ['itemID']
+    item_id = int(request.form ['itemID'])
     item_status = request.form ['itemStatus']
     item = si.get_item(item_id)
-    updatedItem = {'id': item_id, 'title': item['title'], 'status': item_status}
+    updatedItem = {'id': item_id,'status': item_status,'title': item['title']}
     si.save_item(updatedItem)
-    items = si.get_items()
-    return render_template('index.html', items = items)
+    return redirect(url_for('index'))
 
 @app.route('/status_sortItems', methods = ['GET','POST'])
 def status_sortItems():
@@ -45,8 +44,8 @@ def IDsortItems():
 
 @app.route('/delItem', methods = ['GET','POST'])
 def delItem():
-    delID = request.form['delID']
-    session['items'] = delete_item(delID)
+    del_ID = int(request.form['delID'])
+    session['items'] = delete_item(del_ID)
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
