@@ -2,7 +2,8 @@ from flask import session
 
 _DEFAULT_ITEMS = [
     { 'id': 1, 'status': 'Not Started', 'title': 'List saved todo items' },
-    { 'id': 2, 'status': 'Not Started', 'title': 'Allow new items to be added' }
+    { 'id': 2, 'status': 'Not Started', 'title': 'Allow new items to be added' },
+    { 'id': 3, 'status': 'Complete', 'title': 'test'}
 ]
 
 
@@ -67,3 +68,18 @@ def save_item(item):
     session['items'] = updated_items
 
     return item
+
+def delete_item(id_num):
+    """
+    Removes the item for the ID given. After that re-asigns ID
+    Args: 
+        ID of the item to delete
+    
+    """
+    items = get_items()
+    items.pop(id_num-1)
+
+    for idx, item in enumerate(items):
+        items[idx]['id']=idx+1
+
+    session['items'] = items
