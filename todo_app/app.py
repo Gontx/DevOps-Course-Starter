@@ -44,7 +44,7 @@ def id_sort_items():
 
 @app.route('/del_item', methods = ['GET','POST'])
 def del_item():
-    del_id = int(request.form['delID'])
+    del_id = int(request.form['del_id'])
     delete_item(del_id)
     return redirect(url_for('index'))
 
