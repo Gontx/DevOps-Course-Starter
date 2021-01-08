@@ -35,16 +35,16 @@
 
   <br></br>
 
-  <form action ='/itemStatus' method = 'POST'>
+  <form action ='/item_status' method = 'POST'>
     <h3>Update Item Status</h3>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="selectID">Item ID</label>
-        <input type="number" class="form-control" name="itemID" id="itemID" placeholder="item ID number">
+        <input type="number" class="form-control" name="item_id" id="item_id" placeholder="item ID number">
       </div>
       <div class="form-group col-md-6">
         <label for="selectItemStatus">Select item status</label>
-        <select type = 'text' class="form-control" name="itemStatus" id="itemStatus" >
+        <select type = 'text' class="form-control" name="item_status" id="item_status" >
           <option>Not Started</option>
           <option>Started</option>
           <option>Completed</option>
@@ -69,7 +69,7 @@
       </form>
     </div>
     <div class="form-group col-md-6">
-      <form action = '/IDsortItems' method = 'POST'>
+      <form action = '/id_sort_items' method = 'POST'>
         <button type="submit" class="btn btn-info">
           Sort item list by ID
         </button>
