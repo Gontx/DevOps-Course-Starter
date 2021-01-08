@@ -19,13 +19,13 @@ def form():
     items = si.get_items()
     return redirect(url_for('index'))
 
-@app.route('/itemStatus', methods = ['GET','POST'])
-def itemStatus():
-    item_id = int(request.form ['itemID'])
-    item_status = request.form ['itemStatus']
+@app.route('/item_status', methods = ['GET','POST'])
+def item_status():
+    item_id = int(request.form ['item_id'])
+    item_status = request.form ['item_status']
     item = si.get_item(item_id)
-    updatedItem = {'id': item_id,'status': item_status,'title': item['title']}
-    si.save_item(updatedItem)
+    updated_item = {'id': item_id,'status': item_status,'title': item['title']}
+    si.save_item(updated_item)
     return redirect(url_for('index'))
 
 @app.route('/status_sortItems', methods = ['GET','POST'])
@@ -35,17 +35,18 @@ def status_sortItems():
     session['items'] = final_items
     return redirect(url_for('index'))
 
-@app.route('/IDsortItems', methods = ['GET','POST'])
-def IDsortItems():
+@app.route('/id_sort_items', methods = ['GET','POST'])
+def id_sort_items():
     initial_items = si.get_items()
     final_items = sorted(initial_items, key = lambda item:item['id'])
     session['items'] = final_items
     return redirect(url_for('index'))
 
-@app.route('/delItem', methods = ['GET','POST'])
-def delItem():
-    del_ID = int(request.form['delID'])
-    delete_item(del_ID)
+@app.route('/del_item', methods = ['GET','POST'])
+def del_item():
+    items = si.get_items()
+    del_id = int(request.form['del_id'])
+    delete_item(del_id)
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
