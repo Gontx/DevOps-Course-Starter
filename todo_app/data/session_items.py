@@ -77,9 +77,10 @@ def delete_item(id_num):
     
     """
     items = get_items()
-    items.pop(id_num-1)
+    for item in items:
+        if id_num==item['id']:
+            items.pop(id_num-1)
+            for idx, item in enumerate(items):
+                items[idx]['id']=idx+1
 
-    for idx, item in enumerate(items):
-        items[idx]['id']=idx+1
-
-    session['items'] = items
+            session['items'] = items

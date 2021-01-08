@@ -23,7 +23,7 @@
   <form action='/form' method="POST">
     <h3>Add to-do item</h3>
     <div class="form-group">
-      <input type="text" class="form-control" name="title" id="title" placeholder="to-do item">
+      <input type="text" class="form-control" name="title" id="title" placeholder="to-do item" required>
       <small id = "idHelpBlock" class="form-text text-muted">
         Enter your new to-do item description
       </small>
@@ -35,16 +35,16 @@
 
   <br></br>
 
-  <form action ='/itemStatus' method = 'POST'>
+  <form action ='/item_status' method = 'POST'>
     <h3>Update Item Status</h3>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="selectID">Item ID</label>
-        <input type="number" class="form-control" name="itemID" id="itemID" placeholder="item ID number">
+        <input type="number" class="form-control" name="item_id" id="item_id" placeholder="item ID number" required>
       </div>
       <div class="form-group col-md-6">
         <label for="selectItemStatus">Select item status</label>
-        <select type = 'text' class="form-control" name="itemStatus" id="itemStatus" >
+        <select type = 'text' class="form-control" name="item_status" id="item_status">
           <option>Not Started</option>
           <option>Started</option>
           <option>Completed</option>
@@ -69,7 +69,7 @@
       </form>
     </div>
     <div class="form-group col-md-6">
-      <form action = '/IDsortItems' method = 'POST'>
+      <form action = '/id_sort_items' method = 'POST'>
         <button type="submit" class="btn btn-info">
           Sort item list by ID
         </button>
@@ -79,8 +79,8 @@
 
   <br></br>
   
-  <form action = '/delItem' method = 'POST'>
-    <input type="number" name="delID" id="delID" placeholder="item ID number">
+  <form action = '/del_item' method = 'POST'>
+    <input type="number" name="del_id" id="del_id" placeholder="item ID number" required>
       <small id = "delidHelpBlock" class="form-text text-muted">
         Enter the ID for the item you want to delete from the list
       </small>
