@@ -1,6 +1,8 @@
 from todo_app.data.session_items import delete_item
 from flask import Flask, render_template, request, url_for, redirect, session
 
+import requests
+
 from todo_app.flask_config import Config
 from todo_app.data import session_items as si
 
