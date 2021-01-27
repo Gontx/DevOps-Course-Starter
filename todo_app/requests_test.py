@@ -19,9 +19,13 @@ print ('Name of the board is ', r['name'])
 r=requests.get(base_url + 'boards/' + id_board + '/lists' , params = payload)
 print (r.status_code)
 r=r.json()
-board_list={}
-for i in range(len(r)):
-    print(r[i]['name'])
-    board_list.update({'id':r[i]['id'],'name':r[i]['name']})
+#print (r)
 
-print(board_list)
+print('Id for ', r[0]['name'], ' list is: ', r[0]['id'])
+id_todo = r[0]['id']
+
+r=requests.get(base_url + 'lists/' + id_todo + '/cards', params = payload)
+print (r.status_code)
+r=r.json()
+print(len(r))
+print (r[0]['name'])
