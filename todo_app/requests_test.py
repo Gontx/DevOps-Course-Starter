@@ -1,5 +1,6 @@
 import requests
 from auth import api_key, token
+from todo_app.classes import Item
 
 print (api_key)
 
@@ -39,3 +40,4 @@ for list in lists:
 print ('Cards within list: ')
 for key in r:
     print (key['name'])
+
