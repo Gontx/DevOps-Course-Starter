@@ -22,9 +22,7 @@ print ('Name of the board is ', r['name'])
 r=requests.get(base_url + 'boards/' + id_board + '/lists' , params = payload)
 print (r.status_code)
 r=r.json()
-lists = []
-for key in r:
-    lists.append(dict({key['name']:key['id']}))
+lists = r
 
 print(lists)
 
@@ -36,8 +34,22 @@ for list in lists:
     r=requests.get(base_url + 'lists/' + id_list + '/cards', params = payload)
     print (r.status_code)
     r=r.json()
+    for card in r:
+        cards.append(card)
+
+# Assign name, and status to item
+i=0
+items=[]
+for card in cards:
+    for list in lists:
+        if card['idList'] == list['id']:
+            status = list['name']
+            name = card['name']
+            item=Item(i,status,name)
+            items.append(item)
+            i=i+1
 
 print ('Cards within list: ')
-for key in r:
-    print (key['name'])
+for item in items:
+    print('Item id: ',item.id, ' with title: ',item.title, ' is ',item.status)
 

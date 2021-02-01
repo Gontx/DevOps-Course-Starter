@@ -5,6 +5,7 @@ import requests
 
 from todo_app.flask_config import Config
 from todo_app.data import session_items as si
+from todo_app.classes import Item
 
 app = Flask(__name__)
 app.config.from_object(Config)
