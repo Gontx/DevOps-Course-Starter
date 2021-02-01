@@ -7,6 +7,7 @@ from todo_app.classes import Item
 base_url = 'https://trello.com/1/'
 id_board = 'sr8Gn9uE'
 payload ={ 'key' : api_key , 'token' : token }
+todo_id = '5fda74f60fc61c6f342225cf'
 
 _DEFAULT_ITEMS = [
     { 'id': 1, 'status': 'Not Started', 'title': 'List saved todo items' },
@@ -63,7 +64,7 @@ def get_item(id):
         item: The saved item, or None if no items match the specified ID.
     """
     items = get_items()
-    return next((item for item in items if item['id'] == int(id)), None)
+    return next((item for item in items if item.id == int(id)), None)
 
 
 def add_item(title):
@@ -79,13 +80,16 @@ def add_item(title):
     items = get_items()
 
     # Determine the ID for the item based on that of the previously added item
-    id = items[-1]['id'] + 1 if items else 0
+    id = items[-1].id + 1 if items else 0
 
-    item = { 'id': id, 'title': title, 'status': 'Not Started' }
+    item = Item(id , title , 'To do')
+
+    # Create item card in Trello using to Do list as default
+    r=requests.post(base_url+'cards?'+'idList='+todo_id+'&name='+title , params = payload)
 
     # Add the item to the list
-    items.append(item)
-    session['items'] = items
+    #items.append(item)
+    #session['items'] = items
 
     return item
 
