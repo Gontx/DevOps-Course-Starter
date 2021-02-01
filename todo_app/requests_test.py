@@ -25,14 +25,17 @@ lists = []
 for key in r:
     lists.append(dict({key['name']:key['id']}))
 
-print('Id for ', r[0]['name'], ' list is: ', r[0]['id'])
-id_todo = r[0]['id']
+print(lists)
 
 #Request cards on a list
-r=requests.get(base_url + 'lists/' + id_todo + '/cards', params = payload)
-print (r.status_code)
-r=r.json()
-print(len(r))
+cards = []
+for list in lists:
+    id_list = list['id']
+    name_list = list['name']
+    r=requests.get(base_url + 'lists/' + id_list + '/cards', params = payload)
+    print (r.status_code)
+    r=r.json()
+
 print ('Cards within list: ')
 for key in r:
     print (key['name'])
