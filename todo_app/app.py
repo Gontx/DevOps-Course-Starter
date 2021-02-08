@@ -34,22 +34,6 @@ def item_status():
         si.save_item(item,item_status)
     return redirect(url_for('index'))
 
-# Sort items by status
-@app.route('/status_sortItems', methods = ['GET','POST'])
-def status_sortItems():
-    initial_items = si.get_items()
-    final_items = sorted(initial_items, key = lambda item:item['status'])
-    session['items'] = final_items
-    return redirect(url_for('index'))
-
-# Sort items by id
-@app.route('/id_sort_items', methods = ['GET','POST'])
-def id_sort_items():
-    initial_items = si.get_items()
-    final_items = sorted(initial_items, key = lambda item:item['id'])
-    session['items'] = final_items
-    return redirect(url_for('index'))
-
 # Delete item
 @app.route('/del_item', methods = ['GET','POST'])
 def del_item():

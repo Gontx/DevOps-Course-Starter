@@ -57,28 +57,7 @@
   </form>
 
   <br></br>
-
-  <h3>Sort Items</h3>
-  
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <form action = '/status_sortItems' method = 'POST'>
-        <button type="submit" class="btn btn-info">
-          Sort item list by status
-        </button>
-      </form>
-    </div>
-    <div class="form-group col-md-6">
-      <form action = '/id_sort_items' method = 'POST'>
-        <button type="submit" class="btn btn-info">
-          Sort item list by ID
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <br></br>
-  
+  <h3>Delete Item</h3>
   <form action = '/del_item' method = 'POST'>
     <input type="number" name="del_id" id="del_id" placeholder="item ID number" required>
       <small id = "delidHelpBlock" class="form-text text-muted">
