@@ -102,7 +102,13 @@ def save_item(item,target_list):
         item: The item to save.
     """
     existing_items = get_items()
-
+    for existing_item in existing_items:
+        if item.id == existing_item.id:
+            isId = True
+        else:
+            isId = False
+    if isId == False:
+        return
     # obtain id_list for target list
     r=requests.get(base_url + 'boards/' + id_board + '/lists' , params = payload)
     r=r.json()
