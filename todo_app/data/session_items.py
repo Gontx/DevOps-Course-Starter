@@ -47,7 +47,9 @@ def get_items():
             if card['idList'] == list['id']:
                 status = list['name']
                 name = card['name']
-                item=Item(i,status,name)
+                id_item = card ['id']
+                id_list = list ['id']
+                item=Item(i+1,id_item,status,id_list,name)
                 items.append(item)
                 i=i+1
     return session.get('items', items)
@@ -82,11 +84,14 @@ def add_item(title):
     # Determine the ID for the item based on that of the previously added item
     id = items[-1].id + 1 if items else 0
 
-    item = Item(id , title , 'To do')
-
     # Create item card in Trello using to Do list as default
     r=requests.post(base_url+'cards?'+'idList='+todo_id+'&name='+title , params = payload)
-
+    r=r.json()
+    # Obtain trello item id
+    id_card = r['id']
+    # Obtain trello list id
+    id_list = r['idList']
+    item = Item(id,id_card,'To do',id_list, title)
     return 
 
 def save_item(item):

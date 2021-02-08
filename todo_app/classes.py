@@ -4,18 +4,13 @@
 class Item:
 
     # Initialize item
-    def __init__(self,id,status,title):
+    def __init__(self,id,id_card,list,id_list,title):
         self.id = id
-        self.status = status
+        self.id_card = id_card
+        self.list = list
+        self.id_list = id_list
         self.title = title
     
     # Method to update item status
     def update_status(self,new_status):
         self.status = new_status
-
-
-test = Item(2,'to do', 'test')
-print(test.id,test.status,test.title)
-
-test.update_status('in progress')
-print(test.id,test.status,test.title)

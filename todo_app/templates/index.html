@@ -12,7 +12,7 @@
       <h2>Items list</h2>
       <ul class="list-group mb-4">
         {% for item in items %}
-          <li> Item  {{item.id}}: "{{item.title}}" is {{item.status}} </li>
+          <li> Item  {{item.id}}: "{{item.title}}" is {{item.list}} </li>
         {% endfor %}
         <!-- List the todo items here -->
       </ul>
@@ -45,9 +45,9 @@
       <div class="form-group col-md-6">
         <label for="selectItemStatus">Select item status</label>
         <select type = 'text' class="form-control" name="item_status" id="item_status">
-          <option>Not Started</option>
-          <option>Started</option>
-          <option>Completed</option>
+          <option>To do</option>
+          <option>Doing</option>
+          <option>Done</option>
         </select>
       </div>
     </div>

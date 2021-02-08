@@ -10,11 +10,13 @@ from todo_app.classes import Item
 app = Flask(__name__)
 app.config.from_object(Config)
 
+# Index
 @app.route('/')
 def index():
     items = si.get_items()
     return render_template('index.html', items =items)
 
+# Add item 
 @app.route('/form', methods = ['GET','POST'])
 def form():
     title = request.form ['title']
@@ -22,6 +24,7 @@ def form():
     items = si.get_items()
     return redirect(url_for('index'))
 
+# Update item status
 @app.route('/item_status', methods = ['GET','POST'])
 def item_status():
     item_id = int(request.form ['item_id'])
@@ -31,6 +34,7 @@ def item_status():
     si.save_item(updated_item)
     return redirect(url_for('index'))
 
+# Sort items by status
 @app.route('/status_sortItems', methods = ['GET','POST'])
 def status_sortItems():
     initial_items = si.get_items()
@@ -38,6 +42,7 @@ def status_sortItems():
     session['items'] = final_items
     return redirect(url_for('index'))
 
+# Sort items by id
 @app.route('/id_sort_items', methods = ['GET','POST'])
 def id_sort_items():
     initial_items = si.get_items()
@@ -45,6 +50,7 @@ def id_sort_items():
     session['items'] = final_items
     return redirect(url_for('index'))
 
+# Delete item
 @app.route('/del_item', methods = ['GET','POST'])
 def del_item():
     items = si.get_items()
