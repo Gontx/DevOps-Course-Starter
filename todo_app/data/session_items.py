@@ -7,14 +7,12 @@ from todo_app.classes import Item
 base_url = 'https://trello.com/1/'
 id_board = 'sr8Gn9uE'
 payload ={ 'key' : api_key , 'token' : token }
-todo_id = '5fda74f60fc61c6f342225cf'
 
 _DEFAULT_ITEMS = [
     { 'id': 1, 'status': 'Not Started', 'title': 'List saved todo items' },
     { 'id': 2, 'status': 'Not Started', 'title': 'Allow new items to be added' },
     { 'id': 3, 'status': 'Complete', 'title': 'test'}
 ]
-
 
 def get_items():
     """
@@ -84,6 +82,15 @@ def add_item(title):
     # Determine the ID for the item based on that of the previously added item
     id = items[-1].id + 1 if items else 0
 
+    # Obtain todo_id
+    r=requests.get(base_url + 'boards/' + id_board + '/lists' , params = payload)
+    r=r.json()
+    
+    for list in r:
+        if 'To Do' == list['name']:
+            todo_id = list['id']
+            break
+
     # Create item card in Trello using to Do list as default
     r=requests.post(base_url+'cards?'+'idList='+todo_id+'&name='+title , params = payload)
     r=r.json()
@@ -102,13 +109,7 @@ def save_item(item,target_list):
         item: The item to save.
     """
     existing_items = get_items()
-    for existing_item in existing_items:
-        if item.id == existing_item.id:
-            isId = True
-        else:
-            isId = False
-    if isId == False:
-        return
+   
     # obtain id_list for target list
     r=requests.get(base_url + 'boards/' + id_board + '/lists' , params = payload)
     r=r.json()
@@ -136,7 +137,5 @@ def delete_item(id_num):
     for item in items:
         if item.id == id_num:
             r=requests.delete(base_url + 'cards/' + item.id_card, params = payload)
-            break
-        break
+            break        
     return
-
