@@ -114,7 +114,6 @@ def save_item(item,target_list):
 
     # Update card
     r=requests.put(base_url + 'cards/' + item.id_card + '?idList=' + id_list , params = payload)
-    r=r.json()
 
     return 
 
@@ -125,11 +124,13 @@ def delete_item(id_num):
         ID of the item to delete
     
     """
-    items = get_items()
-    for item in items:
-        if id_num==item['id']:
-            items.pop(id_num-1)
-            for idx, item in enumerate(items):
-                items[idx]['id']=idx+1
 
-            session['items'] = items
+    items = get_items()
+
+    for item in items:
+        if item.id == id_num:
+            r=requests.delete(base_url + 'cards/' + item.id_card, params = payload)
+            break
+        break
+    return
+
