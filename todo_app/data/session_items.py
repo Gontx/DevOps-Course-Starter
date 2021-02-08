@@ -1,11 +1,10 @@
 from flask import session
 import requests
-from auth import api_key, token
+from auth import api_key, token, id_board
 from todo_app.classes import Item
 
 # Define base parameters
 base_url = 'https://trello.com/1/'
-id_board = 'sr8Gn9uE'
 payload ={ 'key' : api_key , 'token' : token }
 
 def get_items():
