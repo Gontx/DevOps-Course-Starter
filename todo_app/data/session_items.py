@@ -94,19 +94,29 @@ def add_item(title):
     item = Item(id,id_card,'To do',id_list, title)
     return 
 
-def save_item(item):
+def save_item(item,target_list):
     """
-    Updates a card from the board. If no existing item matches the ID of the specified item, nothing is saved.
+    Updates a card from the board with the target list. If no existing item matches the ID of the specified item, nothing is saved.
 
     Args:
         item: The item to save.
     """
     existing_items = get_items()
-    updated_items = [item if item['id'] == existing_item['id'] else existing_item for existing_item in existing_items]
 
-    session['items'] = updated_items
+    # obtain id_list for target list
+    r=requests.get(base_url + 'boards/' + id_board + '/lists' , params = payload)
+    r=r.json()
+    
+    for list in r:
+        if target_list == list['name']:
+            id_list = list['id']
+            break
 
-    return item
+    # Update card
+    r=requests.put(base_url + 'cards/' + item.id_card + '?idList=' + id_list , params = payload)
+    r=r.json()
+
+    return 
 
 def delete_item(id_num):
     """

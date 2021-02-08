@@ -37,19 +37,13 @@ for list in lists:
     for card in r:
         cards.append(card)
 
-# Assign name, and status to item
-i=0
-items=[]
-for card in cards:
-    for list in lists:
-        if card['idList'] == list['id']:
-            status = list['name']
-            name = card['name']
-            item=Item(i,status,name)
-            items.append(item)
-            i=i+1
 
-print ('Cards within list: ')
-for item in items:
-    print('Item id: ',item.id, ' with title: ',item.title, ' is ',item.status)
+r=requests.get(base_url + 'boards/' + id_board + '/lists' , params = payload)
+r=r.json()
 
+status = 'Doing' 
+for list in r:
+    if status == list['name']:
+        id_list = list['id']
+
+print(id_list)
