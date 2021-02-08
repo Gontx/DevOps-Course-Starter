@@ -8,12 +8,6 @@ base_url = 'https://trello.com/1/'
 id_board = 'sr8Gn9uE'
 payload ={ 'key' : api_key , 'token' : token }
 
-_DEFAULT_ITEMS = [
-    { 'id': 1, 'status': 'Not Started', 'title': 'List saved todo items' },
-    { 'id': 2, 'status': 'Not Started', 'title': 'Allow new items to be added' },
-    { 'id': 3, 'status': 'Complete', 'title': 'test'}
-]
-
 def get_items():
     """
     Fetches all saved items from specified Trello board.
