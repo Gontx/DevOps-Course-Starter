@@ -27,7 +27,7 @@ def item_status():
     item_id = int(request.form ['item_id'])
     item_status = request.form ['item_status']
     item = si.get_item(item_id)
-    updated_item = {'id': item_id,'status': item_status,'title': item['title']}
+    updated_item = Item(item_id,item_status,item.title)
     si.save_item(updated_item)
     return redirect(url_for('index'))
 

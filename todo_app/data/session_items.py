@@ -87,16 +87,11 @@ def add_item(title):
     # Create item card in Trello using to Do list as default
     r=requests.post(base_url+'cards?'+'idList='+todo_id+'&name='+title , params = payload)
 
-    # Add the item to the list
-    #items.append(item)
-    #session['items'] = items
-
-    return item
-
+    return 
 
 def save_item(item):
     """
-    Updates an existing item in the session. If no existing item matches the ID of the specified item, nothing is saved.
+    Updates a card from the board. If no existing item matches the ID of the specified item, nothing is saved.
 
     Args:
         item: The item to save.
