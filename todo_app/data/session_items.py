@@ -39,7 +39,6 @@ def get_items():
             cards.append(card)
 
     # Assign name, and status to item
-    i=0
     items=[]
     for card in cards:
         for list in lists:
@@ -48,11 +47,9 @@ def get_items():
                 name = card['name']
                 id_item = card ['id']
                 id_list = list ['id']
-                item=Item(i,id_item,status,id_list,name)
+                item=Item(id_item,status,id_list,name)
                 items.append(item)
-                i=i+1
     return session.get('items', items)
-
 
 def get_item(title):
     """
@@ -79,9 +76,6 @@ def add_item(title):
         item: The saved item.
     """
     items = get_items()
-
-    # Determine the ID for the item based on that of the previously added item
-    id = items[-1].id + 1 if items else 0
 
     # Obtain todo_id
     r=requests.get(base_url + 'boards/' + id_board + '/lists' , params = payload)
@@ -120,9 +114,7 @@ def save_item(item,target_list):
             break
 
     # Update card
-    r=requests.put(base_url + 'cards/' + item.id_card + '?idList=' + id_list , params = payload)
-
-    return 
+    r=requests.put(base_url + 'cards/' + item.id_card + '?idList=' + id_list , params = payload) 
 
 def delete_item(id_title):
     """
