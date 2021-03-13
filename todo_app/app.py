@@ -25,9 +25,9 @@ def form():
 # Update item status
 @app.route('/item_status', methods = ['GET','POST'])
 def item_status():
-    item_id = int(request.form ['item_id'])
+    item_title = request.form ['item_title']
     item_status = request.form ['item_status']
-    item = si.get_item(item_id)
+    item = si.get_item(item_title)
     if item != None:
         si.save_item(item,item_status)
     return redirect(url_for('index'))
@@ -35,8 +35,8 @@ def item_status():
 # Delete item
 @app.route('/del_item', methods = ['GET','POST'])
 def del_item():
-    del_id = int(request.form['del_id'])
-    delete_item(del_id)
+    del_title = request.form['del_title']
+    delete_item(del_title)
     return redirect(url_for('index'))
 
 if __name__ == '__main__':

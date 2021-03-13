@@ -48,24 +48,24 @@ def get_items():
                 name = card['name']
                 id_item = card ['id']
                 id_list = list ['id']
-                item=Item(i+1,id_item,status,id_list,name)
+                item=Item(i,id_item,status,id_list,name)
                 items.append(item)
                 i=i+1
     return session.get('items', items)
 
 
-def get_item(id):
+def get_item(title):
     """
-    Fetches the saved item with the specified ID.
+    Fetches the saved item with the specified item title.
 
     Args:
-        id: The ID of the item.
+        title: The title of the item.
 
     Returns:
         item: The saved item, or None if no items match the specified ID.
     """
     items = get_items()
-    return next((item for item in items if item.id == int(id)), None)
+    return next((item for item in items if item.title == title), None)
 
 
 def add_item(title):
@@ -124,7 +124,7 @@ def save_item(item,target_list):
 
     return 
 
-def delete_item(id_num):
+def delete_item(id_title):
     """
     Removes the item for the ID given. After that re-asigns ID
     Args: 
@@ -135,7 +135,6 @@ def delete_item(id_num):
     items = get_items()
 
     for item in items:
-        if item.id == id_num:
+        if item.title == id_title:
             r=requests.delete(base_url + 'cards/' + item.id_card, params = payload)
             break        
-    return
