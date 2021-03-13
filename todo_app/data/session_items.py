@@ -1,4 +1,3 @@
-from flask import session
 import requests
 import os
 from dotenv import load_dotenv
@@ -49,7 +48,7 @@ def get_items():
                 id_list = list ['id']
                 item=Item(id_item,status,id_list,name)
                 items.append(item)
-    return session.get('items', items)
+    return items
 
 def get_item(title):
     """
@@ -129,4 +128,9 @@ def delete_item(id_title):
     for item in items:
         if item.title == id_title:
             r=requests.delete(base_url + 'cards/' + item.id_card, params = payload)
-            break        
+            break     
+
+# Return the items within a specific list
+def return_list_items(list):
+    items = get_items()
+    return items
