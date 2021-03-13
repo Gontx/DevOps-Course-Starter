@@ -15,7 +15,6 @@ token = os.getenv('TOKEN')
 id_board = os.getenv('ID_BOARD')
 
 
-
 def test_just_one_list():
     lists = ['To Do','Doing','Done']
     for list in lists:
@@ -28,4 +27,17 @@ def test_just_one_list():
                 break
         if bOK == False:
             break
+    assert bOK == True
+
+def test_to_do_items():
+    list = 'To Do'
+    items=ViewModel.to_do_items
+    for item in items:
+        if item.list == list:
+            bOK = True
+        else:
+            bOK = False
+            break
+    if bOK == False:
+        break
     assert bOK == True

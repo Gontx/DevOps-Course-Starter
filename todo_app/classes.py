@@ -21,3 +21,11 @@ class ViewModel:
     @property
     def items(self):
         return self._items
+    @property    
+    def to_do_items(self):
+        self._to_do_items = []
+        for item in self.items:
+            if item.list == 'To Do':
+                self._to_do_items.append(item)
+        return self._to_do_items
+        
