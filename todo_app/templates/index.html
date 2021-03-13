@@ -12,7 +12,7 @@
       <h2>Items list</h2>
       <ul class="list-group mb-4">
         {% for item in items %}
-          <li> Item  {{item.id}}: "{{item.title}}" is {{item.status}} </li>
+          <li>  "{{item.title}}" status is "{{item.list}}" </li>
         {% endfor %}
         <!-- List the todo items here -->
       </ul>
@@ -20,7 +20,7 @@
   </div>
   <br></br>
     <!-- Form which will send a POST request to the current URL -->
-  <form action='/form' method="POST">
+  <form action='/create_item' method="POST">
     <h3>Add to-do item</h3>
     <div class="form-group">
       <input type="text" class="form-control" name="title" id="title" placeholder="to-do item" required>
@@ -40,14 +40,14 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="selectID">Item ID</label>
-        <input type="number" class="form-control" name="item_id" id="item_id" placeholder="item ID number" required>
+        <input type="string" class="form-control" name="item_title" id="item_title" placeholder="item title" required>
       </div>
       <div class="form-group col-md-6">
         <label for="selectItemStatus">Select item status</label>
         <select type = 'text' class="form-control" name="item_status" id="item_status">
-          <option>Not Started</option>
-          <option>Started</option>
-          <option>Completed</option>
+          <option>To Do</option>
+          <option>Doing</option>
+          <option>Done</option>
         </select>
       </div>
     </div>
@@ -57,32 +57,11 @@
   </form>
 
   <br></br>
-
-  <h3>Sort Items</h3>
-  
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <form action = '/status_sortItems' method = 'POST'>
-        <button type="submit" class="btn btn-info">
-          Sort item list by status
-        </button>
-      </form>
-    </div>
-    <div class="form-group col-md-6">
-      <form action = '/id_sort_items' method = 'POST'>
-        <button type="submit" class="btn btn-info">
-          Sort item list by ID
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <br></br>
-  
+  <h3>Delete Item</h3>
   <form action = '/del_item' method = 'POST'>
-    <input type="number" name="del_id" id="del_id" placeholder="item ID number" required>
+    <input type="string" name="del_title" id="del_title" placeholder="item title" required>
       <small id = "delidHelpBlock" class="form-text text-muted">
-        Enter the ID for the item you want to delete from the list
+        Enter the title for the item you want to delete from the list
       </small>
     <button type="submit" class="btn btn-info">
       Delete item
