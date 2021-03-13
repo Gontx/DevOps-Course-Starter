@@ -16,7 +16,7 @@ payload ={ 'key' : api_key , 'token' : token }
 
 def get_items():
     """
-    Fetches all saved items from specified Trello board.
+    Fetches all saved items from specified session.
 
     Returns:
         list: The list of saved items.
