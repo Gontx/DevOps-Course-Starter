@@ -37,7 +37,6 @@ def item_status():
 # Delete item
 @app.route('/del_item', methods = ['GET','POST'])
 def del_item():
-    items = si.get_items()
     del_id = int(request.form['del_id'])
     delete_item(del_id)
     return redirect(url_for('index'))
