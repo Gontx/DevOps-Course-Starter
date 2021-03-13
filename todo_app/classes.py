@@ -13,3 +13,11 @@ class Item:
     # Method to update item status
     def update_status(self,new_status):
         self.status = new_status
+
+class ViewModel:
+    def __init__(self,items):
+        self._items = items
+    
+    @property
+    def items(self):
+        return self._items

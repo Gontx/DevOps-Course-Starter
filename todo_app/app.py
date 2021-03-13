@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, url_for, redirect, session
 import requests
 from todo_app.flask_config import Config
 from todo_app.data import session_items as si
-from todo_app.classes import Item
+from todo_app.classes import Item, ViewModel
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -12,7 +12,8 @@ app.config.from_object(Config)
 @app.route('/')
 def index():
     items = si.get_items()
-    return render_template('index.html', items =items)
+    item_view_model = ViewModel(items)
+    return render_template('index.html', view_model = item_view_model)
 
 # Add item 
 @app.route('/create_item', methods = ['POST'])
