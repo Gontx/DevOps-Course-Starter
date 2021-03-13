@@ -1,7 +1,14 @@
 from flask import session
 import requests
-from auth import api_key, token, id_board
+import os
+from dotenv import load_dotenv
 from todo_app.classes import Item
+
+# Load .env variables
+load_dotenv()
+api_key = os.getenv('API_KEY')
+token = os.getenv('TOKEN')
+id_board = os.getenv('ID_BOARD')
 
 # Define base parameters
 base_url = 'https://trello.com/1/'
