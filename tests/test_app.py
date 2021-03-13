@@ -17,10 +17,15 @@ id_board = os.getenv('ID_BOARD')
 
 
 def test_just_one_list():
-    lists = ['to do','doing','done']
+    lists = ['To Do','Doing','Done']
     for list in lists:
         items = return_list_items(list)
         for item in items:
-            if item.list != list:
+            if item.list == list:
+                bOK = True
+            else:
                 bOK = False
+                break
+        if bOK == False:
+            break
     assert bOK == True
