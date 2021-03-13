@@ -20,7 +20,6 @@ def index():
 def form():
     title = request.form ['title']
     si.add_item(title)
-    items = si.get_items()
     return redirect(url_for('index'))
 
 # Update item status
