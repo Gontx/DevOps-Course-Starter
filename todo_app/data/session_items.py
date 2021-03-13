@@ -131,6 +131,42 @@ def delete_item(id_title):
             break     
 
 # Return the items within a specific list
-def return_list_items(list):
-    items = get_items()
+def return_list_items(list_name):
+    """
+    Fetches all items within the list specified.
+    
+    Args:
+        list: The list whose items will be returned.
+    Returns:
+        list: The list of saved items within the list specified.
+    """
+
+    # Request lists within the board
+    r=requests.get(base_url + 'boards/' + id_board + '/lists' , params = payload)
+    r=r.json()
+    lists = r
+
+    #Request cards on a list
+    cards = []
+    for list in lists:
+        if list['name'] == list_name:
+            id_list = list['id']
+            name_list = list['name']
+            r=requests.get(base_url + 'lists/' + id_list + '/cards', params = payload)
+            print (r.status_code)
+            r=r.json()
+            for card in r:
+                cards.append(card)
+
+    # Assign name, and status to item
+    items=[]
+    for card in cards:
+        for list in lists:
+            if card['idList'] == list['id']:
+                status = list['name']
+                name = card['name']
+                id_item = card ['id']
+                id_list = list ['id']
+                item=Item(id_item,status,id_list,name)
+                items.append(item)
     return items
