@@ -37,6 +37,7 @@ def get_items():
         r=r.json()
         for card in r:
             cards.append(card)
+            
     # Assign name, and status to item
     i=0
     items=[]
