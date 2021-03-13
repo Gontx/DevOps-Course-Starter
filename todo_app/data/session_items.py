@@ -37,7 +37,7 @@ def get_items():
         r=r.json()
         for card in r:
             cards.append(card)
-            
+
     # Assign name, and status to item
     i=0
     items=[]
@@ -99,8 +99,7 @@ def add_item(title):
     id_card = r['id']
     # Obtain trello list id
     id_list = r['idList']
-    item = Item(id,id_card,'To do',id_list, title)
-    return 
+    
 
 def save_item(item,target_list):
     """
