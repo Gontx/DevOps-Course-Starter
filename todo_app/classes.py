@@ -67,4 +67,9 @@ class ViewModel:
     # Returns items completed before today
     @property
     def older_done_items(self):
-        return
+        self._old_done_items = []
+        today = dt.date.today()
+        for item in self.done_items:
+            if item.date_last_activity.date() < today:
+                self._old_done_items.append(item)
+        return self._old_done_items
