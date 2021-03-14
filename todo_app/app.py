@@ -15,16 +15,9 @@ def index():
     item_view_model = ViewModel(items)
     return render_template('index.html', view_model = item_view_model)
 
-# Index view
-@app.route('/done_view')
-def done_view():
-    items = si.get_items()
-    item_view_model = ViewModel(items)
-    return render_template('index.html', view_model = item_view_model)
-
 # Add item 
 @app.route('/create_item', methods = ['POST'])
-def form():
+def create_item():
     title = request.form ['title']
     si.add_item(title)
     return redirect(url_for('index'))
