@@ -32,7 +32,6 @@ def get_items():
         id_list = list['id']
         name_list = list['name']
         r=requests.get(base_url + 'lists/' + id_list + '/cards', params = payload)
-        print (r.status_code)
         r=r.json()
         for card in r:
             cards.append(card)
@@ -86,13 +85,7 @@ def add_item(title):
             break
 
     # Create item card in Trello using to Do list as default
-    r=requests.post(base_url+'cards?'+'idList='+todo_id+'&name='+title , params = payload)
-    r=r.json()
-    # Obtain trello item id
-    id_card = r['id']
-    # Obtain trello list id
-    id_list = r['idList']
-    
+    r=requests.post(base_url+'cards?'+'idList='+todo_id+'&name='+title , params = payload)  
 
 def save_item(item,target_list):
     """
@@ -153,7 +146,6 @@ def return_list_items(list_name):
             id_list = list['id']
             name_list = list['name']
             r=requests.get(base_url + 'lists/' + id_list + '/cards', params = payload)
-            print (r.status_code)
             r=r.json()
             for card in r:
                 cards.append(card)
