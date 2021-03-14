@@ -1,9 +1,11 @@
-from todo_app.data.session_items import delete_item, return_list_items, get_items
-from flask import Flask, render_template, request, url_for, redirect, session
-import requests
-from todo_app.flask_config import Config
+#from todo_app.data.session_items import delete_item, return_list_items, get_items
+#from flask import Flask, render_template, request, url_for, redirect, session
+#import requests
+#from todo_app.flask_config import Config
 from todo_app.data import session_items as si
 from todo_app.classes import Item, ViewModel
+import datetime as dt
+from datetime import date
 
 class Test:
    
@@ -59,8 +61,17 @@ class Test:
     @staticmethod 
     def test_recent_done_items():
         bOK = False
+        # Get today
+        today_date = date.today()
         items = si.get_items()
         item_view_model = ViewModel(items)
+        recent_items = item_view_model.recent_done_items
+        for item in recent_items:
+            if item.date_last_activity.date == today_date.date:
+                bOK = True
+            else:
+                bOK = False
+                break
         assert bOK == True
 
     @staticmethod 
