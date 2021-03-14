@@ -1,11 +1,6 @@
-#from todo_app.data.session_items import delete_item, return_list_items, get_items
-#from flask import Flask, render_template, request, url_for, redirect, session
-#import requests
-#from todo_app.flask_config import Config
 from todo_app.data import session_items as si
-from todo_app.classes import Item, ViewModel
+from todo_app.classes import  ViewModel
 import datetime as dt
-from datetime import date
 
 class Test:
    
