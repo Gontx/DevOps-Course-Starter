@@ -77,6 +77,15 @@ class Test:
     @staticmethod 
     def test_old_done_items():
         bOK = False
+        # Get today
+        today = dt.date.today()
         items = si.get_items()
         item_view_model = ViewModel(items)
+        old_done_items = item_view_model.older_done_items
+        for item in old_done_items:
+            if item.date_last_activity.date() < today:
+                bOK = True
+            else:
+                bOK = False
+                break
         assert bOK == True
