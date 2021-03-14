@@ -6,23 +6,10 @@ from todo_app.data import session_items as si
 from todo_app.classes import Item, ViewModel
 
 class Test:
-    @staticmethod
-    def test_just_one_list():
-        lists = ['To Do','Doing','Done']
-        for list in lists:
-            items = return_list_items(list)
-            for item in items:
-                if item.list == list:
-                    bOK = True
-                else:
-                    bOK = False
-                    break
-            if bOK == False:
-                break
-        assert bOK == True
-
+   
     @staticmethod
     def test_to_do_items():
+        bOK = False
         items = si.get_items()
         item_view_model = ViewModel(items)
         to_do_items = item_view_model.to_do_items
@@ -36,6 +23,7 @@ class Test:
 
     @staticmethod
     def test_doing_items():
+        bOK = False
         items = si.get_items()
         item_view_model = ViewModel(items)
         doing_items = item_view_model.doing_items
@@ -49,6 +37,7 @@ class Test:
 
     @staticmethod
     def test_done_items():
+        bOK = False
         items = si.get_items()
         item_view_model = ViewModel(items)
         done_items = item_view_model.done_items
@@ -62,18 +51,21 @@ class Test:
 
     @staticmethod 
     def test_show_all_done_items():
+        bOK = False
         items = si.get_items()
         item_view_model = ViewModel(items)
-        assert
+        assert bOK == True
 
     @staticmethod 
     def test_recent_done_items():
+        bOK = False
         items = si.get_items()
         item_view_model = ViewModel(items)
-        assert
+        assert bOK == True
 
     @staticmethod 
     def test_old_done_items():
+        bOK = False
         items = si.get_items()
         item_view_model = ViewModel(items)
-        assert    
+        assert bOK == True
