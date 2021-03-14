@@ -45,7 +45,8 @@ def get_items():
                 name = card['name']
                 id_item = card ['id']
                 id_list = list ['id']
-                item=Item(id_item,status,id_list,name)
+                date_last_activity = card['dateLastActivity']
+                item=Item(id_item,status,id_list,name,date_last_activity)
                 items.append(item)
     return items
 

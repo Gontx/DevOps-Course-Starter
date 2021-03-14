@@ -4,11 +4,12 @@
 class Item:
 
     # Initialize item
-    def __init__(self,id_card,list,id_list,title):
+    def __init__(self,id_card,list,id_list,title,date_last_activity):
         self.id_card = id_card
         self.list = list
         self.id_list = id_list
         self.title = title
+        self.date_last_activity = date_last_activity
     
     # Method to update item status
     def update_status(self,new_status):
