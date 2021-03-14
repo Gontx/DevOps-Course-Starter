@@ -62,12 +62,12 @@ class Test:
     def test_recent_done_items():
         bOK = False
         # Get today
-        today_date = date.today()
+        today = dt.date.today()
         items = si.get_items()
         item_view_model = ViewModel(items)
         recent_items = item_view_model.recent_done_items
         for item in recent_items:
-            if item.date_last_activity.date == today_date.date:
+            if item.date_last_activity.date() == today:
                 bOK = True
             else:
                 bOK = False

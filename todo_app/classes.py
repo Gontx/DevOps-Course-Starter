@@ -1,3 +1,5 @@
+import datetime as dt
+from datetime import date
 
 # Create item class
 
@@ -49,15 +51,20 @@ class ViewModel:
 
     # Returns all done items
     @property
-    def show_all_done_items():
+    def show_all_done_items(self):
         return
 
     # Returns items completed today
     @property
-    def recent_done_items():
-        return
+    def recent_done_items(self):
+        self._recent_done_items = []
+        today = dt.date.today()
+        for item in self.done_items:
+            if item.date_last_activity.date() == today:
+                self._recent_done_items.append(item)
+        return self._recent_done_items
 
     # Returns items completed before today
     @property
-    def older_done_items():
+    def older_done_items(self):
         return
