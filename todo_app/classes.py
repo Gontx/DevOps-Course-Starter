@@ -73,3 +73,9 @@ class ViewModel:
             if item.date_last_activity.date() < today:
                 self._old_done_items.append(item)
         return self._old_done_items
+
+    # Returns number of completed items:
+    @property
+    def n_done(self):
+        self._n_done = len(self.done_items)
+        return self._n_done

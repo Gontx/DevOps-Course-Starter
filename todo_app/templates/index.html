@@ -28,11 +28,17 @@
     </div>
     <div class="form-group col-md-4" style="background-color:rgba(96, 121, 160, 0.856);padding:40px;">
       <h2>Done</h2>
-      <ul class="list-group mb-4">
-        {% for item in view_model.done_items %}
-          <li>  {{item.title}} </li>
-        {% endfor %}
-        <!-- List the todo items here -->
+      <ul class="list-group mb-4">  
+        {% if view_model.n_done <= 5 : %}
+          {% for item in view_model.done_items %}
+            <li>  {{item.title}} </li>
+          {% endfor %}
+          <!-- List the todo items here -->
+        {% else: %}
+          {% for i in range(5) %}
+            <li>  {{view_model.recent_done_items[i].title}} </li>
+          {% endfor %}
+        {% endif%}
       </ul>
     </div>
   </div>
