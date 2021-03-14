@@ -20,7 +20,7 @@ class Test:
             if bOK == False:
                 break
         assert bOK == True
-        
+
     @staticmethod
     def test_to_do_items():
         items = si.get_items()
@@ -59,3 +59,21 @@ class Test:
                 bOK = False
                 break
         assert bOK == True
+
+    @staticmethod 
+    def test_show_all_done_items():
+        items = si.get_items()
+        item_view_model = ViewModel(items)
+        assert
+
+    @staticmethod 
+    def test_recent_done_items():
+        items = si.get_items()
+        item_view_model = ViewModel(items)
+        assert
+
+    @staticmethod 
+    def test_old_done_items():
+        items = si.get_items()
+        item_view_model = ViewModel(items)
+        assert    
