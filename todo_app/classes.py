@@ -21,11 +21,39 @@ class ViewModel:
     @property
     def items(self):
         return self._items
-    @property    
+
+    @property
     def to_do_items(self):
         self._to_do_items = []
         for item in self.items:
             if item.list == 'To Do':
                 self._to_do_items.append(item)
         return self._to_do_items
-        
+
+    @property
+    def doing_items(self):
+        self._doing_items = []
+        for item in self.items:
+            if item.list == 'Doing':
+                self._doing_items.append(item)
+        return self._doing_items
+
+    @property
+    def done_items(self):
+        self._done_items = []
+        for item in self.items:
+            if item.list == 'Done':
+                self._done_items.append(item)
+        return self._done_items
+
+    @property
+    def show_all_done_items():
+        return
+
+    @property
+    def recent_done_items():
+        return
+
+    @property
+    def older_done_items():
+        return
