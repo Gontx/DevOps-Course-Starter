@@ -1,5 +1,6 @@
 import requests
 import os
+import datetime as dt
 from dotenv import load_dotenv
 from todo_app.classes import Item
 
@@ -8,6 +9,7 @@ load_dotenv()
 api_key = os.getenv('API_KEY')
 token = os.getenv('TOKEN')
 id_board = os.getenv('ID_BOARD')
+dtformat = '%Y-%m-%dT%H:%M:%S.%fZ'
 
 # Define base parameters
 base_url = 'https://trello.com/1/'
@@ -46,6 +48,7 @@ def get_items():
                 id_item = card ['id']
                 id_list = list ['id']
                 date_last_activity = card['dateLastActivity']
+                date_last_activity = dt.datetime.strptime(date_last_activity,dtformat)
                 item=Item(id_item,status,id_list,name,date_last_activity)
                 items.append(item)
     return items
