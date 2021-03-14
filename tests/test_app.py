@@ -52,13 +52,6 @@ class Test:
         assert bOK == True
 
     @staticmethod 
-    def test_show_all_done_items():
-        bOK = False
-        items = si.get_items()
-        item_view_model = ViewModel(items)
-        assert bOK == True
-
-    @staticmethod 
     def test_recent_done_items():
         bOK = False
         # Get today

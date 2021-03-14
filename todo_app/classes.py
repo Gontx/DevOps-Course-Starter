@@ -49,11 +49,6 @@ class ViewModel:
                 self._done_items.append(item)
         return self._done_items
 
-    # Returns all done items
-    @property
-    def show_all_done_items(self):
-        return
-
     # Returns items completed today
     @property
     def recent_done_items(self):
