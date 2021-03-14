@@ -41,3 +41,11 @@ def del_item():
 
 if __name__ == '__main__':
     app.run()
+
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object('app_config.Config')
+
+    # All the routes and setup code etc
+
+    return app
