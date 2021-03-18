@@ -1,6 +1,6 @@
 from todo_app.data import session_items as si
 from todo_app.classes import  ViewModel
-from todo_app.app import app
+from todo_app.app import create_app
 from dotenv import find_dotenv,load_dotenv
 import datetime as dt
 import pytest
@@ -12,13 +12,13 @@ def client():
     load_dotenv(file_path, override=True)
 
     # Create the new app.
-    test_app = app.create_app()
+    test_app = create_app()
 
     # Use the app to create a test_client that can be used in our tests.
     with test_app.test_client() as client:
         yield client
 
-class Unit_tests:
+class TestUnit:
     @staticmethod
     def test_to_do_items():
         bOK = False
@@ -93,7 +93,7 @@ class Unit_tests:
                 break
         assert bOK == True
 
-class Integration_tests:
+class TestIntegration:
     @staticmethod
     def test_index_page(client):
         response = client.get('/')
