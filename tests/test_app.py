@@ -1,9 +1,9 @@
 from todo_app.data import session_items as si
 from todo_app.classes import  ViewModel
-import datetime as dt
-import pytest
 from todo_app.app import app
 from dotenv import find_dotenv,load_dotenv
+import datetime as dt
+import pytest
 
 @pytest.fixture
 def client():
