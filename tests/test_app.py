@@ -3,6 +3,7 @@ from todo_app.classes import  ViewModel
 import datetime as dt
 import pytest
 from todo_app.app import app
+from dotenv import find_dotenv,load_dotenv
 
 class Unit_tests:
     @staticmethod
@@ -96,17 +97,3 @@ def client():
     # Use the app to create a test_client that can be used in our tests.
     with test_app.test_client() as client:
         yield client
-
-@patch('requests.get')
-def test_index_page(mock_get_requests, client):
-    # Replace call to requests.get(url) with our own
-    function
-        mock_get_requests.side_effect = mock_get_lists
-        response = client.get('/')
-    def mock_get_lists(url, params):
-        if url == f'https://api.trello.com/1/boards/{TEST_BOARD_ID}/lists':
-        response = Mock()
-        # sample_trello_lists_response should point to some test response data
-        response.json.return_value =sample_trello_lists_response
-        return response
-    return None
