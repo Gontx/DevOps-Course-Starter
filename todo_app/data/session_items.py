@@ -24,7 +24,7 @@ def get_items():
     """
 
     # Request lists within the board
-    r=requests.get(base_url + 'boards/' + id_board + '/lists' , params = payload)
+    r=requests.get(base_url + 'boards/' + get_id_board() + '/lists' , params = payload)
     r=r.json()
     lists = r
 
@@ -80,7 +80,7 @@ def add_item(title):
     items = get_items()
 
     # Obtain todo_id
-    r=requests.get(base_url + 'boards/' + id_board + '/lists' , params = payload)
+    r=requests.get(base_url + 'boards/' + get_id_board() + '/lists' , params = payload)
     r=r.json()
     
     for list in r:
@@ -101,7 +101,7 @@ def save_item(item,target_list):
     existing_items = get_items()
    
     # obtain id_list for target list
-    r=requests.get(base_url + 'boards/' + id_board + '/lists' , params = payload)
+    r=requests.get(base_url + 'boards/' + get_id_board() + '/lists' , params = payload)
     r=r.json()
     
     for list in r:
@@ -125,4 +125,7 @@ def delete_item(id_title):
     for item in items:
         if item.title == id_title:
             r=requests.delete(base_url + 'cards/' + item.id_card, params = payload)
-            break     
+            break  
+
+def get_id_board():
+    return os.getenv('ID_BOARD')   
