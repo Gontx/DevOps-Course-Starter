@@ -74,3 +74,9 @@ class ViewModel:
     def n_done(self):
         self._n_done = len(self.done_items)
         return self._n_done
+
+    # Returns number of recent completed items:
+    @property
+    def n_recent_done(self):
+        self._n_recent_done = len(self.recent_done_items)
+        return self._n_recent_done

@@ -42,9 +42,15 @@
             {% endfor %}
             <!-- List the todo items here -->
           {% else: %}
-            {% for i in range(5) %}
-              <li>  {{view_model.recent_done_items[i].title}} </li>
-            {% endfor %}
+            {% if view_model.n_recent_done>=5:%}
+              {% for i in range(5) %}
+                <li>  {{view_model.recent_done_items[i].title}} </li>
+              {% endfor %}
+            {% else: %}
+              {% for i in range(view_model.n_recent_done) %}
+                <li>  {{view_model.recent_done_items[i].title}} </li>
+              {% endfor %}
+            {% endif %}
           {% endif%}
         </ul>
       </details>
