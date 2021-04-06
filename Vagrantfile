@@ -87,8 +87,7 @@ Vagrant.configure("2") do |config|
     # Set python version globally
     pyenv global 3.7.5
     # Install poetry
-    curl -sSL https://raw.githubusercontent.com/python-poetry/
-    poetry/master/get-poetry.py | python
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
 
   SHELL
   
