@@ -126,3 +126,4 @@ auth.py
 
 ### Vagrant files ###
 .vagrant
+logs.txt
