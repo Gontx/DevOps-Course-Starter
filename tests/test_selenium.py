@@ -40,10 +40,10 @@ def app_with_temp_board():
     os.environ['ID_BOARD'] = id_board
 
     # Construct the new application
-    application = app.create_app()
+    app = create_app()
 
     # start the app in its own thread
-    thread = Thread(target=lambda:application.run(use_reloader=False))
+    thread = Thread(target=lambda:app.run(use_reloader=False))
     thread.daemon = True
     thread.start()
     yield app
@@ -58,7 +58,7 @@ def driver():
         yield driver
 
 # Tests
-def test_task_journey(driver, app_with_temp_board):
+def test_task_journey(driver, app):
     driver.get('hhtp://localhost:5000/')
 
     assert driver.title == 'To-DoApp'
