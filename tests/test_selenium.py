@@ -5,6 +5,8 @@ import pytest
 from dotenv import load_dotenv
 from todo_app.classes import Item
 from threading import Thread
+from selenium import webdriver
+from todo_app.app import create_app
 
 # Load .env variables
 load_dotenv()
@@ -49,3 +51,14 @@ def app_with_temp_board():
     #Tear Down
     thread.join(1)
     delete_board (id_board_long)
+
+@pytest.fixture(scope = "module")
+def driver():
+    with webdriver.Firefox() as driver:
+        yield driver
+
+# Tests
+def test_task_journey(driver, app_with_temp_board):
+    driver.get('hhtp://localhost:5000/')
+
+    assert driver.title == 'To-DoApp'
