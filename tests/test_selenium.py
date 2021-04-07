@@ -1,9 +1,7 @@
 import requests
 import os
-import datetime as dt
 import pytest
 from dotenv import load_dotenv
-from todo_app.classes import Item
 from threading import Thread
 from selenium import webdriver
 from todo_app.app import create_app
@@ -58,7 +56,7 @@ def driver():
         yield driver
 
 # Tests
-def test_task_journey(driver, app):
+def test_task_journey(driver, app_with_temp_board):
     driver.get('hhtp://localhost:5000/')
 
     assert driver.title == 'To-DoApp'
