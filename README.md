@@ -59,6 +59,7 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 
 ## Testing
 A number of unit tests have been added in /tests folder. They have been written with pytest in mind.
+Before unit testing make sure to have a task recently completed to be able to trigger all the tests.
 
 ### How to run the tests
 Using VSCode add [Test Explorer UI extension](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-test-explorer) and [Python Test Explorer for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=LittleFoxTeam.vscode-python-test-adapter). Navigate to extension GUI and execute tests.

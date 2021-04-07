@@ -58,6 +58,5 @@ def driver():
 
 # Tests
 def test_task_journey(driver, app_with_temp_board):
-    driver.get('hhtp://localhost:5000/')
-    delete_board (os.getenv('ID_BOARD_LONG'))
-    assert driver.title == 'To-DoApp'
+    driver.get('http://localhost:5000/')
+    assert driver.title == 'To-Do App'
