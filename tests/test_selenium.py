@@ -36,6 +36,7 @@ def app_with_temp_board():
     # Create the new board & update the board id environment variable
     (id_board,id_board_long) = create_board('SeleniumTestBoard')
     os.environ['ID_BOARD'] = id_board
+    os.environ['ID_BOARD_LONG'] = id_board_long
 
     # Construct the new application
     app = create_app()
@@ -48,7 +49,7 @@ def app_with_temp_board():
 
     #Tear Down
     thread.join(1)
-    delete_board (id_board_long)
+    delete_board(id_board_long)
 
 @pytest.fixture(scope = "module")
 def driver():
@@ -58,5 +59,5 @@ def driver():
 # Tests
 def test_task_journey(driver, app_with_temp_board):
     driver.get('hhtp://localhost:5000/')
-
+    delete_board (os.getenv('ID_BOARD_LONG'))
     assert driver.title == 'To-DoApp'
