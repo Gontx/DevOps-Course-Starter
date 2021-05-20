@@ -15,7 +15,14 @@ class TestUnit:
         to_do_items = item_view_model.to_do_items
         assert len(to_do_items) > 0
         for item in to_do_items:
-            assert item.list == "To Do"
+            assert item.list == "To"
+        for item in to_do_items:
+            if item.list == 'To Do':
+                bOK = True
+            else:
+                bOK = False
+                break
+        assert bOK == True
 
     @staticmethod
     def test_doing_items():
@@ -23,27 +30,19 @@ class TestUnit:
         items = si.get_items()
         item_view_model = ViewModel(items)
         doing_items = item_view_model.doing_items
+        assert len(doing_items) > 0
         for item in doing_items:
-            if item.list == 'Doing':
-                bOK = True
-            else:
-                bOK = False
-                break
-        assert bOK == True
-
+            assert item.list = "Doing"
+    
     @staticmethod
     def test_done_items():
         bOK = False
         items = si.get_items()
         item_view_model = ViewModel(items)
         done_items = item_view_model.done_items
+        assert len(done_items) > 0
         for item in done_items:
-            if item.list == 'Done':
-                bOK = True
-            else:
-                bOK = False
-                break
-        assert bOK == True
+            assert item.list == "Done"
 
     @staticmethod 
     def test_recent_done_items():
