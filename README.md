@@ -56,3 +56,12 @@ You should see output similar to the following:
  * Debugger PIN: 226-556-590
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
+## Vagrant
+Navigate to repository root directory and run:
+```bash
+$ vagrant up
+```
+This command will provision a VM with the requirements needed for the To-Do app and start it automatically.
+
+The app is accessible on http://127.0.0.1:5000/ 

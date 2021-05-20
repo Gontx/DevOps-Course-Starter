@@ -121,3 +121,12 @@ env/
 
 ### Trello API keys ###
 auth.py
+.vscode/launch.json
+.vscode/settings.json
+
+### Vagrant files ###
+.vagrant
+logs.txt
+
+### Logs ###
+.log
