@@ -13,13 +13,9 @@ class TestUnit:
         items = si.get_items()
         item_view_model = ViewModel(items)
         to_do_items = item_view_model.to_do_items
+        assert len(to_do_items) > 0
         for item in to_do_items:
-            if item.list == 'To Do':
-                bOK = True
-            else:
-                bOK = False
-                break
-        assert bOK == True
+            assert item.list == "To Do"
 
     @staticmethod
     def test_doing_items():
