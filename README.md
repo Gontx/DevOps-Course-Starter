@@ -64,3 +64,7 @@ Before unit testing make sure to have a task recently completed to be able to tr
 ### How to run the tests
 Using VSCode add [Test Explorer UI extension](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-test-explorer) and [Python Test Explorer for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=LittleFoxTeam.vscode-python-test-adapter). Navigate to extension GUI and execute tests.
 
+To run from command line:
+```bash
+$ poetry run pytest
+```
