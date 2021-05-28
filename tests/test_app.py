@@ -15,7 +15,7 @@ class TestUnit:
         to_do_items = item_view_model.to_do_items
         assert len(to_do_items) > 0
         for item in to_do_items:
-            assert item.list == "To"
+            assert item.list == "To Do"
         for item in to_do_items:
             if item.list == 'To Do':
                 bOK = True
