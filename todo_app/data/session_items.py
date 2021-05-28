@@ -1,6 +1,6 @@
-from flask import session
 import requests
 import os
+import datetime as dt
 from dotenv import load_dotenv
 from todo_app.classes import Item
 
@@ -9,6 +9,7 @@ load_dotenv()
 api_key = os.getenv('API_KEY')
 token = os.getenv('TOKEN')
 id_board = os.getenv('ID_BOARD')
+dtformat = '%Y-%m-%dT%H:%M:%S.%fZ'
 
 # Define base parameters
 base_url = 'https://trello.com/1/'
@@ -23,7 +24,7 @@ def get_items():
     """
 
     # Request lists within the board
-    r=requests.get(base_url + 'boards/' + id_board + '/lists' , params = payload)
+    r=requests.get(base_url + 'boards/' + get_id_board() + '/lists' , params = payload)
     r=r.json()
     lists = r
 
@@ -33,7 +34,6 @@ def get_items():
         id_list = list['id']
         name_list = list['name']
         r=requests.get(base_url + 'lists/' + id_list + '/cards', params = payload)
-        print (r.status_code)
         r=r.json()
         for card in r:
             cards.append(card)
@@ -47,9 +47,11 @@ def get_items():
                 name = card['name']
                 id_item = card ['id']
                 id_list = list ['id']
-                item=Item(id_item,status,id_list,name)
+                date_last_activity = card['dateLastActivity']
+                date_last_activity = dt.datetime.strptime(date_last_activity,dtformat)
+                item=Item(id_item,status,id_list,name,date_last_activity)
                 items.append(item)
-    return session.get('items', items)
+    return items
 
 def get_item(title):
     """
@@ -78,7 +80,7 @@ def add_item(title):
     items = get_items()
 
     # Obtain todo_id
-    r=requests.get(base_url + 'boards/' + id_board + '/lists' , params = payload)
+    r=requests.get(base_url + 'boards/' + get_id_board() + '/lists' , params = payload)
     r=r.json()
     
     for list in r:
@@ -87,13 +89,7 @@ def add_item(title):
             break
 
     # Create item card in Trello using to Do list as default
-    r=requests.post(base_url+'cards?'+'idList='+todo_id+'&name='+title , params = payload)
-    r=r.json()
-    # Obtain trello item id
-    id_card = r['id']
-    # Obtain trello list id
-    id_list = r['idList']
-    
+    r=requests.post(base_url+'cards?'+'idList='+todo_id+'&name='+title , params = payload)  
 
 def save_item(item,target_list):
     """
@@ -105,7 +101,7 @@ def save_item(item,target_list):
     existing_items = get_items()
    
     # obtain id_list for target list
-    r=requests.get(base_url + 'boards/' + id_board + '/lists' , params = payload)
+    r=requests.get(base_url + 'boards/' + get_id_board() + '/lists' , params = payload)
     r=r.json()
     
     for list in r:
@@ -129,4 +125,7 @@ def delete_item(id_title):
     for item in items:
         if item.title == id_title:
             r=requests.delete(base_url + 'cards/' + item.id_card, params = payload)
-            break        
+            break  
+
+def get_id_board():
+    return os.getenv('ID_BOARD')   

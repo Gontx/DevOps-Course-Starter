@@ -8,16 +8,64 @@
   </div>
 
   <div class="row">
-    <div class="col-md-12">
-      <h2>Items list</h2>
-      <ul class="list-group mb-4">
-        {% for item in items %}
-          <li>  "{{item.title}}" status is "{{item.list}}" </li>
-        {% endfor %}
-        <!-- List the todo items here -->
-      </ul>
+    <div class="form-group col-md-4" style="background-color:rgb(164, 187, 226); padding:40px;">
+      <details open>
+        <summary style='list-style:none;'><h2>To Do</h2></summary>
+        <ul class="list-group mb-4" >
+          {% for item in view_model.to_do_items %}
+            <li>  {{item.title}} </li>
+          {% endfor %}
+          <!-- List the todo items here -->
+        </ul>
+      </details>
+    </div>
+
+    <div class="form-group col-md-4" style="background-color:rgb(132, 157, 206);padding:40px;">
+      <details open>
+        <summary style='list-style:none;'><h2>Doing</h2></summary>
+        <ul class="list-group mb-4">
+          {% for item in view_model.doing_items %}
+            <li>  {{item.title}} </li>
+          {% endfor %}
+          <!-- List the todo items here -->
+        </ul>
+      </details>
+    </div>
+
+    <div class="form-group col-md-4" style="background-color:rgba(96, 121, 160, 0.856);padding:40px;">
+      <details open>
+        <summary style='list-style:none;'><h2>Done</h2></summary>
+        <ul class="list-group mb-4">  
+          {% if view_model.n_done <= 5 : %}
+            {% for item in view_model.done_items %}
+              <li>  {{item.title}} </li>
+            {% endfor %}
+            <!-- List the todo items here -->
+          {% else: %}
+            {% if view_model.n_recent_done>=5:%}
+              {% for i in range(5) %}
+                <li>  {{view_model.recent_done_items[i].title}} </li>
+              {% endfor %}
+            {% else: %}
+              {% for i in range(view_model.n_recent_done) %}
+                <li>  {{view_model.recent_done_items[i].title}} </li>
+              {% endfor %}
+            {% endif %}
+          {% endif%}
+        </ul>
+      </details>
+    </div>
+
+    <div>
+      <small id = "idHelpBlock" class="form-text text-muted">
+        Click on list titles to toggle view on/off
+      </small>
+      <small id = "idHelpBlock" class="form-text text-muted">
+        Done list will show up to 5 items completed today
+      </small>
     </div>
   </div>
+     
   <br></br>
     <!-- Form which will send a POST request to the current URL -->
   <form action='/create_item' method="POST">
