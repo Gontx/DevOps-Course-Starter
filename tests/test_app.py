@@ -32,7 +32,7 @@ class TestUnit:
         doing_items = item_view_model.doing_items
         assert len(doing_items) > 0
         for item in doing_items:
-            assert item.list = "Doing"
+            assert item.list == "Doing"
     
     @staticmethod
     def test_done_items():
