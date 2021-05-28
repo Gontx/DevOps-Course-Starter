@@ -57,6 +57,7 @@ You should see output similar to the following:
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
+
 ## Testing
 A number of unit tests have been added in /tests folder. This tests make use of items_pickle file to load a hardcoded set of items.
 
@@ -67,3 +68,13 @@ To run from command line:
 ```bash
 $ poetry run pytest
 ```
+
+## Vagrant
+Navigate to repository root directory and run:
+```bash
+$ vagrant up
+```
+This command will provision a VM with the requirements needed for the To-Do app and start it automatically.
+
+The app is accessible on http://127.0.0.1:5000/ 
+

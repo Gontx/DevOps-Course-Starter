@@ -119,6 +119,7 @@ env/
 ### Configuration files ###
 .env
 
+
 ### VScode config ###
 .vscode/
 
@@ -131,4 +132,16 @@ geckodriver.log
 
 ### Logs
 logs.txt
+.log
 geckodriver.log
+
+### Trello API keys ###
+auth.py
+.vscode/launch.json
+.vscode/settings.json
+
+### Vagrant files ###
+.vagrant
+logs.txt
+
+
