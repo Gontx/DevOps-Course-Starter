@@ -1,5 +1,5 @@
 # Use python:3.7 image as base
-FROM python:3.7
+FROM python:buster
 
 # Update pip
 RUN apt-get update && pip install --upgrade pip
@@ -20,11 +20,13 @@ COPY . /usr/DevOps-Course-Starter
 
 WORKDIR /usr/DevOps-Course-Starter
 
-# Install poetry dependencies
+# Install poetry dependencies and create .env
 RUN poetry install
+
+RUN cp .env.template .env
 
 # To-do app entrypoint
 CMD ["ls"]
 #CMD ["ls"]
 
-#ENTRYPOINT ["poetry run flask run"]
+ENTRYPOINT [""]
