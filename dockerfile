@@ -27,6 +27,5 @@ RUN cp .env.template .env
 
 # To-do app entrypoint
 CMD ["ls"]
-#CMD ["ls"]
 
-ENTRYPOINT [""]
+ENTRYPOINT ["poetry run flask run"]
