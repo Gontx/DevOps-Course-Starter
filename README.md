@@ -108,10 +108,10 @@ $ docker build --target development  --tag todo-app:dev .
 To run the development application with the local repository binded to the container:
 
 ```bash
-$ docker run --env-file ./.env -p 5100:80 --mount type=bind,source="$(pwd)"/todo_app,target=/app/todo_app todo-app:dev
+$ docker run --env-file ./.env -p 5000:5000 --mount type=bind,source="$(pwd)"/todo_app,target=/app/todo_app todo-app:dev
 ```
 
 Docker will pick your environment variables from your local .env file. Make sure to have it up to date.
 
-The app is accesible locally on: http://127.0.0.1:8000/ 
+The app is accesible locally on: http://localhost:5000/ 
 

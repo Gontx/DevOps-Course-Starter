@@ -9,10 +9,11 @@ RUN apt-get install -y curl
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
 ENV PATH = "${PATH}:/root/.poetry/bin"
 
+FROM base as production
+
 # Expose Port 8000
 EXPOSE 8000
 
-FROM base as production
 # Copy code accross
 COPY . /usr/DevOps-Course-Starter
 
@@ -27,6 +28,9 @@ ENTRYPOINT ["poetry","run","gunicorn", "-w", "4","--bind","0.0.0.0", "todo_app.a
 
 FROM base as development
 
+# Expose port 5000
+EXPOSE 5000
+
 # Copy requirements
 WORKDIR /usr/DevOps-Course-Starter
 COPY pyproject.toml /usr/DevOps-Course-Starter
@@ -35,5 +39,9 @@ COPY pyproject.toml /usr/DevOps-Course-Starter
 
 RUN poetry install
 
+# Flask Server env
+ENV FLASK_APP =todo_app.app
+ENV FLASK_ENV=development
+
 # App entrypoint
-ENTRYPOINT ["poetry","run","flask","run"]
+ENTRYPOINT ["poetry","run","flask","run","--host","0.0.0.0"]
