@@ -9,11 +9,8 @@ RUN apt-get install -y curl
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
 ENV PATH = "${PATH}:/root/.poetry/bin"
 
-# Install Gunicorn
-RUN pip install gunicorn
-
 # Expose Port 80
-EXPOSE 80
+EXPOSE 8000
 
 # Copy code accross
 COPY . /usr/DevOps-Course-Starter
@@ -23,9 +20,6 @@ WORKDIR /usr/DevOps-Course-Starter
 # Install poetry dependencies and create .env
 RUN poetry install
 
-RUN cp .env.template .env
-
 # To-do app entrypoint
-CMD ["ls"]
 
-ENTRYPOINT ["poetry run flask run"]
+ENTRYPOINT ["poetry","run","gunicorn", "-w", "4","--bind","0.0.0.0", "todo_app.app:create_app()"]

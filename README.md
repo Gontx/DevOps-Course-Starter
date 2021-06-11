@@ -78,3 +78,10 @@ This command will provision a VM with the requirements needed for the To-Do app 
 
 The app is accessible on http://127.0.0.1:5000/ 
 
+## Docker
+To use Docker to run the application run:
+```bash 
+$ docker run --env-file .env -p 8000:8000 todo-app
+```
+The app is accesible locally on: http://127.0.0.1:8000/ 
+
