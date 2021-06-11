@@ -1,5 +1,5 @@
-# Use python:3.7 image as base
-FROM python:buster
+# Use python:buster image as base
+FROM python:buster as base
 
 # Update pip
 RUN apt-get update && pip install --upgrade pip
@@ -12,6 +12,7 @@ ENV PATH = "${PATH}:/root/.poetry/bin"
 # Expose Port 80
 EXPOSE 8000
 
+FROM base as production
 # Copy code accross
 COPY . /usr/DevOps-Course-Starter
 
@@ -23,3 +24,5 @@ RUN poetry install
 # To-do app entrypoint
 
 ENTRYPOINT ["poetry","run","gunicorn", "-w", "4","--bind","0.0.0.0", "todo_app.app:create_app()"]
+
+FROM base as development
