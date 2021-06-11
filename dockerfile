@@ -26,3 +26,9 @@ RUN poetry install
 ENTRYPOINT ["poetry","run","gunicorn", "-w", "4","--bind","0.0.0.0", "todo_app.app:create_app()"]
 
 FROM base as development
+
+# Install poetry dependencies and create .env
+
+RUN poetry install
+# App entrypoint
+ENTRYPOINT ["poetry","run","flask","run"]

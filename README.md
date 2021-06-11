@@ -94,6 +94,7 @@ To run the app within the production container:
 ```bash 
 $ docker run --env-file .env -p 8000:8000 todo-app:prod
 ```
+Docker will pick your environment variables from your local .env file. Make sure to have it up to date.
 
 The app is accesible locally on: http://127.0.0.1:8000/ 
 
