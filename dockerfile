@@ -18,7 +18,7 @@ COPY . /usr/DevOps-Course-Starter
 
 WORKDIR /usr/DevOps-Course-Starter
 
-# Install poetry dependencies and create .env
+# Install poetry dependencies 
 RUN poetry install
 
 # To-do app entrypoint
@@ -27,8 +27,13 @@ ENTRYPOINT ["poetry","run","gunicorn", "-w", "4","--bind","0.0.0.0", "todo_app.a
 
 FROM base as development
 
-# Install poetry dependencies and create .env
+# Copy requirements
+WORKDIR /usr/DevOps-Course-Starter
+COPY pyproject.toml /usr/DevOps-Course-Starter
+
+# Install poetry dependencies 
 
 RUN poetry install
+
 # App entrypoint
 ENTRYPOINT ["poetry","run","flask","run"]
