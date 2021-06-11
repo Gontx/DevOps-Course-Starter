@@ -9,7 +9,7 @@ RUN apt-get install -y curl
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
 ENV PATH = "${PATH}:/root/.poetry/bin"
 
-# Expose Port 80
+# Expose Port 8000
 EXPOSE 8000
 
 FROM base as production
