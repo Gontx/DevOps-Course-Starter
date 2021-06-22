@@ -78,3 +78,40 @@ This command will provision a VM with the requirements needed for the To-Do app 
 
 The app is accessible on http://127.0.0.1:5000/ 
 
+## Docker
+
+A production and a development container are available.
+
+### Production:
+To build the production container:
+
+```bash
+$ docker build --target production  --tag todo-app:prod .
+```
+
+To run the app within the production container:
+
+```bash 
+$ docker run --env-file .env -p 8000:8000 todo-app:prod
+```
+Docker will pick your environment variables from your local .env file. Make sure to have it up to date.
+
+The app is accesible locally on: http://localhost:8000/ 
+
+
+### Development:
+To build the development container:
+
+```bash
+$ docker build --target development  --tag todo-app:dev .
+```
+To run the development application with the local repository binded to the container:
+
+```bash
+$ docker run --env-file ./.env -p 5000:5000 --mount type=bind,source="$(pwd)"/todo_app,target=/usr/DevOps-Course-Starter/todo_app todo-app:dev
+```
+
+Docker will pick your environment variables from your local .env file. Make sure to have it up to date.
+
+The app is accesible locally on: http://localhost:5000/ 
+
