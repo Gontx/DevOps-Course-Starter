@@ -24,7 +24,7 @@ COPY . /usr/DevOps-Course-Starter
 WORKDIR /usr/DevOps-Course-Starter
 
 # Install poetry dependencies 
-RUN poetry install
+RUN poetry install --no-dev
 
 # To-do app entrypoint
 
