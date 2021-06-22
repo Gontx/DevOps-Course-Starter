@@ -1,5 +1,5 @@
 # Use python:buster image as base
-FROM python:buster as base
+FROM python:3.7.10-buster as base
 
 # Update pip
 RUN apt-get update && pip install --upgrade pip
@@ -13,6 +13,10 @@ FROM base as production
 
 # Expose Port 8000
 EXPOSE 8000
+EXPOSE 5000
+
+# Set Workdir
+WORKDIR /usr/DevOps-Course-Starter
 
 # Copy code accross
 COPY . /usr/DevOps-Course-Starter
@@ -28,12 +32,9 @@ ENTRYPOINT ["poetry","run","gunicorn", "-w", "4","--bind","0.0.0.0", "todo_app.a
 
 FROM base as development
 
-# Expose port 5000
-EXPOSE 5000
-
 # Copy requirements
-WORKDIR /usr/DevOps-Course-Starter
 COPY pyproject.toml /usr/DevOps-Course-Starter
+COPY poetry.lock /usr/DevOps-Course-Starter
 
 # Install poetry dependencies 
 
