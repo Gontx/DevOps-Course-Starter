@@ -3,3 +3,6 @@ Dockerfile
 .gitignore
 .env
 .env.template
+Vagrantfile
+.Vagrantfile
+geckodriver.exe
