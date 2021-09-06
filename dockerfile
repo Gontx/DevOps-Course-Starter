@@ -66,7 +66,10 @@ COPY pyproject.toml /usr/DevOps-Course-Starter
 COPY poetry.lock /usr/DevOps-Course-Starter
 
 # Install poetry dependencies 
-
 RUN poetry install
+
+# Copy tests and mock items
+COPY tests /usr/DevOps-Course-Starter/
+COPY items_pickle /usr/DevOps-Course-Starter/
 
 ENTRYPOINT [ "poetry" , "run" , "pytest" ]
