@@ -128,3 +128,5 @@ To run the testing container:
 $ docker run --env-file ./.env -p 5000:5000 --mount type=bind,source="$(pwd)"/todo_app,target=/usr/DevOps-Course-Starter/todo_app todo-app:test
 ```
 
+## Travis CI
+Check build status at https://app.travis-ci.com/github/Gontx/DevOps-Course-Starter
