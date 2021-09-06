@@ -129,4 +129,4 @@ $ docker run --env-file ./.env -p 5000:5000 --mount type=bind,source="$(pwd)"/to
 ```
 
 ## Travis CI
-Check build status at https://app.travis-ci.com/github/Gontx/DevOps-Course-Starter
+Check build status at [Travis](https://app.travis-ci.com/github/Gontx/DevOps-Course-Starter)
