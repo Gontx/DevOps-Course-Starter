@@ -115,3 +115,16 @@ Docker will pick your environment variables from your local .env file. Make sure
 
 The app is accesible locally on: http://localhost:5000/ 
 
+
+### Testing:
+To build the testing container: 
+
+```bash
+$ docker build --target test  --tag todo-app:test .
+```
+To run the testing container:
+
+```bash
+$ docker run --env-file ./.env -p 5000:5000 --mount type=bind,source="$(pwd)"/todo_app,target=/usr/DevOps-Course-Starter/todo_app todo-app:test
+```
+
