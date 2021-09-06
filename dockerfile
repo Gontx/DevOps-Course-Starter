@@ -72,4 +72,20 @@ RUN poetry install
 COPY tests /usr/DevOps-Course-Starter/
 COPY items_pickle /usr/DevOps-Course-Starter/
 
+# Install Chrome
+RUN curl -sSL https://dl.google.com/linux/direct/google-chromestable_current_amd64.deb -o chrome.deb &&\
+    apt-get install ./chrome.deb -y &&\
+    rm ./chrome.deb
+
+# Install Chromium WebDriver
+RUN LATEST=`curl -sSL https://chromedriver.storage.googleapis.com/
+
+LATEST_RELEASE` &&\
+    echo "Installing chromium webdriver version ${LATEST}" &&\
+    curl -sSL https://chromedriver.storage.googleapis.com/${LATEST}/
+    
+chromedriver_linux64.zip -o chromedriver_linux64.zip &&\
+    apt-get install unzip -y &&\
+    unzip ./chromedriver_linux64.zip
+
 ENTRYPOINT [ "poetry" , "run" , "pytest" ]

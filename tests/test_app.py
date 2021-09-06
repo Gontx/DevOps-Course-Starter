@@ -70,12 +70,15 @@ class TestUnit:
         item_view_model = ViewModel(items_pickle)
 
         recent_items = item_view_model.recent_done_items
-        for item in recent_items:
-            if item.date_last_activity.date() == today:
-                bOK = True
-            else:
-                bOK = False
-                break
+        if len(recent_items) > 0:
+            for item in recent_items:
+                if item.date_last_activity.date() == today:
+                    bOK = True
+                else:
+                    bOK = False
+                    break
+        else:
+            bOK = True
         assert bOK == True
 
     @staticmethod 
