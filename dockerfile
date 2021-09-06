@@ -1,3 +1,4 @@
+# Common setup stage
 # Use python:buster image as base
 FROM python:3.7.10-buster as base
 
@@ -9,6 +10,8 @@ RUN apt-get install -y curl
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
 ENV PATH = "${PATH}:/root/.poetry/bin"
 
+
+# Production build stage
 FROM base as production
 
 # Expose Port 8000
@@ -30,6 +33,8 @@ RUN poetry install --no-dev
 
 ENTRYPOINT ["poetry","run","gunicorn", "-w", "4","--bind","0.0.0.0", "todo_app.app:create_app()"]
 
+
+# Local Development stage
 FROM base as development
 
 # Copy requirements
@@ -46,3 +51,9 @@ ENV FLASK_ENV=development
 
 # App entrypoint
 ENTRYPOINT ["poetry","run","flask","run","--host","0.0.0.0"]
+
+# Testing stage
+FROM base as test
+
+
+ENTRYPOINT [ "poetry" , "run" , "pytest" ]
