@@ -84,4 +84,5 @@ RUN LATEST=`curl -sSL https://chromedriver.storage.googleapis.com/LATEST_RELEASE
     apt-get install unzip -y &&\
     unzip ./chromedriver_linux64.zip
 
-ENTRYPOINT [ "poetry" , "run" , "pytest" , "/usr/DevOps-Course-Starter/test_app.py" ]
+#ENTRYPOINT [ "poetry" , "run" , "pytest" , "/usr/DevOps-Course-Starter/test_app.py" ]
+ENTRYPOINT [ "poetry" , "run" , "pytest" ]
