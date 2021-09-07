@@ -1,3 +1,3 @@
 script: 
 - docker build --target test  --tag todo-app:test .
-- docker run -p 5000:5000 --mount type=bind,source="$(pwd)"/todo_app,target=/usr/DevOps-Course-Starter/todo_app todo-app:test
+- docker run --mount type=bind,source="$(pwd)"/todo_app,target=/usr/DevOps-Course-Starter/todo_app todo-app:test
