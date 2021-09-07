@@ -61,6 +61,7 @@ FROM base as test
 # Set Workdir
 WORKDIR /usr/DevOps-Course-Starter
 
+
 # Copy requirements
 COPY pyproject.toml /usr/DevOps-Course-Starter
 COPY poetry.lock /usr/DevOps-Course-Starter
@@ -84,5 +85,8 @@ RUN LATEST=`curl -sSL https://chromedriver.storage.googleapis.com/LATEST_RELEASE
     apt-get install unzip -y &&\
     unzip ./chromedriver_linux64.zip
 
-#ENTRYPOINT [ "poetry" , "run" , "pytest" , "test_app.py" ]
-ENTRYPOINT [ "poetry" , "run" , "pytest" ]
+# Copy fake env
+COPY .env.test /usr/DevOps-Course-Starter/
+
+ENTRYPOINT [ "poetry" , "run" , "pytest" , "test_app.py" ]
+#ENTRYPOINT [ "poetry" , "run" , "pytest" ]
