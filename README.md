@@ -125,7 +125,10 @@ $ docker build --target test  --tag todo-app:test .
 To run the testing container:
 
 ```bash
-$ docker run --env-file ./.env -p 5000:5000 --mount type=bind,source="$(pwd)"/todo_app,target=/usr/DevOps-Course-Starter/todo_app todo-app:test
+$ docker run --env-file ./.env --mount type=bind,source="$(pwd)"/todo_app,target=/usr/DevOps-Course-Starter/todo_app todo-app:test
+```
+```bash
+$ docker run --env-file ./.env todo-app:test
 ```
 
 ## Travis CI
