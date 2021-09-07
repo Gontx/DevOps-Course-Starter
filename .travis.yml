@@ -1,7 +1,8 @@
 #script: 
 #- docker build --target test  --tag todo-app:test .
 #- docker run --mount type=bind,source="$(pwd)"/todo_app,target=/usr/DevOps-Course-Starter/todo_app todo-app:test
-
+services:
+- docker
 jobs:
   include:
     - stage: Unit tests
