@@ -88,5 +88,14 @@ RUN LATEST=`curl -sSL https://chromedriver.storage.googleapis.com/LATEST_RELEASE
 # Copy fake env
 COPY .env.test /usr/DevOps-Course-Starter/
 
-ENTRYPOINT [ "poetry" , "run" , "pytest" , "test_app.py" ]
+#ENTRYPOINT [ "poetry" , "run" , "pytest" , "test_app.py" ]
 #ENTRYPOINT [ "poetry" , "run" , "pytest" ]
+
+FROM test AS unittest
+ENTRYPOINT [ "poetry" , "run" , "pytest" , "test_app.py" ]
+
+FROM test AS integrationtest
+ENTRYPOINT [ "poetry" , "run" , "pytest" , "test_integration.py" ]
+
+FROM test AS endtoendtest
+ENTRYPOINT [ "poetry" , "run" , "pytest" , "test_selenium.py" ]

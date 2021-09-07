@@ -1,3 +1,18 @@
-script: 
-- docker build --target test  --tag todo-app:test .
-- docker run --mount type=bind,source="$(pwd)"/todo_app,target=/usr/DevOps-Course-Starter/todo_app todo-app:test
+#script: 
+#- docker build --target test  --tag todo-app:test .
+#- docker run --mount type=bind,source="$(pwd)"/todo_app,target=/usr/DevOps-Course-Starter/todo_app todo-app:test
+
+jobs:
+  include:
+    - stage: Unit tests
+      script:
+        - docker build --target unittest  --tag todo-app:unittest .
+        - docker run --mount type=bind,source="$(pwd)"/todo_app,target=/usr/DevOps-Course-Starter/todo_app todo-app:unittest
+    - stage: Integration tests
+      script:
+        - docker build --target integrationtest  --tag todo-app:integrationtest .
+        - docker run --mount type=bind,source="$(pwd)"/todo_app,target=/usr/DevOps-Course-Starter/todo_app todo-app:integrationtest
+    - stage: End2End tests
+      script:
+        - docker build --target endtoendtest  --tag todo-app:endtoendtest .
+        - docker run --mount type=bind,source="$(pwd)"/todo_app,target=/usr/DevOps-Course-Starter/todo_app todo-app:integrationtest
