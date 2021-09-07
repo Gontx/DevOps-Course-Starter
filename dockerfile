@@ -85,6 +85,10 @@ RUN LATEST=`curl -sSL https://chromedriver.storage.googleapis.com/LATEST_RELEASE
     apt-get install unzip -y &&\
     unzip ./chromedriver_linux64.zip
 
+# Flask Server env
+ENV FLASK_APP =todo_app.app
+ENV FLASK_ENV=development
+
 # Copy fake env
 COPY .env.test /usr/DevOps-Course-Starter/
 
