@@ -119,8 +119,18 @@ The app is accesible locally on: http://localhost:5000/
 ### Testing:
 To build the testing container: 
 
+#### Unit testing:
 ```bash
-$ docker build --target test  --tag todo-app:test .
+$ docker build --target unittest  --tag todo-app:unittest .
+```
+#### Integration testing:
+```bash
+$ docker build --target integrationtest  --tag todo-app:integrationtest .
+```
+
+#### End to End testing:
+```bash
+$ docker build --target endtoendtest  --tag todo-app:endtoendtest .
 ```
 To run the testing container:
 
