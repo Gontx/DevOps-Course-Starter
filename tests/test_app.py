@@ -59,11 +59,12 @@ class TestUnit:
             assert item.list == "Done"
 
     @staticmethod 
+    #add decorator "add freeze date"
     def test_recent_done_items():
         bOK = False
         # Get today
         today = dt.date.today()
-
+#check freezegun
         # Load hardcoded items
         with open('items_pickle', 'rb') as f:
             items_pickle = pickle.load(f)
