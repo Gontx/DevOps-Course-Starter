@@ -61,7 +61,6 @@ FROM base as test
 # Set Workdir
 WORKDIR /usr/DevOps-Course-Starter
 
-
 # Copy requirements
 COPY pyproject.toml /usr/DevOps-Course-Starter
 COPY poetry.lock /usr/DevOps-Course-Starter
@@ -69,9 +68,9 @@ COPY poetry.lock /usr/DevOps-Course-Starter
 # Install poetry dependencies 
 RUN poetry install
 
-# Copy tests and mock items
-COPY tests /usr/DevOps-Course-Starter/
-COPY items_pickle /usr/DevOps-Course-Starter/
+# Flask Server env
+ENV FLASK_APP =todo_app.app
+ENV FLASK_ENV=development
 
 # Install Chrome
 RUN curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o chrome.deb &&\
@@ -85,23 +84,14 @@ RUN LATEST=`curl -sSL https://chromedriver.storage.googleapis.com/LATEST_RELEASE
     apt-get install unzip -y &&\
     unzip ./chromedriver_linux64.zip
 
-COPY todo_app /usr/DevOps-Course-Starter/todo_app
+# Copy tests and mock items
+COPY tests /usr/DevOps-Course-Starter/
+COPY items_pickle /usr/DevOps-Course-Starter/
 
-# Flask Server env
-ENV FLASK_APP =todo_app.app
-ENV FLASK_ENV=development
+# Copy app code
+COPY todo_app /usr/DevOps-Course-Starter/todo_app
 
 # Copy fake env
 COPY .env.test /usr/DevOps-Course-Starter/
 
-#ENTRYPOINT [ "poetry" , "run" , "pytest" , "test_app.py" ]
 ENTRYPOINT [ "poetry" , "run" , "pytest" ]
-
-FROM test AS unittest
-ENTRYPOINT [ "poetry" , "run" , "pytest" ]
-
-FROM test AS integrationtest
-ENTRYPOINT [ "poetry" , "run" , "pytest" , "test_integration.py" ]
-
-FROM test AS endtoendtest
-ENTRYPOINT [ "poetry" , "run" , "pytest" , "test_selenium.py" ]
