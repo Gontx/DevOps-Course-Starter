@@ -1,1 +1,40 @@
-<mxfile host="app.diagrams.net" modified="2021-09-06T12:43:01.193Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36" version="15.0.6" etag="ECD-0_wGcoZjjUw0RMb6" type="github"><diagram id="LFyLwkTYdvU1cZ0abhbc">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2021-09-09T13:28:28.268Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36" etag="55K7wzdWD352ii27UvW_" version="15.0.6" type="github">
+  <diagram id="LFyLwkTYdvU1cZ0abhbc" name="Page-1">
+    <mxGraphModel dx="1218" dy="1118" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="biTrqEPJxAgLQ549WeBH-4" value="Single-Page Application" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="210" y="120" width="390" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="biTrqEPJxAgLQ549WeBH-5" value="[ Container: html ]" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="biTrqEPJxAgLQ549WeBH-4">
+          <mxGeometry y="26" width="390" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="biTrqEPJxAgLQ549WeBH-6" value="Provides all the to-do app functionality to customers via their web browser" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="biTrqEPJxAgLQ549WeBH-4">
+          <mxGeometry y="52" width="390" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="biTrqEPJxAgLQ549WeBH-8" value="Application" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;" vertex="1" parent="1">
+          <mxGeometry x="235" y="320" width="340" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="biTrqEPJxAgLQ549WeBH-9" value="[ Container: python, flask, requests ]" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="biTrqEPJxAgLQ549WeBH-8">
+          <mxGeometry y="26" width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="biTrqEPJxAgLQ549WeBH-10" value="Provides the application functionalities to the user:&#xa;- Create Items&#xa;- Modify Items&#xa;- Delete Items&#xa;- Re-order items" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="biTrqEPJxAgLQ549WeBH-8">
+          <mxGeometry y="52" width="340" height="98" as="geometry" />
+        </mxCell>
+        <mxCell id="biTrqEPJxAgLQ549WeBH-16" value="Trello&lt;br&gt;Stores user created to-do items" style="ellipse;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="345" y="640" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="biTrqEPJxAgLQ549WeBH-18" value="" style="endArrow=classic;startArrow=classic;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.497;exitY=0.99;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="biTrqEPJxAgLQ549WeBH-10" target="biTrqEPJxAgLQ549WeBH-16">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="480" as="sourcePoint" />
+            <mxPoint x="440" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="biTrqEPJxAgLQ549WeBH-19" value="Trello API" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="414" y="560" width="66" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
