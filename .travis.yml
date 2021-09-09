@@ -1,6 +1,4 @@
-#script: 
-#- docker build --target test  --tag todo-app:test .
-#- docker run --mount type=bind,source="$(pwd)"/todo_app,target=/usr/DevOps-Course-Starter/todo_app todo-app:test
+
 services:
 - docker
 jobs:
@@ -9,12 +7,6 @@ jobs:
       script:
         - docker build --target test --tag todo-app:test .
         - docker run todo-app:test test_app.py
-    - stage: Integration tests
-      script:
-        - docker build --target integrationtest  --tag todo-app:integrationtest .
-        - docker run --mount type=bind,source="$(pwd)"/todo_app,target=/usr/DevOps-Course-Starter/todo_app todo-app:integrationtest
-    - stage: End2End tests
-      script:
-        - docker build --target endtoendtest  --tag todo-app:endtoendtest .
-        - docker run --mount type=bind,source="$(pwd)"/todo_app,target=/usr/DevOps-Course-Starter/todo_app todo-app:integrationtest
-        # -e and names of the env names 
+        - docker run todo-app:test test_integration.py
+        - docker run todo-app:test test_selenium.py -e SECRET_KEY -e API_KEY -e TOKEN -e ID_BOARD
+    
