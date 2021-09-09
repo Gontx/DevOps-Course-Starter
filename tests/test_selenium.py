@@ -53,8 +53,8 @@ def app_with_temp_board():
 
 #@pytest.fixture(scope = "module")
 #def driver():
- #   with webdriver.Firefox() as driver:
-  #      yield driver
+#    with webdriver.Firefox() as driver:
+#        yield driver
 
 @pytest.fixture(scope='module')
 def driver():

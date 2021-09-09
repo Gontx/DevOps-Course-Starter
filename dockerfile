@@ -85,6 +85,8 @@ RUN LATEST=`curl -sSL https://chromedriver.storage.googleapis.com/LATEST_RELEASE
     apt-get install unzip -y &&\
     unzip ./chromedriver_linux64.zip
 
+COPY todo_app /usr/DevOps-Course-Starter/todo_app
+
 # Flask Server env
 ENV FLASK_APP =todo_app.app
 ENV FLASK_ENV=development
@@ -96,7 +98,7 @@ COPY .env.test /usr/DevOps-Course-Starter/
 #ENTRYPOINT [ "poetry" , "run" , "pytest" ]
 
 FROM test AS unittest
-ENTRYPOINT [ "poetry" , "run" , "pytest" , "test_app.py" ]
+ENTRYPOINT [ "poetry" , "run" , "pytest" ]
 
 FROM test AS integrationtest
 ENTRYPOINT [ "poetry" , "run" , "pytest" , "test_integration.py" ]
