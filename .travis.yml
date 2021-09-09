@@ -7,6 +7,6 @@ jobs:
       script:
         - docker build --target test --tag todo-app:test .
         - docker run todo-app:test test_app.py
-        - docker run todo-app:test test_integration.py
+        - docker run --env-file ./.env.test todo-app:test test_integration.py
         - docker run todo-app:test test_selenium.py -e SECRET_KEY -e API_KEY -e TOKEN -e ID_BOARD
     
