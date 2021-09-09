@@ -95,7 +95,7 @@ ENV FLASK_ENV=development
 COPY .env.test /usr/DevOps-Course-Starter/
 
 #ENTRYPOINT [ "poetry" , "run" , "pytest" , "test_app.py" ]
-#ENTRYPOINT [ "poetry" , "run" , "pytest" ]
+ENTRYPOINT [ "poetry" , "run" , "pytest" ]
 
 FROM test AS unittest
 ENTRYPOINT [ "poetry" , "run" , "pytest" ]
