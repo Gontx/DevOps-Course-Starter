@@ -8,8 +8,6 @@ jobs:
     - stage: Build test container
       script:
         - docker build --target test --tag todo-app:test .
-    - stage: Unit tests
-      script:
         - docker run todo-app:test test_app.py
     - stage: Integration tests
       script:
