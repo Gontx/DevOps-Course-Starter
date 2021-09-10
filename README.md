@@ -131,4 +131,8 @@ $ docker run --env-file ./.env todo-app:test
 ```
 
 ## Travis CI
+Travis will build each push and run the dockerized tests.
+
 Check build status at [Travis](https://app.travis-ci.com/github/Gontx/DevOps-Course-Starter)
+
+## Heroku CD
