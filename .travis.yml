@@ -13,5 +13,5 @@ jobs:
     - stage: Build and push production images
       script:
         - echo "$docker_pswd" | docker login -u "$docker_username" --password-stdin
-        - docker build --target production --tag gontx/todo-app:"$TRAVIS_COMMIT" .
-        - docker push gontx/todo-app:"$TRAVIS_COMMIT"
+        - docker build --target production --tag gontx/todo-app:latest .
+        - docker push gontx/todo-app:latest
