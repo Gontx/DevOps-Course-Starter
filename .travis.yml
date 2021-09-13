@@ -5,9 +5,13 @@ jobs:
   include:
     - stage: Build test container and run tests
       script:
-        - echo "$docker_pswd" | docker login -u "$docker_username" --password-stdin
         - docker build --target test --tag todo-app:test .
         - docker run todo-app:test test_app.py
         - docker run --env-file ./.env.test todo-app:test test_integration.py
         - docker run -e SECRET_KEY -e API_KEY -e TOKEN -e ID_BOARD todo-app:test test_selenium.py 
     
+    - stage: Build and push production images
+      script:
+        - echo "$docker_pswd" | docker login -u "$docker_username" --password-stdin
+        - docker build --target production --tag gontx/todo-app:"$TRAVIS_COMMIT" .
+        - docker push gontx/todo-app:"$TRAVIS_COMMIT"
