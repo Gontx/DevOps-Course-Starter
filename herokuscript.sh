@@ -4,8 +4,10 @@ docker pull gontx/todo-app:latest
 
 # Tag it for Heroku
 
-docker tag gontx/todo-app:latest registry.heroku.com/gont-todo-app/web
+docker tag gontx/todo-app:latest registry.heroku.com/gontx-todo-app/web
 
 # Push it to heroku registry
 
 docker push registry.heroku.com/gontx-todo-app/web
+
+container:release
