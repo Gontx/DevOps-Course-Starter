@@ -5,7 +5,7 @@ jobs:
   include:
     - stage: Build test container and run tests
       script:
-        - echo "$docker_username"
+        - echo "$docker_pswd" | docker login -u "$docker_username" --password-stdin
         - docker build --target test --tag todo-app:test .
         - docker run todo-app:test test_app.py
         - docker run --env-file ./.env.test todo-app:test test_integration.py
