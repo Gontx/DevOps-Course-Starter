@@ -3,8 +3,9 @@ services:
 - docker
 jobs:
   include:
-    - stage: Build test container
+    - stage: Build test container and run tests
       script:
+        - docker login -e docker_username -e docker_pswd -u docker_username -p docker_pswd
         - docker build --target test --tag todo-app:test .
         - docker run todo-app:test test_app.py
         - docker run --env-file ./.env.test todo-app:test test_integration.py
