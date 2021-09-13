@@ -11,6 +11,7 @@ jobs:
         - docker run -e SECRET_KEY -e API_KEY -e TOKEN -e ID_BOARD todo-app:test test_selenium.py 
     
     - stage: Build and push production images
+      if: branch = main
       script:
         - echo "$docker_pswd" | docker login -u "$docker_username" --password-stdin
         - docker build --target production --tag gontx/todo-app:latest .
