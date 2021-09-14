@@ -1,6 +1,6 @@
 # Get latest docker image from Docker Hub
 
-docker login --username=_ --password=$(HEROKU_API_KEY) registry.heroku.com
+docker login --username=_ --password=${HEROKU_API_KEY} registry.heroku.com
 
 # Tag it for Heroku
 
