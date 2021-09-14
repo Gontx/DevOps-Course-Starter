@@ -30,7 +30,7 @@ RUN poetry config virtualenvs.create false --local && poetry install
 
 # To-do app entrypoint
 
-CMD /usr/DevOps-Course-Starter/entrypoint.sh
+CMD bash entrypoint.sh
 
 #########################
 # Local Development stage
