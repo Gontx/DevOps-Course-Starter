@@ -7,7 +7,6 @@ docker login --username=_ --password=${HEROKU_API_KEY} registry.heroku.com
 docker tag gontx/todo-app:latest registry.heroku.com/gontx-todo-app/web
 
 # Push it to heroku registry
-
 docker push registry.heroku.com/gontx-todo-app/web
 
-container:release
+heroku container:release web
