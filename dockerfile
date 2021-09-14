@@ -16,7 +16,6 @@ FROM base as production
 
 # Expose Port 8000
 EXPOSE 8000
-EXPOSE 5000
 
 # Set Workdir
 WORKDIR /usr/DevOps-Course-Starter
@@ -31,7 +30,9 @@ RUN poetry config virtualenvs.create false --local && poetry install
 
 # To-do app entrypoint
 
-ENTRYPOINT ["poetry","run","gunicorn", "-w", "4","--bind","0.0.0.0", "todo_app.app:create_app()"]
+#ENTRYPOINT ["poetry","run","gunicorn", "-w", "4","--bind","0.0.0.0", "todo_app.app:create_app()"]
+
+CMD /usr/DevOps-Course-Starter/entrypoint.sh
 
 #########################
 # Local Development stage
