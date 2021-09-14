@@ -11,11 +11,14 @@ jobs:
         - docker run -e SECRET_KEY -e API_KEY -e TOKEN -e ID_BOARD todo-app:test test_selenium.py 
     
     - stage: Build and push production images
-      # if: branch = main
-      script:
+      before_deploy:
         - echo "$docker_pswd" | docker login -u "$docker_username" --password-stdin
         - docker build --target production --tag gontx/todo-app:latest .
         - docker push gontx/todo-app:latest
-    
-    - stage: Deploy to Heroku
-      script: bash herokuscript.sh
+      deploy:
+        provider: script
+        script: bash herokuscript.sh
+        on:
+          branch: 
+            - main
+            - exercise-8

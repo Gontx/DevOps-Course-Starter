@@ -142,7 +142,7 @@ To locally push your application to Heroku, run on Heroku CLI:
 $ heroku container:login
 # Build production latest image and push it
 $ docker login
-$ docker build --target production --tag todo-app:latest .
+$ docker build --target production --tag gontx/todo-app:latest .
 $ docker push gontx/todo-app:latest
 # Pull latest image
 $ docker pull gontx/todo-app:latest
