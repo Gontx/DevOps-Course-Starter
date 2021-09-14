@@ -18,5 +18,4 @@ jobs:
         - docker push gontx/todo-app:latest
     
     - stage: Deploy to Heroku
-      provider: script
       script: bash herokuscript.sh
