@@ -45,7 +45,7 @@ COPY poetry.lock /usr/DevOps-Course-Starter
 
 # Install poetry dependencies 
 
-RUN poetry install
+RUN poetry config virtualenvs.create false --local && poetry install
 
 # Flask Server env
 ENV FLASK_APP =todo_app.app
@@ -66,7 +66,7 @@ COPY pyproject.toml /usr/DevOps-Course-Starter
 COPY poetry.lock /usr/DevOps-Course-Starter
 
 # Install poetry dependencies 
-RUN poetry install
+RUN poetry config virtualenvs.create false --local && poetry install
 
 # Flask Server env
 ENV FLASK_APP =todo_app.app
