@@ -1,7 +1,6 @@
 # Get latest docker image from Docker Hub
 
 docker login --username=_ --password=$(HEROKU_API_KEY) registry.heroku.com
-docker pull gontx/todo-app:latest
 
 # Tag it for Heroku
 
