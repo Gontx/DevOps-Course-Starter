@@ -7,7 +7,8 @@ echo "Tag image for heroku"
 docker tag gontx/todo-app:latest registry.heroku.com/gontx-todo-app/web
 
 # Push it to heroku registry
-echo "push image to heroku"
+echo "Push image to heroku"
 docker push registry.heroku.com/gontx-todo-app/web
-
+echo "Release web"
 heroku container:release web
+echo "You made it"
