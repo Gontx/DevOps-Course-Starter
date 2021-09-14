@@ -136,9 +136,14 @@ Travis will build each push and run the dockerized tests.
 Check build status at [Travis](https://app.travis-ci.com/github/Gontx/DevOps-Course-Starter)
 
 ## Heroku CD
-To locally push your application to Heroku, run on Heroku CLI:
+Travis will take care of deployment to Heroku.
+
+To run your Heroku app, go to [gontx-todo-app](https://gontx-todo-app.herokuapp.com/)
+
+In case you want to locally push your application to Heroku manually, run on Heroku CLI:
 ```bash
 # Log in
+$ heroku login
 $ heroku container:login
 # Build production latest image and push it
 $ docker login
