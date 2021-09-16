@@ -64,7 +64,7 @@ def driver():
     opts.add_argument('--disable-gpu')
     opts.add_argument('--disable-dev-shm-usage')
     opts.add_argument('--privileged')
-    with webdriver.Chrome('./chromedriver', options=opts) as driver:
+    with webdriver.Chrome(options=opts) as driver:
         yield driver
 
 # Tests
