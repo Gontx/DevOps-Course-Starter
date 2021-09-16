@@ -10,6 +10,9 @@ RUN apt-get install -y curl
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
 ENV PATH = "${PATH}:/root/.poetry/bin"
 
+# Set Workdir
+WORKDIR /usr/DevOps-Course-Starter
+
 ########################
 # Production build stage
 FROM base as production
@@ -18,13 +21,8 @@ FROM base as production
 EXPOSE 8000
 EXPOSE 5000
 
-# Set Workdir
-WORKDIR /usr/DevOps-Course-Starter
-
 # Copy code accross
 COPY . /usr/DevOps-Course-Starter
-
-WORKDIR /usr/DevOps-Course-Starter
 
 # Install poetry dependencies 
 RUN poetry install --no-dev
@@ -37,8 +35,6 @@ ENTRYPOINT ["poetry","run","gunicorn", "-w", "4","--bind","0.0.0.0", "todo_app.a
 # Local Development stage
 FROM base as development
 
-# Set Workdir
-WORKDIR /usr/DevOps-Course-Starter
 # Copy requirements
 COPY pyproject.toml /usr/DevOps-Course-Starter
 COPY poetry.lock /usr/DevOps-Course-Starter
@@ -57,9 +53,6 @@ ENTRYPOINT ["poetry","run","flask","run","--host","0.0.0.0"]
 ###############
 # Testing stage
 FROM base as test
-
-# Set Workdir
-WORKDIR /usr/DevOps-Course-Starter
 
 # Copy requirements
 COPY pyproject.toml /usr/DevOps-Course-Starter
