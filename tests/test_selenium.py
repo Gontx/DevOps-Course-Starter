@@ -51,9 +51,20 @@ def app_with_temp_board():
     thread.join(1)
     delete_board(id_board_long)
 
-@pytest.fixture(scope = "module")
+#@pytest.fixture(scope = "module")
+#def driver():
+#    with webdriver.Firefox() as driver:
+#        yield driver
+
+@pytest.fixture(scope='module')
 def driver():
-    with webdriver.Firefox() as driver:
+    opts = webdriver.ChromeOptions()
+    opts.add_argument('--headless')
+    opts.add_argument('--no-sandbox')
+    opts.add_argument('--disable-gpu')
+    opts.add_argument('--disable-dev-shm-usage')
+    opts.add_argument('--privileged')
+    with webdriver.Chrome('./chromedriver',options=opts) as driver:
         yield driver
 
 # Tests

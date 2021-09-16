@@ -115,3 +115,20 @@ Docker will pick your environment variables from your local .env file. Make sure
 
 The app is accesible locally on: http://localhost:5000/ 
 
+
+### Testing:
+To build the testing container: 
+
+
+```bash
+$ docker build --target test --tag todo-app:test .
+```
+
+To run the testing container:
+
+```bash
+$ docker run --env-file ./.env todo-app:test
+```
+
+## Travis CI
+Check build status at [Travis](https://app.travis-ci.com/github/Gontx/DevOps-Course-Starter)

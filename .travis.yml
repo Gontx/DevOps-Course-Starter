@@ -1,0 +1,12 @@
+
+services:
+- docker
+jobs:
+  include:
+    - stage: Build test container
+      script:
+        - docker build --target test --tag todo-app:test .
+        - docker run todo-app:test test_app.py
+        - docker run --env-file ./.env.test todo-app:test test_integration.py
+        - docker run -e SECRET_KEY -e API_KEY -e TOKEN -e ID_BOARD todo-app:test test_selenium.py 
+    

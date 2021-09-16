@@ -59,23 +59,27 @@ class TestUnit:
             assert item.list == "Done"
 
     @staticmethod 
+    #add decorator "add freeze date"
     def test_recent_done_items():
         bOK = False
         # Get today
         today = dt.date.today()
-
+#check freezegun
         # Load hardcoded items
         with open('items_pickle', 'rb') as f:
             items_pickle = pickle.load(f)
         item_view_model = ViewModel(items_pickle)
 
         recent_items = item_view_model.recent_done_items
-        for item in recent_items:
-            if item.date_last_activity.date() == today:
-                bOK = True
-            else:
-                bOK = False
-                break
+        if len(recent_items) > 0:
+            for item in recent_items:
+                if item.date_last_activity.date() == today:
+                    bOK = True
+                else:
+                    bOK = False
+                    break
+        else:
+            bOK = True
         assert bOK == True
 
     @staticmethod 

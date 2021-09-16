@@ -7,7 +7,7 @@ from todo_app.classes import Item, ViewModel
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(Config())
 
     # All the routes and setup code etc
     # Index
