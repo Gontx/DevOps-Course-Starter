@@ -131,4 +131,32 @@ $ docker run --env-file ./.env todo-app:test
 ```
 
 ## Travis CI
+Travis will build each push and run the dockerized tests.
+
 Check build status at [Travis](https://app.travis-ci.com/github/Gontx/DevOps-Course-Starter)
+
+## Heroku CD
+Travis will take care of deployment to Heroku.
+
+To run your Heroku app, go to [gontx-todo-app](https://gontx-todo-app.herokuapp.com/)
+
+In case you want to locally push your application to Heroku manually, run on Heroku CLI:
+```bash
+# Log in
+$ heroku login
+$ heroku container:login
+# Build production latest image and push it
+$ docker login
+$ docker build --target production --tag gontx/todo-app:latest .
+$ docker push gontx/todo-app:latest
+# Pull latest image
+$ docker pull gontx/todo-app:latest
+# Tag the image 
+$ docker tag gontx/todo-app:latest registry.heroku.com/gontx-todo-app/web
+# Push the image to heroku
+$ docker push registry.heroku.com/gontx-todo-app/web
+# Release the Container
+$ heroku container:release web
+# Open web 
+$ heroku open
+```

@@ -19,17 +19,16 @@ FROM base as production
 
 # Expose Port 8000
 EXPOSE 8000
-EXPOSE 5000
 
 # Copy code accross
 COPY . /usr/DevOps-Course-Starter
 
 # Install poetry dependencies 
-RUN poetry install --no-dev
+RUN poetry config virtualenvs.create false --local && poetry install
 
 # To-do app entrypoint
 
-ENTRYPOINT ["poetry","run","gunicorn", "-w", "4","--bind","0.0.0.0", "todo_app.app:create_app()"]
+CMD bash entrypoint.sh
 
 #########################
 # Local Development stage
@@ -41,7 +40,7 @@ COPY poetry.lock /usr/DevOps-Course-Starter
 
 # Install poetry dependencies 
 
-RUN poetry install
+RUN poetry config virtualenvs.create false --local && poetry install
 
 # Flask Server env
 ENV FLASK_APP =todo_app.app
@@ -59,7 +58,7 @@ COPY pyproject.toml /usr/DevOps-Course-Starter
 COPY poetry.lock /usr/DevOps-Course-Starter
 
 # Install poetry dependencies 
-RUN poetry install
+RUN poetry config virtualenvs.create false --local && poetry install
 
 # Flask Server env
 ENV FLASK_APP =todo_app.app

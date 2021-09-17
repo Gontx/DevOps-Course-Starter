@@ -1,12 +1,24 @@
-
+language: generic
 services:
 - docker
 jobs:
   include:
-    - stage: Build test container
+    - stage: Build test container and run tests
       script:
         - docker build --target test --tag todo-app:test .
         - docker run todo-app:test test_app.py
         - docker run --env-file ./.env.test todo-app:test test_integration.py
         - docker run -e SECRET_KEY -e API_KEY -e TOKEN -e ID_BOARD todo-app:test test_selenium.py 
     
+    - stage: Build and push production images
+      before_deploy:
+        - echo "$docker_pswd" | docker login -u "$docker_username" --password-stdin
+        - docker build --target production --tag gontx/todo-app:latest .
+        - docker push gontx/todo-app:latest
+      deploy:
+        provider: script
+        script: bash herokuscript.sh
+        on:
+          branch: 
+            - main
+            - exercise-8
