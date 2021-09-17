@@ -73,14 +73,7 @@ class TestUnit:
         recent_items = item_view_model.recent_done_items
         if len(recent_items) > 0:
             for item in recent_items:
-                if item.date_last_activity.date() == today:
-                    bOK = True
-                else:
-                    bOK = False
-                    break
-        else:
-            bOK = True
-        assert bOK == True
+                assert item.date_last_activity.date() == today
 
     @staticmethod 
     def test_old_done_items():
