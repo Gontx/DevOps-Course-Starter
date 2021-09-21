@@ -1,0 +1,55 @@
+<mxfile host="app.diagrams.net" modified="2021-09-16T09:31:19.873Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36" etag="US8C3N6aA-0eJRHWZ0p8" version="15.1.4" type="github">
+  <diagram id="LFyLwkTYdvU1cZ0abhbc" name="Page-1">
+    <mxGraphModel dx="1220" dy="1122" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="biTrqEPJxAgLQ549WeBH-21" value="" style="rounded=0;whiteSpace=wrap;html=1;align=center;dashed=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="90" y="190" width="720" height="680" as="geometry" />
+        </mxCell>
+        <mxCell id="biTrqEPJxAgLQ549WeBH-4" value="Web Application" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+          <mxGeometry x="230" y="50" width="440" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="biTrqEPJxAgLQ549WeBH-5" value="[ Container: html ]" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="biTrqEPJxAgLQ549WeBH-4" vertex="1">
+          <mxGeometry y="26" width="440" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="biTrqEPJxAgLQ549WeBH-6" value="Provides all the to-do app functionality to customers via their web browser" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="biTrqEPJxAgLQ549WeBH-4" vertex="1">
+          <mxGeometry y="52" width="440" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="UscSePGdUHMD3hqCEBK3-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="biTrqEPJxAgLQ549WeBH-16" target="UscSePGdUHMD3hqCEBK3-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="biTrqEPJxAgLQ549WeBH-16" value="Trello&lt;br&gt;Stores user created to-do items" style="ellipse;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="557.75" y="950" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="biTrqEPJxAgLQ549WeBH-19" value="Trello API" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="650" y="900" width="66" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="UscSePGdUHMD3hqCEBK3-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="UscSePGdUHMD3hqCEBK3-1" target="UscSePGdUHMD3hqCEBK3-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="UscSePGdUHMD3hqCEBK3-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.48;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="UscSePGdUHMD3hqCEBK3-1" target="biTrqEPJxAgLQ549WeBH-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="UscSePGdUHMD3hqCEBK3-1" value="&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px&quot;&gt;Index.html&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left&quot;&gt;Provides the web interface for the main application&lt;/div&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;ul&gt;&lt;li&gt;Provides the forms needed for the user to interact with the application&lt;/li&gt;&lt;li&gt;Visualization of main application and to-do items&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="300" y="230" width="276" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="UscSePGdUHMD3hqCEBK3-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="UscSePGdUHMD3hqCEBK3-2" target="UscSePGdUHMD3hqCEBK3-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="UscSePGdUHMD3hqCEBK3-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="UscSePGdUHMD3hqCEBK3-2" target="UscSePGdUHMD3hqCEBK3-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="UscSePGdUHMD3hqCEBK3-2" value="&lt;font style=&quot;font-size: 12px&quot;&gt;&lt;b&gt;app.py&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;span&gt;Main application for the to-do app.&lt;/span&gt;&lt;/div&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left&quot;&gt;Makes use of the forms filled by the user&lt;/li&gt;&lt;li style=&quot;text-align: left&quot;&gt;Interacts with the items (Viewmodel) defined in classes.py by triggering actions from session_items.py&lt;/li&gt;&lt;li style=&quot;text-align: left&quot;&gt;Provides the routes needed for the web application&lt;/li&gt;&lt;/ul&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="304" y="450" width="276" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="UscSePGdUHMD3hqCEBK3-3" value="&lt;font&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;&lt;b&gt;classes.py&lt;/b&gt;&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;Definition of ViewModel class which contains items queried from Trello (using session_items.py) and defines the properties of the items list&lt;/span&gt;&lt;/div&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="670" width="275.5" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="UscSePGdUHMD3hqCEBK3-4" value="&lt;font&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;&lt;b&gt;session_items.py&lt;/b&gt;&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;Defines the HTTP requests to be done to query Trello trough its API&lt;/span&gt;&lt;/div&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="670" width="275.5" height="180" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
