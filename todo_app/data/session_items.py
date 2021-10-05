@@ -1,6 +1,7 @@
 import requests
 import os
 import datetime as dt
+import pymongo
 from dotenv import load_dotenv
 from todo_app.classes import Item
 
@@ -9,11 +10,19 @@ load_dotenv()
 api_key = os.getenv('API_KEY')
 token = os.getenv('TOKEN')
 id_board = os.getenv('ID_BOARD')
+
+# MongoDB secrets loading:
 mongo_usr = os.getenv('MONGO_USR')
 mongo_psw = os.getenv('MONGO_PSW')
 mongo_url = os.getenv('MONGO_URL')
 default_database = os.getenv('DEFAULT_DATABASE')
+
+# Datetime format:
 dtformat = '%Y-%m-%dT%H:%M:%S.%fZ'
+
+# Connect to MongoDB ATLAS:
+client = pymongo.MongoClient("mongodb+srv://"+mongo_usr+":"+mongo_psw+"@"+mongo_url+default_database+"?w=majority")
+client.list_database_names()
 
 # Define base parameters
 base_url = 'https://trello.com/1/'
