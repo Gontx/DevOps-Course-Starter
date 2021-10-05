@@ -84,7 +84,7 @@ def add_item(title):
 
     # Add document to collection
     doc = {'title':title, 'status':'to do' , 'date created':dt.datetime.utcnow()}
-    to_do_items=db['to_do_items']
+    to_do_items=db['to do']
     doc_id = to_do_items.insert_one(doc).inserted_id
 
 def save_item(item,target_list):
@@ -94,19 +94,13 @@ def save_item(item,target_list):
     Args:
         item: The item to save.
     """
-    existing_items = get_items()
-
-    # obtain id_list for target list
-    r=requests.get(base_url + 'boards/' + get_id_board() + '/lists' , params = payload)
-    r=r.json()
-    
-    for list in r:
-        if target_list == list['name']:
-            id_list = list['id']
-            break
-
-    # Update card
-    r=requests.put(base_url + 'cards/' + item.id_card + '?idList=' + id_list , params = payload) 
+    collection = db[item.status]
+    docu = collection.find_one_and_update(
+        {'title': item.title},
+        {"$set":
+            {'status':target_list}
+        },
+    )
 
 def delete_item(title):
     """
@@ -118,7 +112,4 @@ def delete_item(title):
     item = get_item(title)
     collection = db[item.status]
     item_to_delete = {'title': title}
-    collection.delete_one(item_to_delete)   
-
-def get_id_board():
-    return os.getenv('ID_BOARD')   
+    collection.delete_one(item_to_delete)     
