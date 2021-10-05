@@ -95,7 +95,7 @@ def save_item(item,target_list):
         item: The item to save.
     """
     existing_items = get_items()
-   
+
     # obtain id_list for target list
     r=requests.get(base_url + 'boards/' + get_id_board() + '/lists' , params = payload)
     r=r.json()
@@ -108,20 +108,17 @@ def save_item(item,target_list):
     # Update card
     r=requests.put(base_url + 'cards/' + item.id_card + '?idList=' + id_list , params = payload) 
 
-def delete_item(id_title):
+def delete_item(title):
     """
-    Removes the item for the ID given. After that re-asigns ID
+    Removes the item for title given. 
     Args: 
-        ID of the item to delete
+        title of the item to delete
     
     """
-
-    items = get_items()
-
-    for item in items:
-        if item.title == id_title:
-            r=requests.delete(base_url + 'cards/' + item.id_card, params = payload)
-            break  
+    item = get_item(title)
+    collection = db[item.status]
+    item_to_delete = {'title': title}
+    collection.delete_one(item_to_delete)   
 
 def get_id_board():
     return os.getenv('ID_BOARD')   
