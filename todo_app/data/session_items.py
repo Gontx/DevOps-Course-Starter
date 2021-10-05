@@ -9,6 +9,10 @@ load_dotenv()
 api_key = os.getenv('API_KEY')
 token = os.getenv('TOKEN')
 id_board = os.getenv('ID_BOARD')
+mongo_usr = os.getenv('MONGO_USR')
+mongo_psw = os.getenv('MONGO_PSW')
+mongo_url = os.getenv('MONGO_URL')
+default_database = os.getenv('DEFAULT_DATABASE')
 dtformat = '%Y-%m-%dT%H:%M:%S.%fZ'
 
 # Define base parameters
