@@ -22,8 +22,8 @@ dtformat = '%Y-%m-%dT%H:%M:%S.%fZ'
 
 # Connect to MongoDB ATLAS:
 client = pymongo.MongoClient("mongodb+srv://"+mongo_usr+":"+mongo_psw+"@"+mongo_url+"/"+default_database+"?w=majority")
-client.list_database_names()
-
+print (client.list_database_names())
+db = client.board
 # Define base parameters
 base_url = 'https://trello.com/1/'
 payload ={ 'key' : api_key , 'token' : token }
@@ -35,7 +35,30 @@ def get_items():
     Returns:
         list: The list of saved items.
     """
+    # Obtain collections within database (lists within board):
+    dblists = db.list_collection_names()
+    print (dblists)
+    print (dblists[0])
 
+    # Obtain documents in each collection
+    docs = []
+    for dblist in dblists:
+        dblist_name = db[dblist]
+        for doc in dblist_name.find():
+            docs.append(doc)
+    
+    # Assign name and status to item
+    items = []
+    for doc in docs:
+        for dblist in dblists:
+            if doc['status'] == dblist:
+                status = doc['status']
+                title = doc['title']
+                date_created = doc['date created']
+                item=Item(status,title,date_created)
+                items.append(item)
+    return items
+        
     # Request lists within the board
     r=requests.get(base_url + 'boards/' + get_id_board() + '/lists' , params = payload)
     r=r.json()
@@ -90,19 +113,11 @@ def add_item(title):
     Returns:
         item: The saved item.
     """
-    items = get_items()
 
-    # Obtain todo_id
-    r=requests.get(base_url + 'boards/' + get_id_board() + '/lists' , params = payload)
-    r=r.json()
-    
-    for list in r:
-        if 'To Do' == list['name']:
-            todo_id = list['id']
-            break
-
-    # Create item card in Trello using to Do list as default
-    r=requests.post(base_url+'cards?'+'idList='+todo_id+'&name='+title , params = payload)  
+    # Add document to collection
+    doc = {'title':title, 'status':'to do' , 'date created':dt.datetime.utcnow()}
+    to_do_items=db['to_do_items']
+    doc_id = to_do_items.insert_one(doc).inserted_id
 
 def save_item(item,target_list):
     """
