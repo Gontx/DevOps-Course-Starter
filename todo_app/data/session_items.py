@@ -3,7 +3,7 @@ import os
 import datetime as dt
 import pymongo
 from dotenv import load_dotenv
-from todo_app.classes import Item
+from todo_app.classes import Item, mongoItem
 
 # Load .env variables
 load_dotenv()
@@ -22,7 +22,7 @@ dtformat = '%Y-%m-%dT%H:%M:%S.%fZ'
 
 # Connect to MongoDB ATLAS:
 client = pymongo.MongoClient("mongodb+srv://"+mongo_usr+":"+mongo_psw+"@"+mongo_url+"/"+default_database+"?w=majority")
-print (client.list_database_names())
+
 db = client.board
 # Define base parameters
 base_url = 'https://trello.com/1/'
@@ -37,9 +37,7 @@ def get_items():
     """
     # Obtain collections within database (lists within board):
     dblists = db.list_collection_names()
-    print (dblists)
-    print (dblists[0])
-
+  
     # Obtain documents in each collection
     docs = []
     for dblist in dblists:
@@ -55,38 +53,8 @@ def get_items():
                 status = doc['status']
                 title = doc['title']
                 date_created = doc['date created']
-                item=Item(status,title,date_created)
-                items.append(item)
-    return items
-        
-    # Request lists within the board
-    r=requests.get(base_url + 'boards/' + get_id_board() + '/lists' , params = payload)
-    r=r.json()
-    lists = r
-
-    #Request cards on a list
-    cards = []
-    for list in lists:
-        id_list = list['id']
-        name_list = list['name']
-        r=requests.get(base_url + 'lists/' + id_list + '/cards', params = payload)
-        r=r.json()
-        for card in r:
-            cards.append(card)
-
-    # Assign name, and status to item
-    items=[]
-    for card in cards:
-        for list in lists:
-            if card['idList'] == list['id']:
-                status = list['name']
-                name = card['name']
-                id_item = card ['id']
-                id_list = list ['id']
-                date_last_activity = card['dateLastActivity']
-                date_last_activity = dt.datetime.strptime(date_last_activity,dtformat)
-                item=Item(id_item,status,id_list,name,date_last_activity)
-                items.append(item)
+                item=mongoItem(status,title,date_created)
+                items.append(item)        
     return items
 
 def get_item(title):

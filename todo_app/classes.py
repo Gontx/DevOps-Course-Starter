@@ -12,8 +12,6 @@ class mongoItem:
     def update_status(self,new_status):
         self.status = new_status
 
-
-
 class mongoViewModel:
     def __init__(self,items):
         self._items = items
