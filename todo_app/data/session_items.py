@@ -21,7 +21,7 @@ default_database = os.getenv('DEFAULT_DATABASE')
 dtformat = '%Y-%m-%dT%H:%M:%S.%fZ'
 
 # Connect to MongoDB ATLAS:
-client = pymongo.MongoClient("mongodb+srv://"+mongo_usr+":"+mongo_psw+"@"+mongo_url+default_database+"?w=majority")
+client = pymongo.MongoClient("mongodb+srv://"+mongo_usr+":"+mongo_psw+"@"+mongo_url+"/"+default_database+"?w=majority")
 client.list_database_names()
 
 # Define base parameters
