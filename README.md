@@ -163,6 +163,6 @@ $ heroku open
 ### MONGO DB
 To connect to MongoDB Atlas:
 ```bash
-$ client = pymongo.MongoClient("mongodb+srv://<USER_NAME>:<PASSWORD>@<MONGO_URL><DEFAULT_DATABASE>?w=majority")
+$ client = pymongo.MongoClient("mongodb+srv://<USER_NAME>:<PASSWORD>@<MONGO_URL>/<DEFAULT_DATABASE>?w=majority")
 $ client.list_database_names()['admin', 'local']
 ```
