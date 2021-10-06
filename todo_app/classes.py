@@ -4,10 +4,10 @@ from datetime import date
 # Create item class
 class mongoItem:
     # Initialize item
-    def __init__(self,status,title,date_created):
+    def __init__(self,status,title,date_last_modified):
         self.status = status
         self.title = title
-        self.date_created = date_created
+        self.date_last_modified = date_last_modified
     # Method to update item status
     def update_status(self,new_status):
         self.status = new_status
@@ -50,7 +50,7 @@ class mongoViewModel:
         self._recent_done_items = []
         today = dt.date.today()
         for item in self.done_items:
-            if item.date_created.date() == today:
+            if item.date_last_modified.date() == today:
                 self._recent_done_items.append(item)
         return self._recent_done_items
 
@@ -60,7 +60,7 @@ class mongoViewModel:
         self._old_done_items = []
         today = dt.date.today()
         for item in self.done_items:
-            if item.date_created.date() < today:
+            if item.date_last_modified.date() < today:
                 self._old_done_items.append(item)
         return self._old_done_items
 

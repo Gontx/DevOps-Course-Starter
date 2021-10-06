@@ -83,9 +83,9 @@ def add_item(title):
     """
 
     # Add document to collection
-    doc = {'title':title, 'status':'to do' , 'date created':dt.datetime.utcnow()}
+    doc = {'title':title, 'status':'to do' , 'date modified':dt.datetime.utcnow()}
     to_do_items=db['to do']
-    doc_id = to_do_items.insert_one(doc).inserted_id
+    to_do_items.insert_one(doc)
 
 def save_item(item,target_list):
     """
@@ -94,13 +94,18 @@ def save_item(item,target_list):
     Args:
         item: The item to save.
     """
-    collection = db[item.status]
-    docu = collection.find_one_and_update(
+    collection_from = db[item.status]
+    collection_to = db[target_list]
+    
+    docu = collection_from.find_one_and_update(
         {'title': item.title},
         {"$set":
             {'status':target_list}
         },
     )
+    collection_to.insert_one(docu)
+    collection_from.delete_one(docu)
+
 
 def delete_item(title):
     """
