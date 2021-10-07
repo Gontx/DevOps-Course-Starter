@@ -1,4 +1,3 @@
-import requests
 import os
 import datetime as dt
 import pymongo
