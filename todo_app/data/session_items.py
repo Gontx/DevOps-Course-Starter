@@ -3,7 +3,7 @@ import os
 import datetime as dt
 import pymongo
 from dotenv import load_dotenv
-from todo_app.classes import Item, mongoItem
+from todo_app.classes import mongoItem
 
 # Load .env variables
 load_dotenv()
@@ -24,9 +24,6 @@ dtformat = '%Y-%m-%dT%H:%M:%S.%fZ'
 client = pymongo.MongoClient("mongodb+srv://"+mongo_usr+":"+mongo_psw+"@"+mongo_url+"/"+default_database+"?w=majority")
 
 db = client.board
-# Define base parameters
-base_url = 'https://trello.com/1/'
-payload ={ 'key' : api_key , 'token' : token }
 
 def get_items():
     """
@@ -52,8 +49,8 @@ def get_items():
             if doc['status'] == dblist:
                 status = doc['status']
                 title = doc['title']
-                date_created = doc['date created']
-                item=mongoItem(status,title,date_created)
+                date_last_modified = doc['date modified']
+                item = mongoItem(status,title,date_last_modified)
                 items.append(item)        
     return items
 
@@ -84,7 +81,7 @@ def add_item(title):
 
     # Add document to collection
     doc = {'title':title, 'status':'to do' , 'date modified':dt.datetime.utcnow()}
-    to_do_items=db['to do']
+    to_do_items = db['to do']
     to_do_items.insert_one(doc)
 
 def save_item(item,target_list):
@@ -94,18 +91,14 @@ def save_item(item,target_list):
     Args:
         item: The item to save.
     """
-    collection_from = db[item.status]
-    collection_to = db[target_list]
     
-    docu = collection_from.find_one_and_update(
-        {'title': item.title},
-        {"$set":
-            {'status':target_list}
-        },
-    )
-    collection_to.insert_one(docu)
-    collection_from.delete_one(docu)
+    collection_to = db[target_list]
+    doc = {'title':item.title, 'status':target_list , 'date modified':dt.datetime.utcnow()}
+    collection_to.insert_one(doc)
 
+    collection_from = db[item.status]
+    docu = collection_from.find_one({'title':item.title})
+    collection_from.delete_one(docu)
 
 def delete_item(title):
     """
