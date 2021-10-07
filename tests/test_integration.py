@@ -1,11 +1,9 @@
 from todo_app.data import session_items as si
-from todo_app.classes import  mongoViewModel
 from todo_app.app import create_app
 from dotenv import find_dotenv,load_dotenv
 import datetime as dt
 import pytest
 import json
-import os
 from unittest.mock import patch, Mock
 
 @pytest.fixture
