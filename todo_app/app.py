@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, url_for, redirect, session
 import requests
 from todo_app.flask_config import Config
 from todo_app.data import session_items as si
-from todo_app.classes import Item, ViewModel, mongoViewModel
+from todo_app.classes import mongoViewModel
 
 def create_app():
     app = Flask(__name__)
