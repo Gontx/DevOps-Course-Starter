@@ -4,12 +4,6 @@ import pymongo
 from dotenv import load_dotenv
 from todo_app.classes import mongoItem
 
-# Load .env variables
-load_dotenv()
-api_key = os.getenv('API_KEY')
-token = os.getenv('TOKEN')
-id_board = os.getenv('ID_BOARD')
-
 # MongoDB secrets loading:
 mongo_usr = os.getenv('MONGO_USR')
 mongo_psw = os.getenv('MONGO_PSW')
