@@ -5,18 +5,22 @@ from dotenv import load_dotenv
 from todo_app.classes import mongoItem
 
 # MongoDB secrets loading:
+load_dotenv()
 mongo_usr = os.getenv('MONGO_USR')
 mongo_psw = os.getenv('MONGO_PSW')
 mongo_url = os.getenv('MONGO_URL')
 default_database = os.getenv('DEFAULT_DATABASE')
+mongo_protocol = os.getenv('MONGO_PROTOCOL')
 
 # Datetime format:
 dtformat = '%Y-%m-%dT%H:%M:%S.%fZ'
 
-# Connect to MongoDB ATLAS:
-client = pymongo.MongoClient("mongodb+srv://"+mongo_usr+":"+mongo_psw+"@"+mongo_url+"/"+default_database+"?w=majority")
-
-db = client.board
+# Function to connect to mongo
+def connect_mongo():
+    # Connect to MongoDB ATLAS:
+    client = pymongo.MongoClient(mongo_protocol+"://"+mongo_usr+":"+mongo_psw+"@"+mongo_url+"/"+default_database+"?w=majority")
+    global db
+    db = client.board
 
 def get_items():
     """

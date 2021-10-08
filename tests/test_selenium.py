@@ -6,16 +6,15 @@ from threading import Thread
 from selenium import webdriver
 from todo_app.app import create_app
 
-# Load .env variables
+# MongoDB secrets loading:
 load_dotenv()
-api_key = os.getenv('API_KEY')
-token = os.getenv('TOKEN')
-id_board = os.getenv('ID_BOARD')
-dtformat = '%Y-%m-%dT%H:%M:%S.%fZ'
+mongo_usr = os.getenv('MONGO_USR')
+mongo_psw = os.getenv('MONGO_PSW')
+mongo_url = os.getenv('MONGO_URL')
+default_database = os.getenv('DEFAULT_DATABASE')
+mongo_protocol = os.getenv('MONGO_PROTOCOL')
 
-# Define base parameters
-base_url = 'https://trello.com/1/'
-payload ={ 'key' : api_key , 'token' : token }
+dtformat = '%Y-%m-%dT%H:%M:%S.%fZ'
 
 def create_board(board_name):
     # Creates a new Trello board and returns the created board's ID

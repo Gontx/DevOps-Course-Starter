@@ -8,6 +8,8 @@ from todo_app.classes import mongoViewModel
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config())
+    # Connect to mongo
+    si.connect_mongo()
 
     # All the routes and setup code etc
     # Index
