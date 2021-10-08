@@ -6,35 +6,28 @@ import pymongo
 import mongomock
 import os
 import datetime as dt
-#from unittest.mock import patch, Mock
-
-# MongoDB secrets loading:
-load_dotenv('.env.test')
-#mongo_usr = os.getenv('MONGO_USR')
-#mongo_psw = os.getenv('MONGO_PSW')
-#mongo_url = os.getenv('MONGO_URL')
-#default_database = os.getenv('DEFAULT_DATABASE')
-#mongo_protocol = os.getenv('MONGO_PROTOCOL')
-
-mongo_usr='fakeusr'
-mongo_psw='fakemongopsw'
-mongo_url='fakemongo.com'
-default_database='fakedatabase'
-mongo_protocol='mongodb'
 
 @pytest.fixture
 def client():
     # Use our test integration config instead of the "real" version
     file_path = find_dotenv('.env.test') 
     load_dotenv(file_path, override=True)
-
+    # MongoDB secrets loading:
+    global mongo_usr,mongo_psw,mongo_url,default_database,mongo_protocol
+    mongo_usr = os.getenv('MONGO_USR')
+    mongo_psw = os.getenv('MONGO_PSW')
+    mongo_url = os.getenv('MONGO_URL')
+    default_database = os.getenv('DEFAULT_DATABASE')
+    mongo_protocol = os.getenv('MONGO_PROTOCOL')    
+    
     # Mongomock
-    with mongomock.patch(servers=(('fakemongo.com', 27017),)):
+    with mongomock.patch(servers=((mongo_url, 27017),)):
         # Create the new app.
         test_app = create_app()
 
         # Add fake items to mongomock
         mclient = pymongo.mongoclient(mongo_protocol+"://"+mongo_usr+":"+mongo_psw+"@"+mongo_url+"/"+default_database+"?w=majority")
+        #mclient = pymongo.mongoclient(mongo_url)
         db = mclient.testboard
 
         to_do_items = db['to do']

@@ -6,6 +6,7 @@ from todo_app.classes import mongoItem
 
 # MongoDB secrets loading:
 load_dotenv()
+secret_key = os.getenv('SECRET_KEY')
 mongo_usr = os.getenv('MONGO_USR')
 mongo_psw = os.getenv('MONGO_PSW')
 mongo_url = os.getenv('MONGO_URL')
