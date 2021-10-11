@@ -25,7 +25,7 @@ def client():
         test_app = create_app()
 
         # Add fake items to mongomock
-        mclient = pymongo.mongoclient(mongo_protocol+"://"+mongo_usr+":"+mongo_psw+"@"+mongo_url+"/"+default_database+"?w=majority")
+        mclient = pymongo.MongoClient(mongo_protocol+"://"+mongo_usr+":"+mongo_psw+"@"+mongo_url+"/"+default_database+"?w=majority")
         #mclient = pymongo.mongoclient(mongo_url)
         db = mclient.testboard
 
