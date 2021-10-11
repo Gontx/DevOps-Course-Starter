@@ -1,24 +1,19 @@
 from logging import DEBUG
 import requests
 import os
+from dotenv import find_dotenv
 import pytest
 from dotenv import load_dotenv
 from threading import Thread
 from selenium import webdriver
 from todo_app.app import create_app
 
-# MongoDB secrets loading:
-load_dotenv()
-mongo_usr = os.getenv('MONGO_USR')
-mongo_psw = os.getenv('MONGO_PSW')
-mongo_url = os.getenv('MONGO_URL')
-default_database = os.getenv('DEFAULT_DATABASE')
-mongo_protocol = os.getenv('MONGO_PROTOCOL')
-
 dtformat = '%Y-%m-%dT%H:%M:%S.%fZ'
 
 @pytest.fixture(scope ='module')
 def app_with_temp_db():
+    file_path = find_dotenv('.env') 
+    load_dotenv(file_path, override=True)
     # Construct the new application
     app = create_app()
 
