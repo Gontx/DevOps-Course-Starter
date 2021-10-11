@@ -1,3 +1,4 @@
+from logging import DEBUG
 import requests
 import os
 import pytest
@@ -16,27 +17,8 @@ mongo_protocol = os.getenv('MONGO_PROTOCOL')
 
 dtformat = '%Y-%m-%dT%H:%M:%S.%fZ'
 
-def create_board(board_name):
-    # Creates a new Trello board and returns the created board's ID
-    payload = { 'key' : api_key , 'token' : token , 'name' : board_name }
-    r=requests.post(base_url+'boards/' , params = payload)
-    r=r.json()
-    id_board = r['shortUrl']
-    id_board = id_board.rsplit('/', 1)[-1]
-    id_board_long = r['id']
-    return id_board,id_board_long
-
-def delete_board(id_board):
-    # Deletes the speciafied board
-    r=requests.delete(base_url+'boards/'+id_board, params = payload)
-
 @pytest.fixture(scope ='module')
-def app_with_temp_board():
-    # Create the new board & update the board id environment variable
-    (id_board,id_board_long) = create_board('SeleniumTestBoard')
-    os.environ['ID_BOARD'] = id_board
-    os.environ['ID_BOARD_LONG'] = id_board_long
-
+def app_with_temp_db():
     # Construct the new application
     app = create_app()
 
@@ -48,12 +30,6 @@ def app_with_temp_board():
 
     #Tear Down
     thread.join(1)
-    delete_board(id_board_long)
-
-#@pytest.fixture(scope = "module")
-#def driver():
-#    with webdriver.Firefox() as driver:
-#        yield driver
 
 @pytest.fixture(scope='module')
 def driver():
@@ -67,6 +43,6 @@ def driver():
         yield driver
 
 # Tests
-def test_task_journey(driver, app_with_temp_board):
+def test_task_journey(driver,app_with_temp_db):
     driver.get('http://localhost:5000/')
     assert driver.title == 'To-Do App'
