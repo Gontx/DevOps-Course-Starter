@@ -13,7 +13,6 @@ def client():
     file_path = find_dotenv('.env.test') 
     load_dotenv(file_path, override=True)
     # MongoDB secrets loading:
-    global mongo_usr,mongo_psw,mongo_url,default_database,mongo_protocol
     mongo_usr = os.getenv('MONGO_USR')
     mongo_psw = os.getenv('MONGO_PSW')
     mongo_url = os.getenv('MONGO_URL')
