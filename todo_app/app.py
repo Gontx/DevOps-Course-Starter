@@ -47,3 +47,15 @@ def create_app():
         app.run()
 
     return app
+
+    login_manager = LoginManager()
+    
+    @login_manager.unauthorized_handler
+    def unauthenticated():
+        pass 
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return None
+
+    login_manager.init_app(app)
