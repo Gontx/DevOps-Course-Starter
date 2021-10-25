@@ -61,6 +61,9 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 ## Testing
 A number of unit tests have been added in /tests folder. This tests make use of items_pickle file to load a hardcoded set of items.
 
+### Requirements:
+Add chromedriver.exe to your project path
+
 ### How to run the tests
 Using VSCode add [Test Explorer UI extension](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-test-explorer) and [Python Test Explorer for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=LittleFoxTeam.vscode-python-test-adapter). Navigate to extension GUI and execute tests.
 
@@ -159,4 +162,10 @@ $ docker push registry.heroku.com/gontx-todo-app/web
 $ heroku container:release web
 # Open web 
 $ heroku open
+```
+### MONGO DB
+To connect to MongoDB Atlas:
+```bash
+$ client = pymongo.MongoClient("mongodb+srv://<USER_NAME>:<PASSWORD>@<MONGO_URL>/<DEFAULT_DATABASE>?w=majority")
+$ client.list_database_names()['admin', 'local']
 ```

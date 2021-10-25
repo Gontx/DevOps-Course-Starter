@@ -1,10 +1,5 @@
-from todo_app.data import session_items as si
 from todo_app.classes import  ViewModel
-from todo_app.app import create_app
-from dotenv import find_dotenv,load_dotenv
 import datetime as dt
-import pytest
-import json
 import pickle
 
 class TestUnit:
@@ -21,14 +16,7 @@ class TestUnit:
 
         assert len(to_do_items) > 0
         for item in to_do_items:
-            assert item.list == "To Do"
-        for item in to_do_items:
-            if item.list == 'To Do':
-                bOK = True
-            else:
-                bOK = False
-                break
-        assert bOK == True
+            assert item.status == "to do"   
 
     @staticmethod
     def test_doing_items():
@@ -42,7 +30,7 @@ class TestUnit:
         doing_items = item_view_model.doing_items
         assert len(doing_items) > 0
         for item in doing_items:
-            assert item.list == "Doing"
+            assert item.status == "doing"
     
     @staticmethod
     def test_done_items():
@@ -56,7 +44,7 @@ class TestUnit:
         done_items = item_view_model.done_items
         assert len(done_items) > 0
         for item in done_items:
-            assert item.list == "Done"
+            assert item.status == "done"
 
     @staticmethod 
     #add decorator "add freeze date"
@@ -73,7 +61,7 @@ class TestUnit:
         recent_items = item_view_model.recent_done_items
         if len(recent_items) > 0:
             for item in recent_items:
-                assert item.date_last_activity.date() == today
+                assert item.date_last_modified.date() == today
 
     @staticmethod 
     def test_old_done_items():
@@ -88,9 +76,5 @@ class TestUnit:
         
         old_done_items = item_view_model.older_done_items
         for item in old_done_items:
-            if item.date_last_activity.date() < today:
-                bOK = True
-            else:
-                bOK = False
-                break
-        assert bOK == True
+            assert item.date_last_modified.date() < today
+            

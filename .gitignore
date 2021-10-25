@@ -144,4 +144,8 @@ auth.py
 .vagrant
 logs.txt
 
+# Aux file
+items_pickle.py
 
+### Chromedriver
+chromedriver.exe

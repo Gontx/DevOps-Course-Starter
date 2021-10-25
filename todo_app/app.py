@@ -3,11 +3,13 @@ from flask import Flask, render_template, request, url_for, redirect, session
 import requests
 from todo_app.flask_config import Config
 from todo_app.data import session_items as si
-from todo_app.classes import Item, ViewModel
+from todo_app.classes import ViewModel
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config())
+    # Connect to mongo
+    si.connect_mongo()
 
     # All the routes and setup code etc
     # Index

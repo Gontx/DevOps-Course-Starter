@@ -8,7 +8,7 @@ jobs:
         - docker build --target test --tag todo-app:test .
         - docker run todo-app:test test_app.py
         - docker run --env-file ./.env.test todo-app:test test_integration.py
-        - docker run -e SECRET_KEY -e API_KEY -e TOKEN -e ID_BOARD todo-app:test test_selenium.py 
+        - docker run -e SECRET_KEY -e MONGO_PROTOCOL -e MONGO_PSW -e MONGO_URL -e MONGO_USR -e DEFAULT_DATABASE todo-app:test test_selenium.py 
     
     - stage: Build and push production images
       before_deploy:

@@ -2,17 +2,12 @@ import datetime as dt
 from datetime import date
 
 # Create item class
-
 class Item:
-
     # Initialize item
-    def __init__(self,id_card,list,id_list,title,date_last_activity):
-        self.id_card = id_card
-        self.list = list
-        self.id_list = id_list
+    def __init__(self,status,title,date_last_modified):
+        self.status = status
         self.title = title
-        self.date_last_activity = date_last_activity
-    
+        self.date_last_modified = date_last_modified
     # Method to update item status
     def update_status(self,new_status):
         self.status = new_status
@@ -29,7 +24,7 @@ class ViewModel:
     def to_do_items(self):
         self._to_do_items = []
         for item in self.items:
-            if item.list == 'To Do':
+            if item.status == 'to do':
                 self._to_do_items.append(item)
         return self._to_do_items
 
@@ -37,7 +32,7 @@ class ViewModel:
     def doing_items(self):
         self._doing_items = []
         for item in self.items:
-            if item.list == 'Doing':
+            if item.status == 'doing':
                 self._doing_items.append(item)
         return self._doing_items
 
@@ -45,7 +40,7 @@ class ViewModel:
     def done_items(self):
         self._done_items = []
         for item in self.items:
-            if item.list == 'Done':
+            if item.status == 'done':
                 self._done_items.append(item)
         return self._done_items
 
@@ -55,7 +50,7 @@ class ViewModel:
         self._recent_done_items = []
         today = dt.date.today()
         for item in self.done_items:
-            if item.date_last_activity.date() == today:
+            if item.date_last_modified.date() == today:
                 self._recent_done_items.append(item)
         return self._recent_done_items
 
@@ -65,7 +60,7 @@ class ViewModel:
         self._old_done_items = []
         today = dt.date.today()
         for item in self.done_items:
-            if item.date_last_activity.date() < today:
+            if item.date_last_modified.date() < today:
                 self._old_done_items.append(item)
         return self._old_done_items
 
