@@ -1,6 +1,7 @@
 from todo_app.data.session_items import delete_item
 from flask import Flask, render_template, request, url_for, redirect, session
 import requests
+import flask_login
 from todo_app.flask_config import Config
 from todo_app.data import session_items as si
 from todo_app.classes import mongoViewModel
@@ -48,14 +49,14 @@ def create_app():
 
     return app
 
-    login_manager = LoginManager()
-    
-    @login_manager.unauthorized_handler
-    def unauthenticated():
-        pass 
+login_manager = flask_login.LoginManager()
 
-    @login_manager.user_loader
-    def load_user(user_id):
-        return None
+@login_manager.unauthorized_handler
+def unauthenticated():
+    pass
 
-    login_manager.init_app(app)
+@login_manager.user_loader
+def load_user(user_id):
+    return None
+
+login_manager.init_app(app)
