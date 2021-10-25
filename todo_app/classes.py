@@ -2,7 +2,7 @@ import datetime as dt
 from datetime import date
 
 # Create item class
-class mongoItem:
+class Item:
     # Initialize item
     def __init__(self,status,title,date_last_modified):
         self.status = status
@@ -12,7 +12,7 @@ class mongoItem:
     def update_status(self,new_status):
         self.status = new_status
 
-class mongoViewModel:
+class ViewModel:
     def __init__(self,items):
         self._items = items
     

@@ -4,7 +4,7 @@ import requests
 import flask_login
 from todo_app.flask_config import Config
 from todo_app.data import session_items as si
-from todo_app.classes import mongoViewModel
+from todo_app.classes import ViewModel
 
 def create_app():
     app = Flask(__name__)
@@ -17,7 +17,7 @@ def create_app():
     @app.route('/')
     def index():
         items = si.get_items()
-        item_view_model = mongoViewModel(items)
+        item_view_model = ViewModel(items)
         return render_template('index.html', view_model = item_view_model)
 
     # Add item 

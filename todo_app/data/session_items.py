@@ -2,7 +2,7 @@ import os
 import datetime as dt
 import pymongo
 from dotenv import load_dotenv
-from todo_app.classes import mongoItem
+from todo_app.classes import Item
 
 # Secret key loading:
 secret_key = os.getenv('SECRET_KEY')
@@ -33,30 +33,22 @@ def get_items():
     """
     # Obtain collections within database (lists within board):
     dblists = db.list_collection_names()
-  
+    
     # Obtain documents in each collection
-    docs = []
+    items = []
     for dblist in dblists:
         dblist_name = db[dblist]
         for doc in dblist_name.find():
-            docs.append(doc)
-    
-    # Assign name and status to item
-    items = []
-    for doc in docs:
-        for dblist in dblists:
-            if doc['status'] == dblist:
-                status = doc['status']
-                title = doc['title']
-                date_last_modified = doc['date modified']
-                item = mongoItem(status,title,date_last_modified)
-                items.append(item)        
+            status = doc['status']
+            title = doc['title']
+            date_last_modified = doc['date modified']
+            item = Item(status,title,date_last_modified)
+            items.append(item)        
     return items
 
 def get_item(title):
     """
     Fetches the saved item with the specified item title.
-d
     Args:
         title: The title of the item.
 
@@ -109,4 +101,4 @@ def delete_item(title):
     item = get_item(title)
     collection = db[item.status]
     item_to_delete = {'title': title}
-    collection.delete_one(item_to_delete)     
+    collection.delete_one(item_to_delete)   
