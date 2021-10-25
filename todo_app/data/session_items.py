@@ -33,24 +33,17 @@ def get_items():
     """
     # Obtain collections within database (lists within board):
     dblists = db.list_collection_names()
-  
+    
     # Obtain documents in each collection
-    docs = []
+    items = []
     for dblist in dblists:
         dblist_name = db[dblist]
         for doc in dblist_name.find():
-            docs.append(doc)
-    
-    # Assign name and status to item
-    items = []
-    for doc in docs:
-        for dblist in dblists:
-            if doc['status'] == dblist:
-                status = doc['status']
-                title = doc['title']
-                date_last_modified = doc['date modified']
-                item = Item(status,title,date_last_modified)
-                items.append(item)        
+            status = doc['status']
+            title = doc['title']
+            date_last_modified = doc['date modified']
+            item = Item(status,title,date_last_modified)
+            items.append(item)        
     return items
 
 def get_item(title):
