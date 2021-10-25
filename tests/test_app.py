@@ -1,4 +1,4 @@
-from todo_app.classes import  mongoViewModel
+from todo_app.classes import  ViewModel
 import datetime as dt
 import pickle
 
@@ -10,7 +10,7 @@ class TestUnit:
         # Load hardcoded items
         with open('items_pickle', 'rb') as f:
             items_pickle = pickle.load(f)
-        item_view_model = mongoViewModel(items_pickle)
+        item_view_model = ViewModel(items_pickle)
 
         to_do_items = item_view_model.to_do_items
 
@@ -25,7 +25,7 @@ class TestUnit:
         # Load hardcoded items
         with open('items_pickle', 'rb') as f:
             items_pickle = pickle.load(f)
-        item_view_model = mongoViewModel(items_pickle)
+        item_view_model = ViewModel(items_pickle)
 
         doing_items = item_view_model.doing_items
         assert len(doing_items) > 0
@@ -39,7 +39,7 @@ class TestUnit:
         # Load hardcoded items
         with open('items_pickle', 'rb') as f:
             items_pickle = pickle.load(f)
-        item_view_model = mongoViewModel(items_pickle)
+        item_view_model = ViewModel(items_pickle)
 
         done_items = item_view_model.done_items
         assert len(done_items) > 0
@@ -56,7 +56,7 @@ class TestUnit:
         # Load hardcoded items
         with open('items_pickle', 'rb') as f:
             items_pickle = pickle.load(f)
-        item_view_model = mongoViewModel(items_pickle)
+        item_view_model = ViewModel(items_pickle)
 
         recent_items = item_view_model.recent_done_items
         if len(recent_items) > 0:
@@ -72,7 +72,7 @@ class TestUnit:
         # Load hardcoded items
         with open('items_pickle', 'rb') as f:
             items_pickle = pickle.load(f)
-        item_view_model = mongoViewModel(items_pickle)
+        item_view_model = ViewModel(items_pickle)
         
         old_done_items = item_view_model.older_done_items
         for item in old_done_items:
