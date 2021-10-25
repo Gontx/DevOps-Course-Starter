@@ -2,7 +2,7 @@ import os
 import datetime as dt
 import pymongo
 from dotenv import load_dotenv
-from todo_app.classes import mongoItem
+from todo_app.classes import Item
 
 # Secret key loading:
 secret_key = os.getenv('SECRET_KEY')
@@ -49,7 +49,7 @@ def get_items():
                 status = doc['status']
                 title = doc['title']
                 date_last_modified = doc['date modified']
-                item = mongoItem(status,title,date_last_modified)
+                item = Item(status,title,date_last_modified)
                 items.append(item)        
     return items
 
@@ -109,4 +109,4 @@ def delete_item(title):
     item = get_item(title)
     collection = db[item.status]
     item_to_delete = {'title': title}
-    collection.delete_one(item_to_delete)     
+    collection.delete_one(item_to_delete)   
