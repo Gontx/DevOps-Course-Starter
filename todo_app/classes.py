@@ -1,5 +1,6 @@
 import datetime as dt
 from datetime import date
+from flask_login import UserMixin
 
 # Create item class
 class Item:
@@ -11,7 +12,12 @@ class Item:
     # Method to update item status
     def update_status(self,new_status):
         self.status = new_status
+# Create User class
+class User(UserMixin):
+    def __init__(self, id):
+        self.id = id
 
+# Create ViewModel class
 class ViewModel:
     def __init__(self,items):
         self._items = items
