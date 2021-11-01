@@ -20,7 +20,6 @@ def create_app():
     @app.route('/')
     @login_required
     def index():
-        print (current_user.id)
         items = si.get_items()
         item_view_model = ViewModel(items)
         return render_template('index.html', view_model = item_view_model)

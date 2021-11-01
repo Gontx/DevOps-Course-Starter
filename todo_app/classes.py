@@ -12,6 +12,7 @@ class Item:
     # Method to update item status
     def update_status(self,new_status):
         self.status = new_status
+        
 # Create User class
 class User(UserMixin):
     def __init__(self, id):

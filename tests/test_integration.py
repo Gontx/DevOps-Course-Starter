@@ -23,6 +23,7 @@ def client():
     with mongomock.patch(servers=((mongo_url, 27017),)):
         # Create the new app.
         test_app = create_app()
+        test_app.config['LOGIN_DISABLED'] = True
 
         # Add fake items to mongomock
         mclient = pymongo.MongoClient(mongo_protocol+"://"+mongo_usr+":"+mongo_psw+"@"+mongo_url+"/"+default_database+"?w=majority")

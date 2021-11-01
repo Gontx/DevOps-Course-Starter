@@ -16,7 +16,7 @@ def app_with_temp_db():
     load_dotenv(file_path, override=True)
     # Construct the new application
     app = create_app()
-
+    app.config['LOGIN_DISABLED'] = True
     # start the app in its own thread
     thread = Thread(target=lambda:app.run(use_reloader=False))
     thread.daemon = True
