@@ -20,9 +20,11 @@ def create_app():
     # Index
     @app.route('/')
     @login_required
+    @reader_required
     def index():
         items = si.get_items()
         item_view_model = ViewModel(items)
+        print (current_user.role)
         return render_template('index.html', view_model = item_view_model)
 
     # Add item 
@@ -74,7 +76,7 @@ def create_app():
 
     @login_manager.user_loader
     def load_user(user_id):
-        return User(user_id)
+        return User(user_id,'reader')
 
     @app.route('/login', methods = ['GET'])
     def login():
@@ -88,7 +90,7 @@ def create_app():
         headers = {'Authorization': 'token ' + access_token}
         usr_response = requests.get(usr_url, headers = headers )
         usr_response = usr_response.json()
-        user = User(usr_response['id'])
+        user = User(usr_response['id'], 'reader')
         login_user(user)
         return redirect(url_for('index'))
 

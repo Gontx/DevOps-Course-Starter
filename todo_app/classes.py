@@ -15,8 +15,9 @@ class Item:
         
 # Create User class
 class User(UserMixin):
-    def __init__(self, id):
+    def __init__(self, id, role):
         self.id = id
+        self.role = role
 
 # Create ViewModel class
 class ViewModel:
