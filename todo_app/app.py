@@ -8,6 +8,7 @@ from oauthlib.oauth2 import WebApplicationClient
 from todo_app.flask_config import Config
 from todo_app.data import session_items as si
 from todo_app.classes import ViewModel, User
+from functools import wraps
 
 def create_app():
     app = Flask(__name__)
@@ -93,6 +94,28 @@ def create_app():
 
     login_manager.init_app(app)
     
+    ### Role decorators
+    # Reader
+    def reader_required(f):
+        @wraps(f)
+        def wrap(*args, **kwargs):
+            if current_user.role == "reader":
+                return f(*args, **kwargs)
+            else:
+                return redirect(url_for('index'))
+        return wrap
+    
+    # Writer
+    def writer_required(f):
+        @wraps(f)
+        def wrap(*args, **kwargs):
+            if current_user.role == "writer":
+                return f(*args, **kwargs)
+            else:
+                return redirect(url_for('index'))
+        return wrap
+
+
     ### MAIN ###
     if __name__ == '__main__':
         app.run()
