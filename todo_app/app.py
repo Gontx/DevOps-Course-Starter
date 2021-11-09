@@ -85,7 +85,7 @@ def create_app():
         return redirect(url_for('index'))
     
     # Route for logout
-    @app.route('/logout', methods = ['GET'])
+    @app.route('/logout')
     @login_required
     @reader_required
     def logout():
