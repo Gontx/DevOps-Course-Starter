@@ -3,12 +3,34 @@ from flask import Flask, render_template, request, url_for, redirect, session
 import requests
 import os
 import flask_login
-from flask_login import login_required, login_user, UserMixin, current_user
+from flask_login import login_required, login_user, UserMixin, current_user, logout_user
 from oauthlib.oauth2 import WebApplicationClient
 from todo_app.flask_config import Config
 from todo_app.data import session_items as si
 from todo_app.classes import ViewModel, User
 from functools import wraps
+
+### Role decorators
+# Reader
+def reader_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if current_user.role == "reader" or current_user.role == "writer":
+            return f(*args, **kwargs)
+        else:
+            return redirect(url_for('index'))
+    return wrap
+
+# Writer
+def writer_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if current_user.role == "writer":
+            return f(*args, **kwargs)
+        else:
+            return redirect(url_for('index'))
+    return wrap
+
 
 def create_app():
     app = Flask(__name__)
@@ -20,16 +42,18 @@ def create_app():
     # Index
     @app.route('/')
     @login_required
-    @reader_required
+    #@reader_required
     def index():
         items = si.get_items()
         item_view_model = ViewModel(items)
+        print (current_user.id)
         print (current_user.role)
         return render_template('index.html', view_model = item_view_model)
 
     # Add item 
     @app.route('/create_item', methods = ['POST'])
     @login_required
+    @writer_required
     def create_item():
         title = request.form ['title']
         si.add_item(title)
@@ -38,6 +62,7 @@ def create_app():
     # Update item status
     @app.route('/item_status', methods = ['GET','POST'])
     @login_required
+    @writer_required
     def item_status():
         item_title = request.form ['item_title']
         item_status = request.form ['item_status']
@@ -49,11 +74,20 @@ def create_app():
     # Delete item
     @app.route('/del_item', methods = ['GET','POST'])
     @login_required
+    @writer_required
     def del_item():
         del_title = request.form['del_title']
         delete_item(del_title)
         return redirect(url_for('index'))
     
+    # Route for logout
+    @app.route('/logout', methods = ['GET'])
+    @login_required
+    @reader_required
+    def logout():
+        logout_user()
+        return redirect(url_for('loggin'))
+
     ### OAuth ###
     # Obtain GitHub OAuth Secrets:
     client_id = os.getenv('CLIENT_ID')
@@ -76,7 +110,7 @@ def create_app():
 
     @login_manager.user_loader
     def load_user(user_id):
-        return User(user_id,'reader')
+        return User(user_id)
 
     @app.route('/login', methods = ['GET'])
     def login():
@@ -90,34 +124,12 @@ def create_app():
         headers = {'Authorization': 'token ' + access_token}
         usr_response = requests.get(usr_url, headers = headers )
         usr_response = usr_response.json()
-        user = User(usr_response['id'], 'reader')
+        user = User(usr_response['id'])
         login_user(user)
         return redirect(url_for('index'))
 
     login_manager.init_app(app)
     
-    ### Role decorators
-    # Reader
-    def reader_required(f):
-        @wraps(f)
-        def wrap(*args, **kwargs):
-            if current_user.role == "reader":
-                return f(*args, **kwargs)
-            else:
-                return redirect(url_for('index'))
-        return wrap
-    
-    # Writer
-    def writer_required(f):
-        @wraps(f)
-        def wrap(*args, **kwargs):
-            if current_user.role == "writer":
-                return f(*args, **kwargs)
-            else:
-                return redirect(url_for('index'))
-        return wrap
-
-
     ### MAIN ###
     if __name__ == '__main__':
         app.run()

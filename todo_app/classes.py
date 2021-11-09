@@ -14,10 +14,16 @@ class Item:
         self.status = new_status
         
 # Create User class
+# pass with an if to check id
 class User(UserMixin):
-    def __init__(self, id, role):
+    def __init__(self, id):
         self.id = id
-        self.role = role
+        if self.id == 123:
+            self.role = 'reader'
+        elif self.id == 74266727:
+            self.role = 'writer'
+        else:
+            self.role = 'none'
 
 # Create ViewModel class
 class ViewModel:
