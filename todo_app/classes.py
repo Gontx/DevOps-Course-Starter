@@ -18,9 +18,9 @@ class Item:
 class User(UserMixin):
     def __init__(self, id):
         self.id = id
-        if self.id == 123:
+        if id == 123:
             self.role = 'reader'
-        elif self.id == 74266727:
+        elif id == '74266727':
             self.role = 'writer'
         else:
             self.role = 'none'

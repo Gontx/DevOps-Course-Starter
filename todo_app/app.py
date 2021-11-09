@@ -42,12 +42,13 @@ def create_app():
     # Index
     @app.route('/')
     @login_required
-    #@reader_required
+    @reader_required
     def index():
         items = si.get_items()
         item_view_model = ViewModel(items)
         print (current_user.id)
         print (current_user.role)
+        print (current_user.id == '74266727')
         return render_template('index.html', view_model = item_view_model)
 
     # Add item 
@@ -86,7 +87,7 @@ def create_app():
     @reader_required
     def logout():
         logout_user()
-        return redirect(url_for('loggin'))
+        return redirect(url_for('index'))
 
     ### OAuth ###
     # Obtain GitHub OAuth Secrets:
@@ -129,7 +130,7 @@ def create_app():
         return redirect(url_for('index'))
 
     login_manager.init_app(app)
-    
+
     ### MAIN ###
     if __name__ == '__main__':
         app.run()
