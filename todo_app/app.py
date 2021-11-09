@@ -15,20 +15,26 @@ from functools import wraps
 def reader_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
-        if current_user.role == "reader" or current_user.role == "writer":
-            return f(*args, **kwargs)
+        if current_user.is_anonymous == False:
+            if current_user.role == "reader" or current_user.role == "writer":
+                return f(*args, **kwargs)
+            else:
+                return redirect(url_for('index'))
         else:
-            return redirect(url_for('index'))
+            return f(*args, **kwargs)
     return wrap
 
 # Writer
 def writer_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
-        if current_user.role == "writer":
-            return f(*args, **kwargs)
+        if current_user.is_anonymous == False:
+            if current_user.role == "writer":
+                return f(*args, **kwargs)
+            else:
+                return redirect(url_for('index'))
         else:
-            return redirect(url_for('index'))
+            return f(*args, **kwargs)
     return wrap
 
 
@@ -46,9 +52,6 @@ def create_app():
     def index():
         items = si.get_items()
         item_view_model = ViewModel(items)
-        print (current_user.id)
-        print (current_user.role)
-        print (current_user.id == '74266727')
         return render_template('index.html', view_model = item_view_model)
 
     # Add item 

@@ -37,12 +37,12 @@ def client():
         # Use the app to create a test_client that can be used in our tests.
         with test_app.test_client() as client:
             yield client
+
 class TestIntegration:
     @staticmethod
     def test_index_page(client):
         response = client.get('/')
         assert response.status_code == 200
-
 
 def insert_document(title, status, db):
     db_used = db[status]
