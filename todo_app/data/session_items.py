@@ -19,8 +19,12 @@ def connect_mongo():
     mongo_url = os.getenv('MONGO_URL')
     default_database = os.getenv('DEFAULT_DATABASE')
     mongo_protocol = os.getenv('MONGO_PROTOCOL')
+    cosmos_database_name = os.getenv('DATABASE_NAME')
+    cosmos_primary_master_key = os.getenv('PRIMARY_MASTER_KEY')
     # Connect to MongoDB ATLAS:
-    client = pymongo.MongoClient(mongo_protocol+"://"+mongo_usr+":"+mongo_psw+"@"+mongo_url+"/"+default_database+"?w=majority")
+    #client = pymongo.MongoClient('mongodb://' + str(cosmos_database_name) + ':' + str(cosmos_primary_master_key) + '==@' + str(cosmos_database_name) + '.mongo.cosmos.azure.com:10255/DefaultDatabase?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@' + str(cosmos_database_name) + '@')
+    client = pymongo.MongoClient('mongodb://' + str(cosmos_database_name) + ':' + str(cosmos_primary_master_key) + '==@' + str(cosmos_database_name) + '.mongo.cosmos.azure.com:10255/DefaultDatabase?ssl=true')
+    
     global db
     db = client.board
 
