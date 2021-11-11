@@ -16,8 +16,10 @@ def connect_mongo():
     # CosmosDB  secrets:
     cosmos_database_name = os.getenv('DATABASE_NAME')
     cosmos_primary_master_key = os.getenv('PRIMARY_MASTER_KEY')
+    cosmos_url = os.getenv('COSMOS_URL')
+    cosmos_port = os.getenv('COSMOS_PORT')
     # Connect to CosmosDB using mongo api:
-    client = pymongo.MongoClient(f'mongodb://{str(cosmos_database_name)}:{str(cosmos_primary_master_key)}@{str(cosmos_database_name)}.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@{str(cosmos_database_name)}@')
+    client = pymongo.MongoClient(f'mongodb://{str(cosmos_database_name)}:{str(cosmos_primary_master_key)}@{str(cosmos_database_name)}.{str(cosmos_url)}:{str(cosmos_port)}/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@{str(cosmos_database_name)}@')
     global db
     db = client.board
 
