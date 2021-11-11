@@ -8,7 +8,7 @@ jobs:
         - docker build --target test --tag todo-app:test .
         - docker run todo-app:test test_app.py
         - docker run --env-file ./.env.test todo-app:test test_integration.py
-        - docker run -e SECRET_KEY -e DATABASE_NAME -e PRIMARY_MASTER_KEY -e CLIENT_ID -e CLIENT_SECRET todo-app:test test_selenium.py 
+        - docker run -e SECRET_KEY -e DATABASE_NAME -e PRIMARY_MASTER_KEY -e CLIENT_ID -e CLIENT_SECRET -e COSMOS_URL -e COSMOS_PORT todo-app:test test_selenium.py 
     
     - stage: Build and push production images
       before_deploy:
