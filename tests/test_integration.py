@@ -19,7 +19,7 @@ def client():
     cosmos_url = os.getenv("COSMOS_URL")
     cosmos_port = os.getenv("COSMOS_PORT")
     # Mongomock
-    with mongomock.patch(servers=((cosmos_url, int(cosmos_port)),)):
+    with mongomock.patch(servers=((f'{cosmos_database_name}.{cosmos_url}', int(cosmos_port)),)):
         # Create the new app.
         test_app = create_app()
         test_app.config['LOGIN_DISABLED'] = True
