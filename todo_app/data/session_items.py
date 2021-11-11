@@ -13,18 +13,11 @@ dtformat = '%Y-%m-%dT%H:%M:%S.%fZ'
 # Function to connect to mongo
 def connect_mongo():
     load_dotenv()
-    # MongoDB secrets:
-    mongo_usr = os.getenv('MONGO_USR')
-    mongo_psw = os.getenv('MONGO_PSW')
-    mongo_url = os.getenv('MONGO_URL')
-    default_database = os.getenv('DEFAULT_DATABASE')
-    mongo_protocol = os.getenv('MONGO_PROTOCOL')
+    # CosmosDB  secrets:
     cosmos_database_name = os.getenv('DATABASE_NAME')
     cosmos_primary_master_key = os.getenv('PRIMARY_MASTER_KEY')
-    # Connect to MongoDB ATLAS:
-    #client = pymongo.MongoClient('mongodb://' + str(cosmos_database_name) + ':' + str(cosmos_primary_master_key) + '==@' + str(cosmos_database_name) + '.mongo.cosmos.azure.com:10255/DefaultDatabase?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@' + str(cosmos_database_name) + '@')
-    client = pymongo.MongoClient('mongodb://' + str(cosmos_database_name) + ':' + str(cosmos_primary_master_key) + '==@' + str(cosmos_database_name) + '.mongo.cosmos.azure.com:10255/DefaultDatabase?ssl=true')
-    
+    # Connect to CosmosDB using mongo api:
+    client = pymongo.MongoClient(f'mongodb://{str(cosmos_database_name)}:{str(cosmos_primary_master_key)}@{str(cosmos_database_name)}.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@{str(cosmos_database_name)}@')
     global db
     db = client.board
 
