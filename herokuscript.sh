@@ -2,7 +2,7 @@
 set -e
 # Get latest docker image from Docker Hub
 echo "Login to docker & heroku"
-docker login --username=_ --password-stdin=${HEROKU_API_KEY} registry.heroku.com
+docker login --username=_ --password=${HEROKU_API_KEY} registry.heroku.com
 # Tag it for Heroku
 echo "Tag image for heroku"
 docker tag gontx/todo-app:latest registry.heroku.com/gontx-todo-app/web
