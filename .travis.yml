@@ -18,7 +18,9 @@ jobs:
         - docker push gontx/todo-app:latest
       deploy:
         provider: script
-        script: bash herokuscript.sh
+        script: 
+            - bash herokuscript.sh
+            - bash webhook.sh
         on:
           branch: 
             - main
