@@ -13,6 +13,7 @@ from functools import wraps
 ### Role decorators
 # Reader
 def reader_required(f):
+    @login_required
     @wraps(f)
     def wrap(*args, **kwargs):
         if current_user.is_anonymous == False:
@@ -26,6 +27,7 @@ def reader_required(f):
 
 # Writer
 def writer_required(f):
+    @login_required
     @wraps(f)
     def wrap(*args, **kwargs):
         if current_user.is_anonymous == False:
@@ -47,7 +49,6 @@ def create_app():
     # All the routes and setup code etc
     # Index
     @app.route('/')
-    @login_required
     @reader_required
     def index():
         items = si.get_items()
@@ -56,7 +57,6 @@ def create_app():
 
     # Add item 
     @app.route('/create_item', methods = ['POST'])
-    @login_required
     @writer_required
     def create_item():
         title = request.form ['title']
@@ -65,7 +65,6 @@ def create_app():
 
     # Update item status
     @app.route('/item_status', methods = ['GET','POST'])
-    @login_required
     @writer_required
     def item_status():
         item_title = request.form ['item_title']
@@ -77,7 +76,6 @@ def create_app():
 
     # Delete item
     @app.route('/del_item', methods = ['GET','POST'])
-    @login_required
     @writer_required
     def del_item():
         del_title = request.form['del_title']
@@ -86,7 +84,6 @@ def create_app():
     
     # Route for logout
     @app.route('/logout')
-    @login_required
     @reader_required
     def logout():
         logout_user()
