@@ -100,5 +100,5 @@ def delete_item(title):
     """
     item = get_item(title)
     collection = db[item.status]
-    item_to_delete = {'title': title}
+    item_to_delete = collection.find_one({'title': title})
     collection.delete_one(item_to_delete)   

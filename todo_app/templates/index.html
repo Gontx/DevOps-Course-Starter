@@ -67,52 +67,60 @@
   </div>
      
   <br></br>
-    <!-- Form which will send a POST request to the current URL -->
-  <form action='/create_item' method="POST">
-    <h3>Add to-do item</h3>
-    <div class="form-group">
-      <input type="text" class="form-control" name="title" id="title" placeholder="to-do item" required>
-      <small id = "idHelpBlock" class="form-text text-muted">
-        Enter your new to-do item description
-      </small>
-    </div>
-    <button type="submit" class="btn btn-secondary">
-    Save
-    </button>
-  </form>
-
-  <br></br>
-
-  <form action ='/item_status' method = 'POST'>
-    <h3>Update Item Status</h3>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="selectID">Item Title:</label>
-        <input type="string" class="form-control" name="item_title" id="item_title" placeholder="item title" required>
+  {% if current_user.role == 'writer' %}
+      <!-- Form which will send a POST request to the current URL -->
+    <form action='/create_item' method="POST">
+      <h3>Add to-do item</h3>
+      <div class="form-group">
+        <input type="text" class="form-control" name="title" id="title" placeholder="to-do item" required>
+        <small id = "idHelpBlock" class="form-text text-muted">
+          Enter your new to-do item description
+        </small>
       </div>
-      <div class="form-group col-md-6">
-        <label for="selectItemStatus">Select item status</label>
-        <select type = 'text' class="form-control" name="item_status" id="item_status">
-          <option>to do</option>
-          <option>doing</option>
-          <option>done</option>
-        </select>
-      </div>
-    </div>
-    <button type="submit" class="btn btn-secondary">
-      Update
-    </button>
-  </form>
+      <button type="submit" class="btn btn-secondary">
+      Save
+      </button>
+    </form>
 
+    <br></br>
+
+    <form action ='/item_status' method = 'POST'>
+      <h3>Update Item Status</h3>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="selectID">Item Title:</label>
+          <input type="string" class="form-control" name="item_title" id="item_title" placeholder="item title" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="selectItemStatus">Select item status</label>
+          <select type = 'text' class="form-control" name="item_status" id="item_status">
+            <option>to do</option>
+            <option>doing</option>
+            <option>done</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-secondary">
+        Update
+      </button>
+    </form>
+
+    <br></br>
+    <h3>Delete Item</h3>
+    <form action = '/del_item' method = 'POST'>
+      <input type="string" name="del_title" id="del_title" placeholder="item title" required>
+        <small id = "delidHelpBlock" class="form-text text-muted">
+          Enter the title for the item you want to delete from the list
+        </small>
+      <button type="submit" class="btn btn-info">
+        Delete item
+      </button>
+    </form>
+  {% endif%}
   <br></br>
-  <h3>Delete Item</h3>
-  <form action = '/del_item' method = 'POST'>
-    <input type="string" name="del_title" id="del_title" placeholder="item title" required>
-      <small id = "delidHelpBlock" class="form-text text-muted">
-        Enter the title for the item you want to delete from the list
-      </small>
-    <button type="submit" class="btn btn-info">
-      Delete item
+  <form action = '/logout' method = 'GET'>
+    <button type="submit" class="btn btn-warning" style="float: right;">
+      Logout
     </button>
   </form>
 
