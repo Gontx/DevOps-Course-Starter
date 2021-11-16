@@ -18,12 +18,10 @@ class Item:
 class User(UserMixin):
     def __init__(self, id):
         self.id = id
-        if id == '74266727d':
-            self.role = 'reader'
-        elif id == '74266727':
+        if id == '74266727':
             self.role = 'writer'
-        else:
-            self.role = 'none'
+        else :
+            self.role = 'reader'
 
 # Create ViewModel class
 class ViewModel:
