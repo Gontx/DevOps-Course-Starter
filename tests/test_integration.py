@@ -28,8 +28,6 @@ def client():
         mclient = pymongo.MongoClient(f'mongodb://{str(cosmos_database_name)}:{str(cosmos_primary_master_key)}@{str(cosmos_database_name)}.{str(cosmos_url)}:{str(cosmos_port)}/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@{str(cosmos_database_name)}@')
         
         # Add fake items to mongomock
-        #mclient = pymongo.MongoClient(mongo_protocol+"://"+mongo_usr+":"+mongo_psw+"@"+mongo_url+"/"+default_database+"?w=majority")
-
         db = mclient.testboard
 
         insert_document('Test item 1','to do',db)
