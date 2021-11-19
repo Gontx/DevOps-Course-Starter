@@ -12,22 +12,22 @@ def client():
     # Use our test integration config instead of the "real" version
     file_path = find_dotenv('.env.test') 
     load_dotenv(file_path, override=True)
-    # MongoDB secrets loading:
-    mongo_usr = os.getenv('MONGO_USR')
-    mongo_psw = os.getenv('MONGO_PSW')
-    mongo_url = os.getenv('MONGO_URL')
-    default_database = os.getenv('DEFAULT_DATABASE')
-    mongo_protocol = os.getenv('MONGO_PROTOCOL')    
-    
+   
+    # CosmosDB  secrets:
+    cosmos_database_name = os.getenv('DATABASE_NAME')
+    cosmos_primary_master_key = os.getenv('PRIMARY_MASTER_KEY')
+    cosmos_url = os.getenv("COSMOS_URL")
+    cosmos_port = os.getenv("COSMOS_PORT")
     # Mongomock
-    with mongomock.patch(servers=((mongo_url, 27017),)):
+    with mongomock.patch(servers=((f'{cosmos_database_name}.{cosmos_url}', int(cosmos_port)),)):
         # Create the new app.
         test_app = create_app()
         test_app.config['LOGIN_DISABLED'] = True
 
+        # Connect to CosmosDB using mongo api:
+        mclient = pymongo.MongoClient(f'mongodb://{str(cosmos_database_name)}:{str(cosmos_primary_master_key)}@{str(cosmos_database_name)}.{str(cosmos_url)}:{str(cosmos_port)}/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@{str(cosmos_database_name)}@')
+        
         # Add fake items to mongomock
-        mclient = pymongo.MongoClient(mongo_protocol+"://"+mongo_usr+":"+mongo_psw+"@"+mongo_url+"/"+default_database+"?w=majority")
-        #mclient = pymongo.mongoclient(mongo_url)
         db = mclient.testboard
 
         insert_document('Test item 1','to do',db)

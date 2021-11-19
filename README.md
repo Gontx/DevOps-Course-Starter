@@ -169,3 +169,5 @@ To connect to MongoDB Atlas:
 $ client = pymongo.MongoClient("mongodb+srv://<USER_NAME>:<PASSWORD>@<MONGO_URL>/<DEFAULT_DATABASE>?w=majority")
 $ client.list_database_names()['admin', 'local']
 ```
+### APPLICATION
+Access application at: http://gontxtodoapp.azurewebsites.net/

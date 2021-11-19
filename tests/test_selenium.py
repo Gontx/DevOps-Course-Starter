@@ -14,6 +14,11 @@ dtformat = '%Y-%m-%dT%H:%M:%S.%fZ'
 def app_with_temp_db():
     file_path = find_dotenv('.env') 
     load_dotenv(file_path, override=True)
+    # CosmosDB  secrets:
+    cosmos_database_name = os.getenv('DATABASE_NAME')
+    cosmos_primary_master_key = os.getenv('PRIMARY_MASTER_KEY')
+    cosmos_url = os.getenv("COSMOS_URL")
+    cosmos_port = os.getenv("COSMOS_PORT")
     # Construct the new application
     app = create_app()
     app.config['LOGIN_DISABLED'] = True
@@ -39,5 +44,6 @@ def driver():
 
 # Tests
 def test_task_journey(driver,app_with_temp_db):
+    driver.implicitly_wait(30)
     driver.get('http://localhost:5000/')
     assert driver.title == 'To-Do App'
