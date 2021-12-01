@@ -171,3 +171,22 @@ $ client.list_database_names()['admin', 'local']
 ```
 ### APPLICATION
 Access application at: http://gontxtodoapp.azurewebsites.net/
+
+### AZURE
+Log in to Azure:
+```bash
+az login
+az account list
+```
+Select the desired subscription:
+```bash
+az account set --subscription="SUBSCRIPTION_ID"
+```
+
+### Infrastructure as Code
+The infrastructure provisioning is handled using Terraform. Chech main.tf file. 
+
+To initialize Terraform:
+```bash
+terraform init
+```

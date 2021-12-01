@@ -18,16 +18,41 @@ data "azurerm_resource_group" "main" {
 }
 
 # CosmosDB
-data "azurerm_cosmosdb_account" "acc" {
-  name                = "todoappacc"
-  resource_group_name = data.azurerm_resource_group.main.name
+resource "azurerm_cosmosdb_account" "acc" {
+  name                  = "todoappacc"
+  resource_group_name   = data.azurerm_resource_group.main.name
+  location              = data.azurerm_resource_group.main.location
+  offer_type            = "Standard"
+  kind                  = "MongoDB"
+
+  enable_automatic_failover = true
+
+  capabilities {
+      name = "EnableAggregationPipeline"
+  }
+  #capabilities {
+  #    name = "EnableServerless"
+  #}
+  capabilities {
+      name = "EnableMongo"
+  }
+  consistency_policy {
+    consistency_level       ="BoundedStaleness" 
+    max_interval_in_seconds = 10
+    max_staleness_prefix    = 200
+  }
+ 
+  geo_location {
+    location            = data.azurerm_resource_group.main.location
+    failover_priority   = 0
+  }
 }
 
 resource "azurerm_cosmosdb_mongo_database" "db" {
   name                = "todoappdb"
-  resource_group_name = data.azurerm_cosmosdb_account.acc.resource_group_name
-  account_name        = data.azurerm_cosmosdb_account.acc.name
-  throughput          = 400
+  resource_group_name = data.azurerm_resource_group.main.name
+  account_name        = azurerm_cosmosdb_account.acc.name
+  throughput          = 800
 }
 
 # Application
@@ -57,5 +82,6 @@ resource "azurerm_app_service" "my_app_service_container" {
 
     app_settings = {
         "DOCKER_REGISTRY_SERVER_URL" = "https://index.docker.io"
+        # pass envirionment variables
     }
 }
