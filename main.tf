@@ -30,12 +30,15 @@ resource "azurerm_cosmosdb_account" "acc" {
   capabilities {
       name = "EnableAggregationPipeline"
   }
-  #capabilities {
-  #    name = "EnableServerless"
-  #}
+
+  capabilities {
+      name = "EnableServerless"
+  }
+
   capabilities {
       name = "EnableMongo"
   }
+
   consistency_policy {
     consistency_level       ="BoundedStaleness" 
     max_interval_in_seconds = 10
@@ -53,6 +56,9 @@ resource "azurerm_cosmosdb_mongo_database" "db" {
   resource_group_name = data.azurerm_resource_group.main.name
   account_name        = azurerm_cosmosdb_account.acc.name
   throughput          = 800
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 # Application
@@ -84,4 +90,13 @@ resource "azurerm_app_service" "my_app_service_container" {
         "DOCKER_REGISTRY_SERVER_URL" = "https://index.docker.io"
         # pass envirionment variables
     }
+}
+
+variable "MONGODB_CONNECTION_STRING"{
+    default = <<EOF
+    mongodb://${azurerm_cosmosdb_account.acc.name}:
+    ${azurerm_cosmosdb_account.acc.primary_key}@
+    ${azurerm_cosmosdb_account.acc.name}.mongo.cosmos.azure.com:10255/DefaultDatabase?
+    ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000
+    EOF
 }
