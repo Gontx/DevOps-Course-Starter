@@ -28,10 +28,6 @@ resource "azurerm_cosmosdb_account" "acc" {
   enable_automatic_failover = true
 
   capabilities {
-      name = "EnableAggregationPipeline"
-  }
-
-  capabilities {
       name = "EnableServerless"
   }
 
@@ -55,7 +51,7 @@ resource "azurerm_cosmosdb_mongo_database" "db" {
   name                = "todoappdb"
   resource_group_name = data.azurerm_resource_group.main.name
   account_name        = azurerm_cosmosdb_account.acc.name
-  throughput          = 800
+
   lifecycle {
     prevent_destroy = true
   }
@@ -89,14 +85,12 @@ resource "azurerm_app_service" "my_app_service_container" {
     app_settings = {
         "DOCKER_REGISTRY_SERVER_URL" = "https://index.docker.io"
         # pass envirionment variables
+        MONGO_CONNECTION_STRING = <<EOF
+        mongodb://${azurerm_cosmosdb_account.acc.name}:
+        ${azurerm_cosmosdb_account.acc.primary_key}@
+        ${azurerm_cosmosdb_account.acc.name}.mongo.cosmos.azure.com:10255/DefaultDatabase?
+        ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000
+        EOF
+        CLIENT_ID = var.client_id
     }
-}
-
-variable "MONGODB_CONNECTION_STRING"{
-    default = <<EOF
-    mongodb://${azurerm_cosmosdb_account.acc.name}:
-    ${azurerm_cosmosdb_account.acc.primary_key}@
-    ${azurerm_cosmosdb_account.acc.name}.mongo.cosmos.azure.com:10255/DefaultDatabase?
-    ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000
-    EOF
 }
