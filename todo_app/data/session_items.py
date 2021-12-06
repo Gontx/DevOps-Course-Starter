@@ -23,7 +23,7 @@ def connect_mongo():
     client = pymongo.MongoClient(cosmos_connection_string)
     #client = pymongo.MongoClient(f'mongodb://{str(cosmos_database_name)}:{str(cosmos_primary_master_key)}@{str(cosmos_database_name)}.{str(cosmos_url)}:{str(cosmos_port)}/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@{str(cosmos_database_name)}@')
     global db
-    db = client.board
+    db = client.todoappdb
 
 def get_items():
     """
