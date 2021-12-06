@@ -14,10 +14,10 @@ dtformat = '%Y-%m-%dT%H:%M:%S.%fZ'
 def connect_mongo():
     load_dotenv()
     # CosmosDB  secrets:
-    cosmos_database_name = os.getenv('DATABASE_NAME')
-    cosmos_primary_master_key = os.getenv('PRIMARY_MASTER_KEY')
-    cosmos_url = os.getenv('COSMOS_URL')
-    cosmos_port = os.getenv('COSMOS_PORT')
+    #cosmos_database_name = os.getenv('DATABASE_NAME')
+    #cosmos_primary_master_key = os.getenv('PRIMARY_MASTER_KEY')
+    #cosmos_url = os.getenv('COSMOS_URL')
+    #cosmos_port = os.getenv('COSMOS_PORT')
     cosmos_connection_string = os.getenv('COSMOS_CONNECTION_STRING')
     # Connect to CosmosDB using mongo api:
     client = pymongo.MongoClient(cosmos_connection_string)
