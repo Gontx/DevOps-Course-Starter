@@ -18,6 +18,7 @@ def client():
     cosmos_primary_master_key = os.getenv('PRIMARY_MASTER_KEY')
     cosmos_url = os.getenv("COSMOS_URL")
     cosmos_port = os.getenv("COSMOS_PORT")
+    cosmos_connection_string = os.getenv('COSMOS_CONNECTION_STRING')
     # Mongomock
     with mongomock.patch(servers=((f'{cosmos_database_name}.{cosmos_url}', int(cosmos_port)),)):
         # Create the new app.
@@ -25,7 +26,7 @@ def client():
         test_app.config['LOGIN_DISABLED'] = True
 
         # Connect to CosmosDB using mongo api:
-        mclient = pymongo.MongoClient(f'mongodb://{str(cosmos_database_name)}:{str(cosmos_primary_master_key)}@{str(cosmos_database_name)}.{str(cosmos_url)}:{str(cosmos_port)}/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@{str(cosmos_database_name)}@')
+        mclient = pymongo.MongoClient(cosmos_connection_string)
         
         # Add fake items to mongomock
         db = mclient.testboard

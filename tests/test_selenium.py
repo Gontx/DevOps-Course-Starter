@@ -19,6 +19,7 @@ def app_with_temp_db():
     cosmos_primary_master_key = os.getenv('PRIMARY_MASTER_KEY')
     cosmos_url = os.getenv("COSMOS_URL")
     cosmos_port = os.getenv("COSMOS_PORT")
+    cosmos_connection_string = os.getenv('COSMOS_CONNECTION_STRING')
     # Construct the new application
     app = create_app()
     app.config['LOGIN_DISABLED'] = True
