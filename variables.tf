@@ -11,3 +11,10 @@ variable "location" {
 variable "client_id" {
     description = "Client ID for AUTH"
 }
+variable "client_secret" {
+    description = "Client secret for AUTH"
+}
+
+variable "secret_key" {
+    description = "Secret Key for Flask application"
+}
