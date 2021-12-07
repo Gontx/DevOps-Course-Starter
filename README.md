@@ -190,3 +190,13 @@ To initialize Terraform:
 ```bash
 terraform init
 ```
+
+To apply Terraform with given environment variables:
+```bash
+terraform apply -var 'client_id=client_id' -var 'client_secret=client_secret' -var 'secret_key=secret_key'
+```
+
+To trigger webhook:
+```bash
+curl -dH -X POST "$(terraform output webhook_url)"
+```
