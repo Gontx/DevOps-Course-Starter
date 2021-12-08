@@ -20,7 +20,7 @@ jobs:
         provider: script
         script: 
             #- bash herokuscript.sh
-            #- bash webhook.sh
+            - bash webhook.sh
         on:
           branch: 
             - main
