@@ -5,6 +5,12 @@ terraform {
             version = ">= 2.49"
         }       
     }
+    backend "azurerm" {
+        resource_group_name         = "tfstate"
+        storage_account_name        = "tfstated2g2y"
+        container_name              = "tfstate"
+        key                         = "terraform.tfstate"
+    }
 }
 
 # Provides configuration details for the azure terraform provider
@@ -52,9 +58,9 @@ resource "azurerm_cosmosdb_mongo_database" "db" {
   resource_group_name = data.azurerm_resource_group.main.name
   account_name        = azurerm_cosmosdb_account.acc.name
 
-  lifecycle {
-    prevent_destroy = true
-  }
+  #lifecycle {
+  #  prevent_destroy = true
+  #}
 }
 
 # Application
