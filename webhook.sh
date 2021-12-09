@@ -1,5 +1,5 @@
 # Run Azure webhook
 echo "About to run Azure webhook"
-curl --globoff -dH -X POST ''"$(terraform output webhook_url)"''
-echo "test comment"
+webhook_url=$(terraform output webhook_url)
+curl --globoff -dH -X POST $webhook_url
 echo "Success"
