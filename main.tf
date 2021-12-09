@@ -58,9 +58,9 @@ resource "azurerm_cosmosdb_mongo_database" "db" {
   resource_group_name = data.azurerm_resource_group.main.name
   account_name        = azurerm_cosmosdb_account.acc.name
 
-  #lifecycle {
-  #  prevent_destroy = true
-  #}
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 # Application
