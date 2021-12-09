@@ -6,7 +6,7 @@ terraform {
         }       
     }
     backend "azurerm" {
-        resource_group_name         = "tfstate"
+        resource_group_name         = "McLaren1_GonzaloOtegui_ProjectExercise"
         storage_account_name        = "tfstated2g2y"
         container_name              = "tfstate"
         key                         = "terraform.tfstate"
