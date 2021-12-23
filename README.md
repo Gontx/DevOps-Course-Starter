@@ -169,8 +169,6 @@ To connect to MongoDB Atlas:
 $ client = pymongo.MongoClient("mongodb+srv://<USER_NAME>:<PASSWORD>@<MONGO_URL>/<DEFAULT_DATABASE>?w=majority")
 $ client.list_database_names()['admin', 'local']
 ```
-### APPLICATION
-Access application at: http://gontxtodoapp.azurewebsites.net/
 
 ### AZURE
 Log in to Azure:
@@ -200,3 +198,6 @@ To trigger webhook:
 ```bash
 curl -dH -X POST "$(terraform output webhook_url)"
 ```
+
+### Azure web-app
+The application can be accessed at: http://gontx-todo-app.azurewebsites.net/
