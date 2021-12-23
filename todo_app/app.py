@@ -10,6 +10,8 @@ from todo_app.flask_config import Config
 from todo_app.data import session_items as si
 from todo_app.classes import ViewModel, User
 from functools import wraps
+from loggly.handlers import HTTPSHandler
+from logging import Formatter
 
 ### Role decorators
 # Reader
@@ -49,6 +51,15 @@ def create_app():
     # Launch app
     app = Flask(__name__)
     app.config.from_object(Config())
+
+    # Loggly
+    if app.config['LOGGLY_TOKEN'] is not None:
+        handler = HTTPSHandler(f'https://logs-01.loggly.com/inputs/{app.config["LOGGLY_TOKEN"]}/tag/todo-app')
+        handler.setFormatter(
+            Formatter("[%(asctime)s] %(levelname)s in %(module)s: %(message)s")
+        )
+        app.logger.addHandler(handler)
+        
     # Connect to mongo
     si.connect_mongo()
 
@@ -86,7 +97,7 @@ def create_app():
     def del_item():
         del_title = request.form['del_title']
         delete_item(del_title)
-        logger.info('Item "', del_title, '" was deleted.')
+        logger.info("Item deleted: %s", del_title)
         return redirect(url_for('index'))
     
     # Route for logout
@@ -134,7 +145,7 @@ def create_app():
         usr_response = usr_response.json()
         user = User(usr_response['id'])
         login_user(user)
-        logger.info(user, ' logged in.')
+        logger.info("User logged in: %s", user)
         return redirect(url_for('index'))
 
     login_manager.init_app(app)
