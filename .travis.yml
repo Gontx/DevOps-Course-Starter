@@ -21,7 +21,7 @@ jobs:
         - echo "$docker_pswd" | docker login -u "$docker_username" --password-stdin
         - docker build --target production --tag gontx/todo-app:latest .
         - docker push gontx/todo-app:latest
-        - terraform apply -var client_id=$CLIENT_ID -var client_secret=$CLIENT_SECRET -var secret_key=$SECRET_KEY -var LOGGLY_KEY=%LOGGLY_TOKEN -auto-approve
+        - terraform apply -var client_id=$CLIENT_ID -var client_secret=$CLIENT_SECRET -var secret_key=$SECRET_KEY -var LOGGLY_TOKEN=%LOGGLY_TOKEN -auto-approve
       deploy:
         provider: script
         script: 
