@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, url_for, redirect, session
 import requests
 import os
 import flask_login
+import logging
 from flask_login import login_required, login_user, UserMixin, current_user, logout_user
 from oauthlib.oauth2 import WebApplicationClient
 from todo_app.flask_config import Config
@@ -41,6 +42,11 @@ def writer_required(f):
 
 
 def create_app():
+    # Defining logger
+    logger = logging.getLogger(__name__)
+    logger.warning('Hello, World!')
+    logging.basicConfig(level=logging.INFO)
+    # Launch app
     app = Flask(__name__)
     app.config.from_object(Config())
     # Connect to mongo
@@ -80,6 +86,7 @@ def create_app():
     def del_item():
         del_title = request.form['del_title']
         delete_item(del_title)
+        logger.info('Item "', del_title, '" was deleted.')
         return redirect(url_for('index'))
     
     # Route for logout
@@ -127,6 +134,7 @@ def create_app():
         usr_response = usr_response.json()
         user = User(usr_response['id'])
         login_user(user)
+        logger.info(user, ' logged in.')
         return redirect(url_for('index'))
 
     login_manager.init_app(app)
