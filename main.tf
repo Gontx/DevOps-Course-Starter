@@ -91,7 +91,7 @@ resource "azurerm_app_service" "my_app_service_container" {
     app_settings = {
         "DOCKER_REGISTRY_SERVER_URL" = "https://index.docker.io"
         # pass envirionment variables
-        MONGO_CONNECTION_STRING = "mongodb://${azurerm_cosmosdb_account.acc.name}:${azurerm_cosmosdb_account.acc.primary_key}@${azurerm_cosmosdb_account.acc.name}.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&connectTimeoutMS=360000&appName=@${azurerm_cosmosdb_account.acc.name}@"
+        COSMOS_CONNECTION_STRING = "mongodb://${azurerm_cosmosdb_account.acc.name}:${azurerm_cosmosdb_account.acc.primary_key}@${azurerm_cosmosdb_account.acc.name}.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&connectTimeoutMS=360000&appName=@${azurerm_cosmosdb_account.acc.name}@"
         CLIENT_ID = var.client_id
         CLIENT_SECRET = var.client_secret
         SECRET_KEY = var.secret_key
