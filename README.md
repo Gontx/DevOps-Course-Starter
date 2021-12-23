@@ -201,3 +201,5 @@ curl -dH -X POST "$(terraform output webhook_url)"
 
 ### Azure web-app
 The application can be accessed at: http://gontx-todo-app.azurewebsites.net/
+
+### Logging
