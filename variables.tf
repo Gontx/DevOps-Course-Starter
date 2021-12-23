@@ -21,3 +21,8 @@ variable "secret_key" {
     description = "Secret Key for Flask application"
     sensitive = true
 }
+
+variable "LOGGLY_TOKEN" {
+    description = "Token for loggly"
+    sensitive = true
+}

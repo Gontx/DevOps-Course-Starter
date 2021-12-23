@@ -95,5 +95,6 @@ resource "azurerm_app_service" "my_app_service_container" {
         CLIENT_ID = var.client_id
         CLIENT_SECRET = var.client_secret
         SECRET_KEY = var.secret_key
+        LOGGLY_KEY = var.LOGGLY_KEY
     }
 }
