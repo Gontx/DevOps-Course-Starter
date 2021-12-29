@@ -58,8 +58,8 @@ def create_app():
         handler.setFormatter(
             Formatter("[%(asctime)s] %(levelname)s in %(module)s: %(message)s")
         )
-        getLogger('werkzeug').addHandler(HTTPSHandler(f'https://logs-01.loggly.com/inputs/{app.config["LOGGLY_TOKEN"]}/tag/todoapp-requests'))
         app.logger.addHandler(handler)
+        getLogger('werkzeug').addHandler(HTTPSHandler(f'https://logs-01.loggly.com/inputs/{app.config["LOGGLY_TOKEN"]}/tag/todoapp-requests'))
         
     # Connect to mongo
     si.connect_mongo()
