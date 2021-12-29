@@ -11,7 +11,7 @@ from todo_app.data import session_items as si
 from todo_app.classes import ViewModel, User
 from functools import wraps
 from loggly.handlers import HTTPSHandler
-from logging import Formatter
+from logging import Formatter, getLogger
 
 ### Role decorators
 # Reader
@@ -58,6 +58,7 @@ def create_app():
         handler.setFormatter(
             Formatter("[%(asctime)s] %(levelname)s in %(module)s: %(message)s")
         )
+        getLogger('werkzeug').addHandler(HTTPSHandler(f'https://logs-01.loggly.com/inputs/{app.config["LOGGLY_TOKEN"]}/tag/todo-app-resuests'))
         app.logger.addHandler(handler)
         
     # Connect to mongo
@@ -105,7 +106,7 @@ def create_app():
     @login_required
     def logout():
         logout_user()
-        logger.info("User logged out. User id: $s", current_user.id)
+        logger.info("User logged out. User id: $s", current_user)
         return redirect(url_for('login'))
 
     ### OAuth ###
