@@ -105,7 +105,7 @@ def create_app():
     @reader_required
     def logout():
         logout_user()
-        return redirect(url_for('index'))
+        return redirect(url_for('/login'))
 
     ### OAuth ###
     # Obtain GitHub OAuth Secrets:
@@ -145,7 +145,7 @@ def create_app():
         usr_response = usr_response.json()
         user = User(usr_response['id'])
         login_user(user)
-        logger.info("User logged in: %s", user)
+        logger.info("User logged in: %s", usr_response['id'])
         return redirect(url_for('index'))
 
     login_manager.init_app(app)
