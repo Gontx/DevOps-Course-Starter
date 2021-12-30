@@ -12,6 +12,7 @@ from todo_app.classes import ViewModel, User
 from functools import wraps
 from loggly.handlers import HTTPSHandler
 from logging import Formatter, getLogger
+from pythonjsonlogger import jsonlogger
 
 ### Role decorators
 # Reader
@@ -56,7 +57,7 @@ def create_app():
     if app.config['LOGGLY_TOKEN'] is not None:
         handler = HTTPSHandler(f'https://logs-01.loggly.com/inputs/{app.config["LOGGLY_TOKEN"]}/tag/todo-app')
         handler.setFormatter(
-            Formatter("[%(asctime)s] %(levelname)s in %(module)s: %(message)s")
+            jsonlogger.JsonFormatter("[%(asctime)s] %(levelname)s in %(module)s: %(message)s")
         )
         app.logger.addHandler(handler)
         getLogger('werkzeug').addHandler(HTTPSHandler(f'https://logs-01.loggly.com/inputs/{app.config["LOGGLY_TOKEN"]}/tag/todoapp-requests'))
