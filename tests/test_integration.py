@@ -15,7 +15,6 @@ def client():
    
     # CosmosDB  secrets:
     cosmos_database_name = os.getenv('DATABASE_NAME')
-    cosmos_primary_master_key = os.getenv('PRIMARY_MASTER_KEY')
     cosmos_url = os.getenv("COSMOS_URL")
     cosmos_port = os.getenv("COSMOS_PORT")
     cosmos_connection_string = os.getenv('COSMOS_CONNECTION_STRING')
