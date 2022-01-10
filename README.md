@@ -203,3 +203,4 @@ curl -dH -X POST "$(terraform output webhook_url)"
 The application can be accessed at: http://gontx-todo-app.azurewebsites.net/
 
 ### Logging
+Logs available at Loggly: https://devopscourse.loggly.com/
