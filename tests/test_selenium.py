@@ -15,11 +15,6 @@ def app_with_temp_db():
     file_path = find_dotenv('.env') 
     load_dotenv(file_path, override=True)
     # CosmosDB  secrets:
-    cosmos_database_name = os.getenv('DATABASE_NAME')
-    cosmos_primary_master_key = os.getenv('PRIMARY_MASTER_KEY')
-    cosmos_url = os.getenv("COSMOS_URL")
-    cosmos_port = os.getenv("COSMOS_PORT")
-    cosmos_connection_string = os.getenv('COSMOS_CONNECTION_STRING')
     # Construct the new application
     app = create_app()
     app.config['LOGIN_DISABLED'] = True
