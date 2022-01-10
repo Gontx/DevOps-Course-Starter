@@ -21,3 +21,8 @@ variable "LOGGLY_TOKEN" {
     description = "Token for loggly"
     sensitive = true
 }
+
+variable "DATABASE_NAME" {
+    description = "Cosmos DB name"
+    sensitive = true
+}
