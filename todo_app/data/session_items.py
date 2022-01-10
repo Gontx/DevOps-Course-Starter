@@ -15,10 +15,11 @@ def connect_mongo():
     load_dotenv()
     # CosmosDB  secrets:
     cosmos_connection_string = os.getenv('COSMOS_CONNECTION_STRING')
+    database_name = os.getenv('DATABASE_NAME')
     # Connect to CosmosDB using mongo api:
     client = pymongo.MongoClient(cosmos_connection_string)
     global db
-    db = client.todoappdb
+    db = client[database_name]
 
 def get_items():
     """
