@@ -3,12 +3,16 @@ from flask import Flask, render_template, request, url_for, redirect, session
 import requests
 import os
 import flask_login
+import logging
 from flask_login import login_required, login_user, UserMixin, current_user, logout_user
 from oauthlib.oauth2 import WebApplicationClient
 from todo_app.flask_config import Config
 from todo_app.data import session_items as si
 from todo_app.classes import ViewModel, User
 from functools import wraps
+from loggly.handlers import HTTPSHandler
+from logging import Formatter, getLogger
+from pythonjsonlogger import jsonlogger
 
 ### Role decorators
 # Reader
@@ -41,8 +45,23 @@ def writer_required(f):
 
 
 def create_app():
+    # Defining logger
+    logger = logging.getLogger(__name__)
+    logger.warning('Hello, World!')
+    logging.basicConfig(level=os.getenv('LOG_LEVEL', 'INFO'))
+    # Launch app
     app = Flask(__name__)
     app.config.from_object(Config())
+
+    # Loggly
+    if app.config['LOGGLY_TOKEN'] is not None:
+        handler = HTTPSHandler(f'https://logs-01.loggly.com/inputs/{app.config["LOGGLY_TOKEN"]}/tag/todo-app')
+        handler.setFormatter(
+            jsonlogger.JsonFormatter("[%(asctime)s] %(levelname)s in %(module)s: %(message)s")
+        )
+        app.logger.addHandler(handler)
+        getLogger('werkzeug').addHandler(HTTPSHandler(f'https://logs-01.loggly.com/inputs/{app.config["LOGGLY_TOKEN"]}/tag/todoapp-requests'))
+        
     # Connect to mongo
     si.connect_mongo()
 
@@ -80,12 +99,14 @@ def create_app():
     def del_item():
         del_title = request.form['del_title']
         delete_item(del_title)
+        logger.info("Item deleted: %s", del_title)
         return redirect(url_for('index'))
     
     # Route for logout
     @app.route('/logout')
-    @reader_required
+    @login_required
     def logout():
+        logger.info("User logged out. User id: %s", current_user.id)
         logout_user()
         return redirect(url_for('index'))
 
@@ -127,6 +148,7 @@ def create_app():
         usr_response = usr_response.json()
         user = User(usr_response['id'])
         login_user(user)
+        logger.info("User logged in: %s", usr_response['id'])
         return redirect(url_for('index'))
 
     login_manager.init_app(app)

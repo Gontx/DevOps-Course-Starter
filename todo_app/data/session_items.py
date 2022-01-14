@@ -19,7 +19,7 @@ def connect_mongo():
     # Connect to CosmosDB using mongo api:
     client = pymongo.MongoClient(cosmos_connection_string)
     global db
-    db = client[database_name]
+    db = client.todoappdb
 
 def get_items():
     """
