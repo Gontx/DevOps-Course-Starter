@@ -108,7 +108,7 @@ def create_app():
     def logout():
         logger.info("User logged out. User id: %s", current_user.id)
         logout_user()
-        return redirect(url_for('login'))
+        return redirect(url_for('index'))
 
     ### OAuth ###
     # Obtain GitHub OAuth Secrets:
