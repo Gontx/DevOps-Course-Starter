@@ -106,8 +106,8 @@ def create_app():
     @app.route('/logout')
     @login_required
     def logout():
+        logger.info("User logged out. User id: %s", current_user.id)
         logout_user()
-        logger.info("User logged out. User id: $s", current_user)
         return redirect(url_for('login'))
 
     ### OAuth ###
