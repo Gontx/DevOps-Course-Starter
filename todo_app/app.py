@@ -48,7 +48,7 @@ def create_app():
     # Defining logger
     logger = logging.getLogger(__name__)
     logger.warning('Hello, World!')
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=os.getenv('LOG_LEVEL', 'INFO'))
     # Launch app
     app = Flask(__name__)
     app.config.from_object(Config())
