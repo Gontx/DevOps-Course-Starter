@@ -204,3 +204,30 @@ The application can be accessed at: http://gontx-todo-app.azurewebsites.net/
 
 ### Logging
 Logs available at Loggly: https://devopscourse.loggly.com/
+
+# KUBERNETES LOCALLY
+
+## Prerequisites:
+* Docker
+* Kubectl
+* Minikube
+
+## Instructions:
+Start minikube cluster:
+```bash
+$ minikube start
+```
+Build application Docker image by running:
+```bash
+docker build --target production --tag todo-app:prod .
+```
+
+To deploy the application:
+```bash
+kubectl apply -f deployment.yaml
+```
+
+To deploy the service:
+```bash
+kubectl apply -f service.yaml
+```
