@@ -213,6 +213,16 @@ Logs available at Loggly: https://devopscourse.loggly.com/
 * Minikube
 
 ## Instructions:
+
+You will need to make your .env variables accessible for kubernetes. Do so by creating secrets using the next command:
+```bash
+# If there was a present app-secrets file before first delete it:
+kubectl delete secret app-secrets
+# Create updated secrets file:
+kubectl create secret generic app-secrets --from-env-file=.env
+```
+
+
 Start minikube cluster:
 ```bash
 $ minikube start
@@ -231,3 +241,10 @@ To deploy the service:
 ```bash
 kubectl apply -f service.yaml
 ```
+
+Port Forwarding:
+```bash
+kubectl port-forward service/module-14 7080:80
+```
+
+Connect to application in localhost:7080
