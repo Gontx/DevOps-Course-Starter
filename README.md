@@ -204,3 +204,50 @@ The application can be accessed at: http://gontx-todo-app.azurewebsites.net/
 
 ### Logging
 Logs available at Loggly: https://devopscourse.loggly.com/
+
+# KUBERNETES LOCALLY
+
+## Prerequisites:
+* Docker
+* Kubectl
+* Minikube
+
+## Instructions:
+
+You will need to make your .env variables accessible for kubernetes. Do so by creating secrets using the next command:
+```bash
+# If there was a present app-secrets file before first delete it:
+kubectl delete secret app-secrets
+# Create updated secrets file:
+kubectl create secret generic app-secrets --from-env-file=.env
+```
+Utility to decode secrets:
+```bash
+kubectl get secrets -o json | ConvertFrom-Json | select -ExpandProperty items | ? data | select -ExpandProperty data | % { $_.PSObject.Properties | % { $_.Name + [System.Environment]::NewLine + [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($_.Value)) + [System.Environment]::NewLine + [System.Environment]::NewLine } }
+```
+
+Start minikube cluster:
+```bash
+$ minikube start
+```
+Build application Docker image by running:
+```bash
+docker build --target production --tag todo-app:prod .
+```
+
+To deploy the application:
+```bash
+kubectl apply -f deployment.yaml
+```
+
+To deploy the service:
+```bash
+kubectl apply -f service.yaml
+```
+
+Port Forwarding:
+```bash
+kubectl port-forward service/module-14 8000:8000
+```
+
+Connect to application in localhost:8000
