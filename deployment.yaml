@@ -19,6 +19,6 @@ spec:
           imagePullPolicy: Never
           envFrom:
           - secretRef:
-              name: app-secrets
+              name: appsecrets
           ports:
           - containerPort: 8000

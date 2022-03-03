@@ -221,7 +221,10 @@ kubectl delete secret app-secrets
 # Create updated secrets file:
 kubectl create secret generic app-secrets --from-env-file=.env
 ```
-
+Utility to decode secrets:
+```bash
+kubectl get secrets -o json | ConvertFrom-Json | select -ExpandProperty items | ? data | select -ExpandProperty data | % { $_.PSObject.Properties | % { $_.Name + [System.Environment]::NewLine + [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($_.Value)) + [System.Environment]::NewLine + [System.Environment]::NewLine } }
+```
 
 Start minikube cluster:
 ```bash
@@ -244,7 +247,7 @@ kubectl apply -f service.yaml
 
 Port Forwarding:
 ```bash
-kubectl port-forward service/module-14 7080:80
+kubectl port-forward service/module-14 8000:8000
 ```
 
-Connect to application in localhost:7080
+Connect to application in localhost:8000
